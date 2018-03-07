@@ -1,7 +1,6 @@
 "use strict";
 
-//const eslint = require('../eslint');
-const eslump = require('eslump');
+const gernerator = require('gernerator');
 
 const child_process = require('child_process');
 const exec = child_process.exec;
@@ -11,7 +10,7 @@ const fs = require('fs');
 
 
 function GenJS() {
-	let randomJSString = eslump.generateRandomJS({
+	let randomJSString = gernerator.generateRandomJS({
 		sourceType: "script",
 		//sourceType: "module",
 		maxDepth: 8,
