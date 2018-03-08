@@ -1,0 +1,168 @@
+/*var func = function(f){
+
+    var o = {
+        a: {},
+        b: {
+            ba:{baa:0,baba:[]},
+            bb:{},
+            bc:{bca:{bcaa:0, bcab :0, bcac: this}},
+        }
+    };
+    o.b.bc.bca.bcab = 0;
+    o.b.bb.bba = Object.toString(o.b.ba.bab);
+}
+
+while(true) func()
+*/
+
+var o = {
+    a: {},
+    b: {ba:[]}
+};
+o.b = Object.toString(o);
+Node {
+  type: 'Program',
+  start: 0,
+  end: 350,
+  body: 
+   [ Node {
+       type: 'VariableDeclaration',
+       start: 286,
+       end: 324,
+       declarations: [Array],
+       kind: 'var' },
+     Node {
+       type: 'ExpressionStatement',
+       start: 325,
+       end: 350,
+       expression: [Node] } ],
+  sourceType: 'script' }
+========
+[+] 前序遍历depth:1 type:Program
+[+] 前序遍历depth:1 start:0
+[+] 前序遍历depth:1 end:350
+[+] 前序遍历depth:1 body:[object Object],[object Object]
+[+] 前序遍历depth:2 0:[object Object]
+[+] 前序遍历depth:3 type:VariableDeclaration
+[+] 前序遍历depth:3 start:286
+[+] 前序遍历depth:3 end:324
+[+] 前序遍历depth:3 declarations:[object Object]
+[+] 前序遍历depth:4 0:[object Object]
+[+] 前序遍历depth:5 type:VariableDeclarator
+[+] 前序遍历depth:5 start:290
+[+] 前序遍历depth:5 end:323
+[+] 前序遍历depth:5 id:[object Object]
+[+] 前序遍历depth:6 type:Identifier
+[+] 前序遍历depth:6 start:290
+[+] 前序遍历depth:6 end:291
+[+] 前序遍历depth:6 name:o
+[+] 前序遍历depth:5 init:[object Object]                ？？？
+[+] 前序遍历depth:6 type:ObjectExpression
+[+] 前序遍历depth:6 start:294
+[+] 前序遍历depth:6 end:323
+[+] 前序遍历depth:6 properties:[object Object],[object Object]      ！！！
+[+] 前序遍历depth:7 0:[object Object]
+[+] 前序遍历depth:8 type:Property
+[+] 前序遍历depth:8 start:300
+[+] 前序遍历depth:8 end:305
+[+] 前序遍历depth:8 method:false                        ！！！
+[+] 前序遍历depth:8 shorthand:false
+[+] 前序遍历depth:8 computed:false
+[+] 前序遍历depth:8 key:[object Object]
+[+] 前序遍历depth:9 type:Identifier
+[+] 前序遍历depth:9 start:300
+[+] 前序遍历depth:9 end:301
+[+] 前序遍历depth:9 name:a
+[+] 前序遍历depth:8 value:[object Object]
+[+] 前序遍历depth:9 type:ObjectExpression
+[+] 前序遍历depth:9 start:303
+[+] 前序遍历depth:9 end:305
+[+] 前序遍历depth:9 properties:                     ？？？
+[+] 前序遍历depth:8 kind:init
+[+] 前序遍历depth:7 1:[object Object]
+[+] 前序遍历depth:8 type:Property
+[+] 前序遍历depth:8 start:311
+[+] 前序遍历depth:8 end:321
+[+] 前序遍历depth:8 method:false
+[+] 前序遍历depth:8 shorthand:false
+[+] 前序遍历depth:8 computed:false
+[+] 前序遍历depth:8 key:[object Object]
+[+] 前序遍历depth:9 type:Identifier
+[+] 前序遍历depth:9 start:311
+[+] 前序遍历depth:9 end:312
+[+] 前序遍历depth:9 name:b
+[+] 前序遍历depth:8 value:[object Object]
+[+] 前序遍历depth:9 type:ObjectExpression
+[+] 前序遍历depth:9 start:314
+[+] 前序遍历depth:9 end:321
+[+] 前序遍历depth:9 properties:[object Object]
+[+] 前序遍历depth:10 0:[object Object]
+[+] 前序遍历depth:11 type:Property
+[+] 前序遍历depth:11 start:315
+[+] 前序遍历depth:11 end:320
+[+] 前序遍历depth:11 method:false
+[+] 前序遍历depth:11 shorthand:false
+[+] 前序遍历depth:11 computed:false
+[+] 前序遍历depth:11 key:[object Object]
+[+] 前序遍历depth:12 type:Identifier
+[+] 前序遍历depth:12 start:315
+[+] 前序遍历depth:12 end:317
+[+] 前序遍历depth:12 name:ba
+[+] 前序遍历depth:11 value:[object Object]
+[+] 前序遍历depth:12 type:ArrayExpression
+[+] 前序遍历depth:12 start:318
+[+] 前序遍历depth:12 end:320
+[+] 前序遍历depth:12 elements:
+[+] 前序遍历depth:11 kind:init
+[+] 前序遍历depth:8 kind:init
+[+] 前序遍历depth:3 kind:var
+[+] 前序遍历depth:2 1:[object Object]
+[+] 前序遍历depth:3 type:ExpressionStatement
+[+] 前序遍历depth:3 start:325
+[+] 前序遍历depth:3 end:350
+[+] 前序遍历depth:3 expression:[object Object]
+[+] 前序遍历depth:4 type:AssignmentExpression
+[+] 前序遍历depth:4 start:325
+[+] 前序遍历depth:4 end:349
+[+] 前序遍历depth:4 operator:=
+[+] 前序遍历depth:4 left:[object Object]
+[+] 前序遍历depth:5 type:MemberExpression
+[+] 前序遍历depth:5 start:325
+[+] 前序遍历depth:5 end:328
+[+] 前序遍历depth:5 object:[object Object]
+[+] 前序遍历depth:6 type:Identifier
+[+] 前序遍历depth:6 start:325
+[+] 前序遍历depth:6 end:326
+[+] 前序遍历depth:6 name:o
+[+] 前序遍历depth:5 property:[object Object]
+[+] 前序遍历depth:6 type:Identifier
+[+] 前序遍历depth:6 start:327
+[+] 前序遍历depth:6 end:328
+[+] 前序遍历depth:6 name:b
+[+] 前序遍历depth:5 computed:false
+[+] 前序遍历depth:4 right:[object Object]
+[+] 前序遍历depth:5 type:CallExpression
+[+] 前序遍历depth:5 start:331
+[+] 前序遍历depth:5 end:349
+[+] 前序遍历depth:5 callee:[object Object]
+[+] 前序遍历depth:6 type:MemberExpression
+[+] 前序遍历depth:6 start:331
+[+] 前序遍历depth:6 end:346
+[+] 前序遍历depth:6 object:[object Object]
+[+] 前序遍历depth:7 type:Identifier
+[+] 前序遍历depth:7 start:331
+[+] 前序遍历depth:7 end:337
+[+] 前序遍历depth:7 name:Object
+[+] 前序遍历depth:6 property:[object Object]
+[+] 前序遍历depth:7 type:Identifier
+[+] 前序遍历depth:7 start:338
+[+] 前序遍历depth:7 end:346
+[+] 前序遍历depth:7 name:toString
+[+] 前序遍历depth:6 computed:false
+[+] 前序遍历depth:5 arguments:[object Object]
+[+] 前序遍历depth:6 0:[object Object]
+[+] 前序遍历depth:7 type:Identifier
+[+] 前序遍历depth:7 start:347
+[+] 前序遍历depth:7 end:348
+[+] 前序遍历depth:7 name:o
+[+] 前序遍历depth:1 sourceType:script

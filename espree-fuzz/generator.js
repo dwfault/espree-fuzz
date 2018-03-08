@@ -4,33 +4,38 @@ const espree = require("espree");
 const fs = require("fs");
 
 
-fs.readFile('../test3.js', 'utf-8', function (err, jsCode) {
+fs.readFile('../test2.js', 'utf-8', function (err, jsCode) {
     console.log(jsCode);
     let ast = espree.parse(jsCode, { ecmaVersion: 6 });
     console.log(ast);
 
     console.log('========');
-    function traverseNode(node) {
-        
+
+
+    function traverseNode(node,depth) {
+        depth++;
         let start = null;                                             //  important fields of the node
         let end = null;
         let type = null;                                              //
 
         for (let index in node) {
 
-            if (node[index] == node)
+            if (node[index] == node) {
+                depth--;
                 return;
-            if (typeof node == "string")
-                return;
-            
-            console.log('[+] 前序遍历：' + index + ':' + node[index]);   //  dealing with fields
-            if(index == 'start'){
-                console.log('startttttt!');
             }
-                                                                        //
-            traverseNode(node[index]);
+            if (typeof node == "string") {
+                depth--;
+                return;
+            } 
+            console.log('[+] 前序遍历' + 'depth:' + depth+' '+ index + ':' + node[index]);   //  dealing with fields
+            if (index == 'start') {
+                //console.log('startttttt!');
+            }
+            //
+            traverseNode(node[index],depth);
         }
     }
-    traverseNode(ast);
-    
+    traverseNode(ast,0);
+
 });

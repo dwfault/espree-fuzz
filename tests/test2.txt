@@ -1,0 +1,27 @@
+undefined
+Node {
+  type: 'Program',
+  start: 0,
+  end: 9,
+  body: 
+   [ Node {
+       type: 'ExpressionStatement',
+       start: 0,
+       end: 9,
+       expression: [Node] } ],
+  sourceType: 'script' }
+========
+[+] 前序遍历depth:1 type:Program
+[+] 前序遍历depth:1 start:0
+[+] 前序遍历depth:1 end:9
+[+] 前序遍历depth:1 body:[object Object]
+[+] 前序遍历depth:2 0:[object Object]
+[+] 前序遍历depth:3 type:ExpressionStatement
+[+] 前序遍历depth:3 start:0
+[+] 前序遍历depth:3 end:9
+[+] 前序遍历depth:3 expression:[object Object]
+[+] 前序遍历depth:4 type:Identifier
+[+] 前序遍历depth:4 start:0
+[+] 前序遍历depth:4 end:9
+[+] 前序遍历depth:4 name:undefined
+[+] 前序遍历depth:1 sourceType:script

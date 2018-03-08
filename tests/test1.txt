@@ -1,0 +1,179 @@
+function test() {
+
+return { __proto__ : [] } instanceof Array
+  && !({ __proto__ : null } instanceof Object);
+      
+}
+
+if (!test())
+    throw new Error("Test failed");
+
+
+Node {
+  type: 'Program',
+  start: 0,
+  end: 170,
+  body: 
+   [ Node {
+       type: 'FunctionDeclaration',
+       start: 0,
+       end: 118,
+       id: [Node],
+       generator: false,
+       expression: false,
+       params: [],
+       body: [Node] },
+     Node {
+       type: 'IfStatement',
+       start: 120,
+       end: 168,
+       test: [Node],
+       consequent: [Node],
+       alternate: null } ],
+  sourceType: 'script' }
+========
+[+] 前序遍历depth:1 type:Program
+[+] 前序遍历depth:1 start:0
+[+] 前序遍历depth:1 end:170
+[+] 前序遍历depth:1 body:[object Object],[object Object]
+[+] 前序遍历depth:2 0:[object Object]
+[+] 前序遍历depth:3 type:FunctionDeclaration
+[+] 前序遍历depth:3 start:0
+[+] 前序遍历depth:3 end:118
+[+] 前序遍历depth:3 id:[object Object]
+[+] 前序遍历depth:4 type:Identifier
+[+] 前序遍历depth:4 start:9
+[+] 前序遍历depth:4 end:13
+[+] 前序遍历depth:4 name:test
+[+] 前序遍历depth:3 generator:false
+[+] 前序遍历depth:3 expression:false
+[+] 前序遍历depth:3 params:
+[+] 前序遍历depth:3 body:[object Object]
+[+] 前序遍历depth:4 type:BlockStatement
+[+] 前序遍历depth:4 start:16
+[+] 前序遍历depth:4 end:118
+[+] 前序遍历depth:4 body:[object Object]
+[+] 前序遍历depth:5 0:[object Object]
+[+] 前序遍历depth:6 type:ReturnStatement
+[+] 前序遍历depth:6 start:19
+[+] 前序遍历depth:6 end:109
+[+] 前序遍历depth:6 argument:[object Object]
+[+] 前序遍历depth:7 type:LogicalExpression
+[+] 前序遍历depth:7 start:26
+[+] 前序遍历depth:7 end:108
+[+] 前序遍历depth:7 left:[object Object]
+[+] 前序遍历depth:8 type:BinaryExpression
+[+] 前序遍历depth:8 start:26
+[+] 前序遍历depth:8 end:61
+[+] 前序遍历depth:8 left:[object Object]
+[+] 前序遍历depth:9 type:ObjectExpression
+[+] 前序遍历depth:9 start:26
+[+] 前序遍历depth:9 end:44
+[+] 前序遍历depth:9 properties:[object Object]
+[+] 前序遍历depth:10 0:[object Object]
+[+] 前序遍历depth:11 type:Property
+[+] 前序遍历depth:11 start:28
+[+] 前序遍历depth:11 end:42
+[+] 前序遍历depth:11 method:false
+[+] 前序遍历depth:11 shorthand:false
+[+] 前序遍历depth:11 computed:false
+[+] 前序遍历depth:11 key:[object Object]
+[+] 前序遍历depth:12 type:Identifier
+[+] 前序遍历depth:12 start:28
+[+] 前序遍历depth:12 end:37
+[+] 前序遍历depth:12 name:__proto__
+[+] 前序遍历depth:11 value:[object Object]
+[+] 前序遍历depth:12 type:ArrayExpression
+[+] 前序遍历depth:12 start:40
+[+] 前序遍历depth:12 end:42
+[+] 前序遍历depth:12 elements:
+[+] 前序遍历depth:11 kind:init
+[+] 前序遍历depth:8 operator:instanceof
+[+] 前序遍历depth:8 right:[object Object]
+[+] 前序遍历depth:9 type:Identifier
+[+] 前序遍历depth:9 start:56
+[+] 前序遍历depth:9 end:61
+[+] 前序遍历depth:9 name:Array
+[+] 前序遍历depth:7 operator:&&
+[+] 前序遍历depth:7 right:[object Object]
+[+] 前序遍历depth:8 type:UnaryExpression
+[+] 前序遍历depth:8 start:67
+[+] 前序遍历depth:8 end:108
+[+] 前序遍历depth:8 operator:!
+[+] 前序遍历depth:8 prefix:true
+[+] 前序遍历depth:8 argument:[object Object]
+[+] 前序遍历depth:9 type:BinaryExpression
+[+] 前序遍历depth:9 start:69
+[+] 前序遍历depth:9 end:107
+[+] 前序遍历depth:9 left:[object Object]
+[+] 前序遍历depth:10 type:ObjectExpression
+[+] 前序遍历depth:10 start:69
+[+] 前序遍历depth:10 end:89
+[+] 前序遍历depth:10 properties:[object Object]
+[+] 前序遍历depth:11 0:[object Object]
+[+] 前序遍历depth:12 type:Property
+[+] 前序遍历depth:12 start:71
+[+] 前序遍历depth:12 end:87
+[+] 前序遍历depth:12 method:false
+[+] 前序遍历depth:12 shorthand:false
+[+] 前序遍历depth:12 computed:false
+[+] 前序遍历depth:12 key:[object Object]
+[+] 前序遍历depth:13 type:Identifier
+[+] 前序遍历depth:13 start:71
+[+] 前序遍历depth:13 end:80
+[+] 前序遍历depth:13 name:__proto__
+[+] 前序遍历depth:12 value:[object Object]
+[+] 前序遍历depth:13 type:Literal
+[+] 前序遍历depth:13 start:83
+[+] 前序遍历depth:13 end:87
+[+] 前序遍历depth:13 value:null
+[+] 前序遍历depth:13 raw:null
+[+] 前序遍历depth:12 kind:init
+[+] 前序遍历depth:9 operator:instanceof
+[+] 前序遍历depth:9 right:[object Object]
+[+] 前序遍历depth:10 type:Identifier
+[+] 前序遍历depth:10 start:101
+[+] 前序遍历depth:10 end:107
+[+] 前序遍历depth:10 name:Object
+[+] 前序遍历depth:2 1:[object Object]
+[+] 前序遍历depth:3 type:IfStatement
+[+] 前序遍历depth:3 start:120
+[+] 前序遍历depth:3 end:168
+[+] 前序遍历depth:3 test:[object Object]
+[+] 前序遍历depth:4 type:UnaryExpression
+[+] 前序遍历depth:4 start:124
+[+] 前序遍历depth:4 end:131
+[+] 前序遍历depth:4 operator:!
+[+] 前序遍历depth:4 prefix:true
+[+] 前序遍历depth:4 argument:[object Object]
+[+] 前序遍历depth:5 type:CallExpression
+[+] 前序遍历depth:5 start:125
+[+] 前序遍历depth:5 end:131
+[+] 前序遍历depth:5 callee:[object Object]
+[+] 前序遍历depth:6 type:Identifier
+[+] 前序遍历depth:6 start:125
+[+] 前序遍历depth:6 end:129
+[+] 前序遍历depth:6 name:test
+[+] 前序遍历depth:5 arguments:
+[+] 前序遍历depth:3 consequent:[object Object]
+[+] 前序遍历depth:4 type:ThrowStatement
+[+] 前序遍历depth:4 start:137
+[+] 前序遍历depth:4 end:168
+[+] 前序遍历depth:4 argument:[object Object]
+[+] 前序遍历depth:5 type:NewExpression
+[+] 前序遍历depth:5 start:143
+[+] 前序遍历depth:5 end:167
+[+] 前序遍历depth:5 callee:[object Object]
+[+] 前序遍历depth:6 type:Identifier
+[+] 前序遍历depth:6 start:147
+[+] 前序遍历depth:6 end:152
+[+] 前序遍历depth:6 name:Error
+[+] 前序遍历depth:5 arguments:[object Object]
+[+] 前序遍历depth:6 0:[object Object]
+[+] 前序遍历depth:7 type:Literal
+[+] 前序遍历depth:7 start:153
+[+] 前序遍历depth:7 end:166
+[+] 前序遍历depth:7 value:Test failed
+[+] 前序遍历depth:7 raw:"Test failed"
+[+] 前序遍历depth:3 alternate:null
+[+] 前序遍历depth:1 sourceType:script

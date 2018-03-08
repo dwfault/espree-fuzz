@@ -1,4 +1,4 @@
-var func = function(f){
+/*var func = function(f){
 
     var o = {
         a: {},
@@ -13,3 +13,10 @@ var func = function(f){
 }
 
 while(true) func()
+*/
+
+var o = {
+    a: {},
+    b: {ba:[]}
+};
+o.b = Object.toString(o);
