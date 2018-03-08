@@ -62,7 +62,7 @@ function statiticalAnalysis(path) {
 	console.log(identifiersArray);
 }
 
-statiticalAnalysis("../testcase/");
+statiticalAnalysis("./testcase/");
 
 
 
