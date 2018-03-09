@@ -7,7 +7,7 @@ const fs = require("fs");
 
 
 /**
- * PHASE 1, Statitical analysis towards "typed" "identifiers" appeard in testcases.
+ * STEP 1, Statitical analysis towards "typed" "identifiers" appeard in testcases.
  * 
  * havent done any substitutions, just try some fix.
  */
@@ -16,54 +16,44 @@ let identifiersArray = [];
 let typesArray = [];
 
 function statiticalAnalysis(path) {
-	fs.readdir(path, function (err, files) {
-		console.log(err);
-		files.forEach(function (file) {
-			console.log(file);
-			fs.readFile(path + file, 'utf-8', function (err, jsCode) {
-				try {
-					let ast = espree.parse(jsCode, { ecmaVersion: 6 });
-					//console.log('===');
-					//console.log(ast);
-					function traverseNode(node) {
-						let start = null;
-						let end = null;
-						let type = null;
-						for (let index in node) {
-							if (node[index] == node) {
-								return;
-							}
-							if (typeof node == "string") {
-								return;
-							}
-							//console.log('[+] '+ index + ':' + node[index]);
-							if (index == 'type') {
-								//console.log(node[index]);
-								typesArray.push(node[index]);
-							}
-							else if(index == 'name'){
-								//console.log(node[index]);
-								identifiersArray.push(node[index]);
-							}
-							traverseNode(node[index]);
+	let files = fs.readdirSync(path);
+	for (let file of files) {
+		let jsCode = fs.readFileSync(path + file, 'utf-8');
+		try {
+			let ast = espree.parse(jsCode, { ecmaVersion: 9 });
+			console.log('======================================================');
+			console.log(ast);
+			function traverseNode(node) {
+				for (let i in node) {
+					let current = node[i];
+					console.log(current);
+					if ((current == node) || (typeof current == "string") || (typeof current == "number")) { }
+					else {
+						if (current.hasOwnProperty("type")) {
+							typesArray.push({
+								type: current.type,
+								code: jsCode.substring(current.start, current.end)
+							});
 						}
+						if (current.hasOwnProperty("name")) {
+							identifiersArray.push(current.name);
+						}
+						traverseNode(current);
 					}
-					traverseNode(ast);
-				} catch (e) {
-					console.log(file+':'+e);
-					console.log(jsCode);
-					let message = linter.verifyAndFix(jsCode,{rules:{semi: 2}});
-					console.log(message);
 				}
-			});
-		});
-	});
-	console.log(typesArray);
-	console.log(identifiersArray);
+			}
+			traverseNode(ast);
+		} catch (e) {
+			console.log('[+] Exception: ' + file + ':' + e);
+			//console.log(jsCode);
+			//console.log(linter.verifyAndFix(jsCode,{rules:{semi: 2}}));
+		}
+	}
 }
 
 statiticalAnalysis("./testcase/");
-
+console.log(typesArray);
+console.log(identifiersArray);
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
