@@ -20,23 +20,40 @@ function statiticalAnalysis(path) {
 	for (let file of files) {
 		let jsCode = fs.readFileSync(path + file, 'utf-8');
 		try {
-			let ast = espree.parse(jsCode, { ecmaVersion: 9 });
-			console.log('======================================================');
-			console.log(ast);
+			let ast = espree.parse(jsCode, {
+				ecmaVersion: 9, sourceType: "script", ecmaFeatures: {
+					jsx: true,
+					globalReturn: true,
+					impliedStrict: false,
+					experimentalObjectRestSpread: true
+				}
+			});
+			//console.log('======================================================');
+			//console.log(ast);
 			function traverseNode(node) {
 				for (let i in node) {
 					let current = node[i];
-					console.log(current);
-					if ((current == node) || (typeof current == "string") || (typeof current == "number")) { }
+					//console.log(current);
+					if ((current == node) || (typeof current == "string") || (typeof current == "number") || current == null) { }
 					else {
 						if (current.hasOwnProperty("type")) {
 							typesArray.push({
 								type: current.type,
 								code: jsCode.substring(current.start, current.end)
 							});
-						}
-						if (current.hasOwnProperty("name")) {
-							identifiersArray.push(current.name);
+							if (current.type == "Identifier") {
+								let scalar = identifiersArray.filter(function (x) { if(x.oldName == current.name) return x;})[0];
+								if (scalar != undefined) {
+									scalar.count++;
+								}
+								else {
+									identifiersArray.push({
+										oldName: current.name,
+										newName: 'o' + identifiersArray.length.toString(),
+										count: 0
+									});
+								}
+							}
 						}
 						traverseNode(current);
 					}
@@ -45,16 +62,21 @@ function statiticalAnalysis(path) {
 			traverseNode(ast);
 		} catch (e) {
 			console.log('[+] Exception: ' + file + ':' + e);
-			//console.log(jsCode);
 			//console.log(linter.verifyAndFix(jsCode,{rules:{semi: 2}}));
 		}
 	}
 }
 
-statiticalAnalysis("./testcase/");
-console.log(typesArray);
-console.log(identifiersArray);
+statiticalAnalysis("./testcase-stress/");
+//console.log(typesArray);
+//console.log(identifiersArray);
+for (let scalar of typesArray)
+	console.log(scalar);
+for (let scalar of identifiersArray)
+	console.log(scalar);
 
+
+	
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*

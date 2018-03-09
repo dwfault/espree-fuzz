@@ -1,3 +1,8 @@
+ASTnotDealtIdentifiers=[
+    "Object","toString","Promise","Array","prototype","slice","call","arguments","apply","length","Error","value","indexof","String","__proto__","undefined","null","Symbol","Number","Date","Boolean","Math","getOwnPropertyDescriptor","getPrototypeOf","setPrototypeOf","enumerable","configurable","get","set","getter","setter","type","constructor","name","Reflect","MAX_VALUE","MIN_VALUE","MAX_SAFE_INTEGER","MAX_SAFE_INFINITY","NaN","EPSILON","POSITIVE_INFINITY","NEGATIVE_INFINITY","forEach","key","value","has","callee","caller","eval","charCodeAt","fromCharCode","Int32Array","map","unshift","isNAN","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+    
+];
+
 ASToprators=[
     "instanceof",
     "&&",
