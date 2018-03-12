@@ -12,7 +12,7 @@ const fs = require("fs");
  * havent done any substitutions, just try some fix.
  */
 
-let identifiersArray = [];
+let identifiersArray = require("./identifiers.js");
 let typesArray = [];
 
 function statiticalAnalysis(path) {
@@ -44,7 +44,7 @@ function statiticalAnalysis(path) {
 							if (current.type == "Identifier") {
 								let scalar = identifiersArray.filter(function (x) { if(x.oldName == current.name) return x;})[0];
 								if (scalar != undefined) {
-									scalar.count++;
+									++scalar.count;
 								}
 								else {
 									identifiersArray.push({
@@ -68,10 +68,8 @@ function statiticalAnalysis(path) {
 }
 
 statiticalAnalysis("./testcase-stress/");
-//console.log(typesArray);
-//console.log(identifiersArray);
-for (let scalar of typesArray)
-	console.log(scalar);
+//for (let scalar of typesArray)
+//	console.log(scalar);
 for (let scalar of identifiersArray)
 	console.log(scalar);
 
