@@ -310,13 +310,13 @@ __defineGetter__
 __defineSetter__
 */
 
-ASTnotDealtIdentifiers=[
-    "all","apply",
-    "Object","toString","Promise","Array","prototype","slice","call","arguments","apply","length","Error","value","indexOf","lastIndexOf","firstIndexOf","String","__proto__","undefined","null","Symbol","Number","Date","Boolean","Math","getOwnPropertyDescriptor","getPrototypeOf","setPrototypeOf","enumerable","configurable","get","set","getter","setter","type","constructor","name","Reflect","MAX_VALUE","MIN_VALUE","MAX_SAFE_INTEGER","MAX_SAFE_INFINITY","NaN","EPSILON","POSITIVE_INFINITY","NEGATIVE_INFINITY","forEach","key","value","has","callee","caller","eval","charCodeAt","fromCharCode","Uint8Array","Uint16Array","Uint32Array","Int8Array","Int16Array","Int32Array","map","unshift","isNAN","push","pop","parseString","parseFloat","parseInt","parseDouble","JSON","parse","writable","deleteProperty","defineProperty","join","defineProperties","global","Float32Array","Float64Array","Atomics","add","and","compareExchange","exchange","load","or","store","sub","wait","wake","xor","Map","ArrayBuffer","__lookupGetter__","__lookupSetter__","sin","cos","atan2","tan","tanh","sinh","sign","print","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
-    
+ASTnotDealtIdentifiers = [
+    "all", "apply",
+    "Object", "toString", "Promise", "Array", "prototype", "slice", "call", "arguments", "apply", "length", "Error", "value", "indexOf", "lastIndexOf", "firstIndexOf", "String", "__proto__", "undefined", "null", "Symbol", "Number", "Date", "Boolean", "Math", "getOwnPropertyDescriptor", "getPrototypeOf", "setPrototypeOf", "enumerable", "configurable", "get", "set", "getter", "setter", "type", "constructor", "name", "Reflect", "MAX_VALUE", "MIN_VALUE", "MAX_SAFE_INTEGER", "MAX_SAFE_INFINITY", "NaN", "EPSILON", "POSITIVE_INFINITY", "NEGATIVE_INFINITY", "forEach", "key", "value", "has", "callee", "caller", "eval", "charCodeAt", "fromCharCode", "Uint8Array", "Uint16Array", "Uint32Array", "Int8Array", "Int16Array", "Int32Array", "map", "unshift", "isNAN", "push", "pop", "parseString", "parseFloat", "parseInt", "parseDouble", "JSON", "parse", "writable", "deleteProperty", "defineProperty", "join", "defineProperties", "global", "Float32Array", "Float64Array", "Atomics", "add", "and", "compareExchange", "exchange", "load", "or", "store", "sub", "wait", "wake", "xor", "Map", "ArrayBuffer", "__lookupGetter__", "__lookupSetter__", "sin", "cos", "atan2", "tan", "tanh", "sinh", "sign", "print", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""
+
 ];
 
-ASToprators=[
+ASToprators = [
     "instanceof",
     "&&",
     "<",
@@ -528,5 +528,5 @@ Property: kind["init", ""];
 
 VariableDeclaration: kind["var", "let", "const"];
 
-Identifier:random["a","b","c","d","e","f","g","h","i","j","__proto__","Object","Array","Error","apply","length"];
+Identifier: random["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "__proto__", "Object", "Array", "Error", "apply", "length"];
 

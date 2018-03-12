@@ -1,5 +1,5 @@
 module.exports = [
-	  { oldName: "Array", newName: "Array", count: 1 }
+	{ oldName: "Array", newName: "Array", count: 1 }
 	, { oldName: "Array.prototype.reverse.call", newName: "Array.prototype.reverse.call", count: 1 }
 	, { oldName: "Array.prototype.splice.call", newName: "Array.prototype.splice.call", count: 1 }
 	, { oldName: "Array.prototype.toLocaleString.call", newName: "Array.prototype.toLocaleString.call", count: 1 }
@@ -67,6 +67,7 @@ module.exports = [
 	, { oldName: "Promise", newName: "Promise", count: 1 }
 	, { oldName: "Proxy", newName: "Proxy", count: 1 }
 	, { oldName: "Reflect", newName: "Reflect", count: 1 }
+	, { oldName: "RegExp", newName: "RegExp", count: 1 }
 	, { oldName: "RegExp.leftContext", newName: "RegExp.leftContext", count: 1 }
 	, { oldName: "RegExp.rightContext", newName: "RegExp.rightContext", count: 1 }
 	, { oldName: "RegExp.lastMatch", newName: "RegExp.lastMatch", count: 1 }
@@ -78,6 +79,7 @@ module.exports = [
 	, { oldName: "RegExp.prototype.test.call", newName: "RegExp.prototype.test.call", count: 1 }
 	, { oldName: "RegExp.prototype.exec.call", newName: "RegExp.prototype.exec.call", count: 1 }
 	, { oldName: "POSTIVE_INFINITY", newName: "POSTIVE_INFINITY", count: 1 }
+	, { oldName: "Set", newName: "Set", count: 1 }
 	, { oldName: "SharedArrayBuffer", newName: "SharedArrayBuffer", count: 1 }
 	, { oldName: "String", newName: "String", count: 1 }
 	, { oldName: "String.FromCharCode", newName: "String.FromCharCode", count: 1 }
@@ -171,6 +173,7 @@ module.exports = [
 	, { oldName: "firstIndexOf", newName: "firstIndexOf", count: 1 }
 	, { oldName: "floor", newName: "floor", count: 1 }
 	, { oldName: "forEach", newName: "forEach", count: 1 }
+	, { oldName: "freeze", newName: "freeze", count: 1 }
 	, { oldName: "from", newName: "from", count: 1 }
 	, { oldName: "fromCharCode", newName: "fromCharCode", count: 1 }
 	, { oldName: "fround", newName: "fround", count: 1 }
@@ -261,6 +264,7 @@ module.exports = [
 	, { oldName: "sin", newName: "sin", count: 1 }
 	, { oldName: "sinh", newName: "sinh", count: 1 }
 	, { oldName: "some", newName: "some", count: 1 }
+	, { oldName: "slice", newName: "slice", count: 1 }
 	, { oldName: "sort", newName: "sort", count: 1 }
 	, { oldName: "source", newName: "source", count: 1 }
 	, { oldName: "species", newName: "species", count: 1 }
@@ -303,8 +307,16 @@ module.exports = [
 	, { oldName: "wake", newName: "wake", count: 1 }
 	, { oldName: "writeable", newName: "writeable", count: 1 }
 	, { oldName: "xor", newName: "xor", count: 1 }
-	, { oldName: "__propto__", newName: "__propto__", count: 1 }
+	, { oldName: "__proto__", newName: "__proto__", count: 1 }
 	, { oldName: "__lookupGetter__", newName: "__lookupGetter__", count: 1 }
 	, { oldName: "__lookupSetter__", newName: "__lookupSetter__", count: 1 }
 	, { oldName: "__defineGetter__", newName: "__defineGetter__", count: 1 }
-	, { oldName: "__defineSetter__", newName: "__defineSetter__", count: 1 }];
+	, { oldName: "__defineSetter__", newName: "__defineSetter__", count: 1 }
+
+
+	//WebKit JavaScriptCore
+	, { oldName: "noInline", newName: "noInline", count: 1 }
+	, { oldName: "dfgTrue", newName: "dfgTrue", count: 1 }
+	, { oldName: "noFTL", newName: "noFTL", count: 1 }
+	, { oldName: "OSRExit", newName: "OSRExit", count: 1 }
+];

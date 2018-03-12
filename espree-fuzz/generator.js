@@ -5,6 +5,8 @@ const linter = new Linter();
 const espree = require("espree");
 const fs = require("fs");
 
+const testcaseDir = "./testcase/";
+const testcaseNormalizedDir = "./testcase-normalized/";
 
 /**
  * STEP 1, Statitical analysis towards "typed" "identifiers" appeard in testcases.
@@ -42,7 +44,7 @@ function statiticalAnalysis(path) {
 								code: jsCode.substring(current.start, current.end)
 							});
 							if (current.type == "Identifier") {
-								let scalar = identifiersArray.filter(function (x) { if(x.oldName == current.name) return x;})[0];
+								let scalar = identifiersArray.filter(function (x) { if (x.oldName == current.name) return x; })[0];
 								if (scalar != undefined) {
 									++scalar.count;
 								}
@@ -67,50 +69,85 @@ function statiticalAnalysis(path) {
 	}
 }
 
-statiticalAnalysis("./testcase-stress/");
+statiticalAnalysis(testcaseDir);
 //for (let scalar of typesArray)
 //	console.log(scalar);
-for (let scalar of identifiersArray)
-	console.log(scalar);
+//for (let scalar of identifiersArray)
+//	console.log(scalar);
 
 
 
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-/*
-fs.readFile('../test2.js', 'utf-8', function (err, jsCode) {
-	console.log(jsCode);
-	let ast = espree.parse(jsCode, { ecmaVersion: 6 });
-	console.log(ast);
-
-	console.log('========');
 
 
-	function traverseNode(node, depth) {
-		depth++;
-		let start = null;                                             //  important fields of the node
-		let end = null;
-		let type = null;                                              //
 
-		for (let index in node) {
 
-			if (node[index] == node) {
-				depth--;
-				return;
+
+
+/**
+ * STEP 2, Substitutions, change the Identifiers using "start" "end" "oldName" "newName".
+ * 
+ * From testcase dir transport to testcase-normalized.
+ */
+function substituteIdentifiers(pathI, pathO) {
+	let files = fs.readdirSync(pathI);
+	for (let file of files) {
+		let jsCode = fs.readFileSync(pathI + file, 'utf-8');
+		try {
+			let ast = espree.parse(jsCode, {
+				ecmaVersion: 9, sourceType: "script", ecmaFeatures: {
+					jsx: true,
+					globalReturn: true,
+					impliedStrict: false,
+					experimentalObjectRestSpread: true
+				}
+			});
+			//console.log('======================================================');
+			//console.log(ast);
+			let toSubstituteIdentifiers = [];
+			function traverseNode(node) {
+				for (let i in node) {
+					let current = node[i];
+					//console.log(current);
+					if ((current == node) || (typeof current == "string") || (typeof current == "number") || current == null) { }
+					else {
+						if (current.hasOwnProperty("type")) {
+							typesArray.push({
+								type: current.type,
+								code: jsCode.substring(current.start, current.end)
+							});
+							if (current.type == "Identifier") {
+								let scalar = identifiersArray.filter(function (x) { if (x.oldName == current.name) return x; })[0];
+								//assert(scalar != undefined);
+								toSubstituteIdentifiers.push({
+									oldName: current.name,
+									newName: scalar.newName,
+									start: current.start,
+									end: current.end
+								});
+							}
+						}
+						traverseNode(current);
+					}
+				}
 			}
-			if (typeof node == "string") {
-				depth--;
-				return;
+			traverseNode(ast);
+
+			let newContent = "";
+			let fp = 0;
+			for (let scalar in toSubstituteIdentifiers) {
+				newContent += jsCode.substring(fp, toSubstituteIdentifiers[scalar].start);
+				newContent += toSubstituteIdentifiers[scalar].newName;
+				fp = toSubstituteIdentifiers[scalar].end;
 			}
-			console.log('[+] 前序遍历' + 'depth:' + depth + ' ' + index + ':' + node[index]);   //  dealing with fields
-			if (index == 'start') {
-				//console.log('startttttt!');
-			}
-			//
-			traverseNode(node[index], depth);
+			newContent += jsCode.substring(fp, jsCode.length);
+			fs.writeFileSync(pathO + file, newContent);
+
+		} catch (e) {
+			console.log('[+] Exception: ' + file + ':' + e);
 		}
 	}
-	traverseNode(ast, 0);
+}
 
-});
-*/
+substituteIdentifiers(testcaseDir, testcaseNormalizedDir);
+
