@@ -70,11 +70,11 @@ function statiticalAnalysis(path) {
 }
 
 statiticalAnalysis(testcaseDir);
-//for (let scalar of typesArray)
-//	console.log(scalar);
-//for (let scalar of identifiersArray)
-//	console.log(scalar);
-
+/*for (let scalar of typesArray)
+	console.log(scalar);
+for (let scalar of identifiersArray)
+	console.log(scalar);
+*/
 
 
 
@@ -151,3 +151,14 @@ function substituteIdentifiers(pathI, pathO) {
 
 substituteIdentifiers(testcaseDir, testcaseNormalizedDir);
 
+
+
+/**
+ * STEP 4, randomly substitute everything from testcase-normalized dir.
+ * 
+ * 
+ */
+typesArray = [];
+statiticalAnalysis(testcaseNormalizedDir);
+for (let scalar of typesArray)
+	console.log(scalar);
