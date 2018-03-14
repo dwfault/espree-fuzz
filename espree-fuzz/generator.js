@@ -85,10 +85,11 @@ for (let scalar of identifiersArray)
 
 
 /**
- * STEP 2, Substitutions, change the Identifiers using "start" "end" "oldName" "newName".
+ * STEP 2, Substitutions, change the Identifiers using "start" "end" "oldName" "newName". VERSION 1.
  * 
  * From testcase dir transport to testcase-normalized.
  */
+/*
 function substituteIdentifiers(pathI, pathO) {
 	let files = fs.readdirSync(pathI);
 	for (let file of files) {
@@ -150,7 +151,93 @@ function substituteIdentifiers(pathI, pathO) {
 }
 
 substituteIdentifiers(testcaseDir, testcaseNormalizedDir);
+*/
 
+
+/**
+ * STEP 2, Substitutions, change the Identifiers using "start" "end" "oldName" "on". VERSION 2.
+ * 
+ * From testcase dir transport to testcase-normalized.
+ */
+function substituteIdentifiers(pathI, pathO) {
+	let files = fs.readdirSync(pathI);
+	for (let file of files) {
+		let jsCode = fs.readFileSync(pathI + file, 'utf-8');
+		try {
+			let ast = espree.parse(jsCode, {
+				ecmaVersion: 9, sourceType: "script", ecmaFeatures: {
+					jsx: true,
+					globalReturn: true,
+					impliedStrict: false,
+					experimentalObjectRestSpread: true
+				}
+			});
+			//console.log('======================================================');
+			//console.log(ast);
+			let toSubstituteIdentifiers = [];
+			function traverseNode(node) {
+				for (let i in node) {
+					let current = node[i];
+					//console.log(current);
+					if ((current == node) || (typeof current == "string") || (typeof current == "number") || current == null) { }
+					else {
+						if (current.hasOwnProperty("type")) {
+							typesArray.push({
+								type: current.type,
+								code: jsCode.substring(current.start, current.end)
+							});
+							if (current.type == "Identifier") {
+								let scalar = identifiersArray.filter(function (x) { if (x.oldName == current.name) return x; })[0];
+								//assert(scalar != undefined);
+								toSubstituteIdentifiers.push({
+									oldName: current.name,
+									newName: scalar.newName,
+									start: current.start,
+									end: current.end
+								});
+							}
+						}
+						traverseNode(current);
+					}
+				}
+			}
+			traverseNode(ast);
+
+			let orderIdentifiers = [];
+			for (let scalar of toSubstituteIdentifiers) {
+				if (orderIdentifiers.filter(function (x) { if (x.oldName == scalar.newName) return x; })[0] == undefined) {
+					if ((scalar.newName[0] == 'o') && (scalar.newName[1] >= '0') && (scalar.newName[1] <= '9')) {
+						orderIdentifiers.push({
+							oldName: scalar.newName,
+							newName: 'o' + orderIdentifiers.length.toString()
+						});
+					}
+					else {
+						orderIdentifiers.push({
+							oldName: scalar.newName,
+							newName: scalar.newName
+						});
+					}
+				}
+			}
+
+			let newContent = "";
+			let fp = 0;
+			for (let scalar of toSubstituteIdentifiers) {
+				newContent += jsCode.substring(fp, scalar.start);
+				newContent += orderIdentifiers.filter(function (x) { if (x.oldName == scalar.newName) return x; })[0].newName;
+				fp = scalar.end;
+			}
+			newContent += jsCode.substring(fp, jsCode.length);
+			fs.writeFileSync(pathO + file, newContent);
+
+		} catch (e) {
+			console.log('[+] Exception: ' + file + ':' + e);
+		}
+	}
+}
+
+substituteIdentifiers(testcaseDir, testcaseNormalizedDir);
 
 
 /**
@@ -160,5 +247,5 @@ substituteIdentifiers(testcaseDir, testcaseNormalizedDir);
  */
 typesArray = [];
 statiticalAnalysis(testcaseNormalizedDir);
-for (let scalar of typesArray)
-	console.log(scalar);
+//for (let scalar of typesArray)
+//	console.log(scalar);

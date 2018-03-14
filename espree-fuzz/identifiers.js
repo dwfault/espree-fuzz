@@ -1,5 +1,6 @@
 module.exports = [
 	{ oldName: "Array", newName: "Array", count: 1 }
+	/*
 	, { oldName: "Array.prototype.reverse.call", newName: "Array.prototype.reverse.call", count: 1 }
 	, { oldName: "Array.prototype.splice.call", newName: "Array.prototype.splice.call", count: 1 }
 	, { oldName: "Array.prototype.toLocaleString.call", newName: "Array.prototype.toLocaleString.call", count: 1 }
@@ -12,15 +13,19 @@ module.exports = [
 	, { oldName: "Array.prototype.push.call", newName: "Array.prototype.push.call", count: 1 }
 	, { oldName: "Array.prototype.shift.call", newName: "Array.prototype.shift.call", count: 1 }
 	, { oldName: "Array.prototype.slice.call", newName: "Array.prototype.slice.call", count: 1 }
+	*/
 	, { oldName: "ArrayBuffer", newName: "ArrayBuffer", count: 1 }
 	, { oldName: "Atomics", newName: "Atomics", count: 1 }
 	, { oldName: "Boolean", newName: "Boolean", count: 1 }
+	/*
 	, { oldName: "Boolean.prototype.toString.call", newName: "Boolean.prototype.toString.call", count: 1 }
 	, { oldName: "Boolean.prototype.toJSON.call", newName: "Boolean.prototype.toJSON.call", count: 1 }
 	, { oldName: "Boolean.prototype.valueOf.call", newName: "Boolean.prototype.valueOf.call", count: 1 }
+	*/
 	, { oldName: "Collator", newName: "Collator", count: 1 }
 	, { oldName: "DataView", newName: "DataView", count: 1 }
 	, { oldName: "Date", newName: "Date", count: 1 }
+	/*
 	, { oldName: "Date.UTC", newName: "Date.UTC", count: 1 }
 	, { oldName: "Date.parse", newName: "Date.parse", count: 1 }
 	, { oldName: "Date.prototype.valueOf.call", newName: "Date.prototype.valueOf.call", count: 1 }
@@ -33,21 +38,28 @@ module.exports = [
 	, { oldName: "Date.prototype.getTimezoneOffset.call", newName: "Date.prototype.getTimezoneOffset.call", count: 1 }
 	, { oldName: "Date.prototype.getFullYear.call", newName: "Date.prototype.getFullYear.call", count: 1 }
 	, { oldName: "Date.prototype.getMilliseconds.call", newName: "Date.prototype.getMilliseconds.call", count: 1 }
+	*/
 	, { oldName: "Debug", newName: "Debug", count: 1 }
+	/*
 	, { oldName: "Debug.write", newName: "Debug.write", count: 1 }
 	, { oldName: "Debug.writeln", newName: "Debug.writeln", count: 1 }
+	*/
 	, { oldName: "Enumerator", newName: "Enumerator", count: 1 }
+	/*
 	, { oldName: "Enumerator.prototype.atEnd.call", newName: "Enumerator.prototype.atEnd.call", count: 1 }
 	, { oldName: "Enumerator.prototype.moveNext.call", newName: "Enumerator.prototype.moveNext.call", count: 1 }
 	, { oldName: "Enumerator.prototype.moveFirst.call", newName: "Enumerator.prototype.moveFirst.call", count: 1 }
+	*/
 	, { oldName: "Error", newName: "Error", count: 1 }
 	, { oldName: "EPSILON", newName: "EPSILON", count: 1 }
 	, { oldName: "Float32Array", newName: "Float32Array", count: 1 }
 	, { oldName: "Float64Array", newName: "Float64Array", count: 1 }
 	, { oldName: "Function", newName: "Function", count: 1 }
+	/*
 	, { oldName: "Function.prototype.toString.call", newName: "Function.prototype.toString.call", count: 1 }
 	, { oldName: "Function.prototype.call.call", newName: "Function.prototype.call.call", count: 1 }
 	, { oldName: "Function.prototype.apply.call", newName: "Function.prototype.apply.call", count: 1 }
+	*/
 	, { oldName: "Infinity", newName: "Infinity", count: 1 }
 	, { oldName: "Int16Array", newName: "Int16Array", count: 1 }
 	, { oldName: "Int32Array", newName: "Int32Array", count: 1 }
@@ -68,6 +80,7 @@ module.exports = [
 	, { oldName: "Proxy", newName: "Proxy", count: 1 }
 	, { oldName: "Reflect", newName: "Reflect", count: 1 }
 	, { oldName: "RegExp", newName: "RegExp", count: 1 }
+	/*
 	, { oldName: "RegExp.leftContext", newName: "RegExp.leftContext", count: 1 }
 	, { oldName: "RegExp.rightContext", newName: "RegExp.rightContext", count: 1 }
 	, { oldName: "RegExp.lastMatch", newName: "RegExp.lastMatch", count: 1 }
@@ -78,10 +91,12 @@ module.exports = [
 	, { oldName: "RegExp.prototype.compile.call", newName: "RegExp.prototype.compile.call", count: 1 }
 	, { oldName: "RegExp.prototype.test.call", newName: "RegExp.prototype.test.call", count: 1 }
 	, { oldName: "RegExp.prototype.exec.call", newName: "RegExp.prototype.exec.call", count: 1 }
+	*/
 	, { oldName: "POSTIVE_INFINITY", newName: "POSTIVE_INFINITY", count: 1 }
 	, { oldName: "Set", newName: "Set", count: 1 }
 	, { oldName: "SharedArrayBuffer", newName: "SharedArrayBuffer", count: 1 }
 	, { oldName: "String", newName: "String", count: 1 }
+	/*
 	, { oldName: "String.FromCharCode", newName: "String.FromCharCode", count: 1 }
 	, { oldName: "String.prototype.substr.call", newName: "String.prototype.substr.call", count: 1 }
 	, { oldName: "String.prototype.substring.call", newName: "String.prototype.substring.call", count: 1 }
@@ -107,18 +122,21 @@ module.exports = [
 	, { oldName: "String.prototype.toLocaleLowerCase.call", newName: "String.prototype.toLocaleLowerCase.call", count: 1 }
 	, { oldName: "String.prototype.toLocaleUpperCase.call", newName: "String.prototype.toLocaleUpperCase.call", count: 1 }
 	, { oldName: "String.prototype.localeCompare.call", newName: "String.prototype.localeCompare.call", count: 1 }
+	*/
 	, { oldName: "Symbol", newName: "Symbol", count: 1 }
 	, { oldName: "Uint16Array", newName: "Uint16Array", count: 1 }
 	, { oldName: "Uint32Array", newName: "Uint32Array", count: 1 }
 	, { oldName: "Uint8Array", newName: "Uint8Array", count: 1 }
 	, { oldName: "Uint8ClampedArray", newName: "Uint8ClampedArray", count: 1 }
 	, { oldName: "VBArray", newName: "VBArray", count: 1 }
+	/*
 	, { oldName: "VBArray.prototype.dimensions.call", newName: "VBArray.prototype.dimensions.call", count: 1 }
 	, { oldName: "VBArray.prototype.getItem.call", newName: "VBArray.prototype.getItem.call", count: 1 }
 	, { oldName: "VBArray.prototype.getItem.call", newName: "VBArray.prototype.getItem.call", count: 1 }
 	, { oldName: "VBArray.prototype.toArray.call", newName: "VBArray.prototype.toArray.call", count: 1 }
 	, { oldName: "VBArray.prototype.lbound.call", newName: "VBArray.prototype.lbound.call", count: 1 }
 	, { oldName: "VBArray.prototype.ubound.call", newName: "VBArray.prototype.ubound.call", count: 1 }
+	*/
 	, { oldName: "WebAssembly", newName: "WebAssembly", count: 1 }
 	, { oldName: "abs", newName: "abs", count: 1 }
 	, { oldName: "acos", newName: "acos", count: 1 }
@@ -191,6 +209,7 @@ module.exports = [
 	, { oldName: "getOwnPropertyDescriptor", newName: "getOwnPropertyDescriptor", count: 1 }
 	, { oldName: "getOwnPropertyNames", newName: "getOwnPropertyNames", count: 1 }
 	, { oldName: "getPrototypeOf", newName: "getPrototypeOf", count: 1 }
+	, { oldName: "getTimezoneOffset", newName: "getTimezoneOffset", count: 1 }
 	, { oldName: "getter", newName: "getter", count: 1 }
 	, { oldName: "global", newName: "global", count: 1 }
 	, { oldName: "has", newName: "has", count: 1 }
