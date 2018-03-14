@@ -474,7 +474,7 @@ function randomlySubstitue(pathI, pathO) {
 				fp = scalar.end;
 			}
 			newContent += jsCode.substring(fp, jsCode.length);
-			fs.writeFileSync(pathO + file, newContent);
+			fs.writeFileSync(pathO + file.substring(0, file.length - 3) + randomString2() + '.js', newContent);
 
 		} catch (e) {
 			console.log('[+] Exception: ' + file + ':' + e);
@@ -483,7 +483,8 @@ function randomlySubstitue(pathI, pathO) {
 }
 
 randomlySubstitue(testcaseNormalizedDir, outputDir);
-
+for (let i = 0; i < 4; i++)
+	randomlySubstitue(outputDir, outputDir);
 
 
 
@@ -537,10 +538,10 @@ randomlySubstitue(testcaseNormalizedDir, outputDir);
 /**
  * Tools functions
  */
-function RandomString32() {
+function randomString2() {
 	var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijkmnoprstuvwxyz0123456789';
 	var str = '';
-	for (let i = 0; i < 32; i++) {
+	for (let i = 0; i < 2; i++) {
 		str += chars.charAt(Math.floor(Math.random() * 60));
 	}
 	return str;
