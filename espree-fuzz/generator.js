@@ -7,6 +7,7 @@ const fs = require("fs");
 
 const testcaseDir = "./testcase/";
 const testcaseNormalizedDir = "./testcase-normalized/";
+const outputDir = "./output/";
 
 /**
  * STEP 1, Statitical analysis towards "typed" "identifiers" appeard in testcases.
@@ -157,7 +158,7 @@ substituteIdentifiers(testcaseDir, testcaseNormalizedDir);
 /**
  * STEP 2, Substitutions, change the Identifiers using "start" "end" "oldName" "on". VERSION 2.
  * 
- * From testcase dir transport to testcase-normalized.
+ * From testcase dir transport to testcase-normalized. Prepare a new types array.
  */
 function substituteIdentifiers(pathI, pathO) {
 	let files = fs.readdirSync(pathI);
@@ -239,13 +240,80 @@ function substituteIdentifiers(pathI, pathO) {
 
 substituteIdentifiers(testcaseDir, testcaseNormalizedDir);
 
-
-/**
- * STEP 4, randomly substitute everything from testcase-normalized dir.
- * 
- * 
- */
 typesArray = [];
 statiticalAnalysis(testcaseNormalizedDir);
 //for (let scalar of typesArray)
 //	console.log(scalar);
+
+/**
+ * STEP 4, randomly substitute everything from testcase-normalized dir.
+ * 
+ * ObjectExpression - ObjectExpression
+ */
+let typeObjectExpression = typesArray.filter(function (x) { if (x.type == 'ObjectExpression') return x; });
+//console.log(typeObjectExpression);
+
+function randomlySubstitue(pathI, pathO) {
+	let files = fs.readdirSync(pathI);
+	for (let file of files) {
+		let jsCode = fs.readFileSync(pathI + file, 'utf-8');
+		try {
+			let ast = espree.parse(jsCode, {
+				ecmaVersion: 9, sourceType: "script", ecmaFeatures: {
+					jsx: true,
+					globalReturn: true,
+					impliedStrict: false,
+					experimentalObjectRestSpread: true
+				}
+			});
+			//console.log('======================================================');
+			//console.log(ast);
+			let toSubstituteTypes = [];
+			function traverseNode(node) {
+				for (let i in node) {
+					let current = node[i];
+					//console.log(current);
+					if ((current == node) || (typeof current == "string") || (typeof current == "number") || current == null) { }
+					else {
+						if (current.hasOwnProperty("type")) {
+							typesArray.push({
+								type: current.type,
+								code: jsCode.substring(current.start, current.end)
+							});
+							//switch(current.type){
+							//}
+							if (current.type == "ObjectExpression") {
+								//if(true){
+								if (Math.floor(Math.random()*2)+0) {
+									let randomScalar = typeObjectExpression[Math.floor((Math.random() * typeObjectExpression.length) + 0)];
+									toSubstituteTypes.push({
+										start: current.start,
+										end: current.end,
+										code: randomScalar.code
+									});
+								}
+							}
+						}
+						traverseNode(current);
+					}
+				}
+			}
+			traverseNode(ast);
+
+			let newContent = "";
+			let fp = 0;
+			for (let scalar of toSubstituteTypes) {
+				newContent += jsCode.substring(fp, scalar.start);
+				newContent += scalar.code;
+				fp = scalar.end;
+			}
+			newContent += jsCode.substring(fp, jsCode.length);
+			fs.writeFileSync(pathO + file, newContent);
+
+		} catch (e) {
+			console.log('[+] Exception: ' + file + ':' + e);
+		}
+	}
+}
+
+randomlySubstitue(testcaseNormalizedDir, outputDir);
