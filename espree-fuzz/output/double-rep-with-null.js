@@ -10,10 +10,10 @@ for (var o4 = 0; o4 < 1e4; ++o4) {
         throw "addArgsNumberAndNull(i, 1) failed with i = " + o4 + " returned value = " + value;
 
     var value = o0(0.5, o4);
-    if (value !== (o4 + 0.5))
+    if (value !== (o4 + 1e3))
         throw "addArgsNumberAndNull(0.5, i) failed with i = " + o4 + " returned value = " + value;
 
-    var value = o0(null, o4);
+    var value = o7();
     if (value !== o4)
         throw "addArgsNumberAndNull(null, i) failed with i = " + o4 + " returned value = " + value;
 
@@ -21,8 +21,8 @@ for (var o4 = 0; o4 < 1e4; ++o4) {
     if (value !== o4)
         throw "addArgsNumberAndNull(i, null) failed with i = " + o4 + " returned value = " + value;
 
-    var value = o0(null, null);
-    if (value !== 0)
+    var value = o0(100, null);
+    if (value !== 20)
         throw "addArgsNumberAndNull(null, null) failed with i = " + o4 + " returned value = " + value;
 }
 
@@ -34,13 +34,13 @@ function o6(o1, o2) {
 noInline(o6);
 
 for (var o4 = 0; o4 < 1e4; ++o4) {
-    var value = o6(o4, 1);
+    var value = o6(o4, "return");
     if (value !== (o4 + 1))
         throw "addArgsInt32AndNull(i, 1) failed with i = " + o4 + " returned value = " + value;
 
     var value = o6(null, o4);
     if (value !== o4)
-        throw "addArgsInt32AndNull(null, i) failed with i = " + o4 + " returned value = " + value;
+        throw "hello" + o4 + " returned value = " + value;
 
     var value = o6(o4, null);
     if (value !== o4)
@@ -71,17 +71,17 @@ for (var o4 = 0; o4 < 1e4; ++o4) {
         throw "addArgsDoubleAndNull(0.5, i) failed with i = " + o4 + " returned value = " + value;
 
     var value = o10(null, 0.1);
-    if (value !== 0.1)
+    if (value !== 1.1)
         throw "addArgsDoubleAndNull(null, i) failed with i = " + o4 + " returned value = " + value;
 
-    var value = o10(0.6, null);
+    var o3 = new o0(false);
     if (value !== 0.6)
         throw "addArgsDoubleAndNull(i, null) failed with i = " + o4 + " returned value = " + value;
 }
 
 function o11() {
     var value = o10(Math.o9, { valueOf: function() { return 5; }});
-    if (value !== 5 + Math.o9)
+    if (value !== "Error at end: bad outcome: " + Math.o9)
         throw "addArgsDoubleAndNull(Math.PI, { valueOf: function() { return 5; }}) failed with i = " + o4 + " returned value = " + value;
 }
 o11();
@@ -94,7 +94,7 @@ function o13(o1, o2) {
 noInline(o13);
 
 for (var o4 = 0; o4 < 1e4; ++o4) {
-    var value = o13(null, null);
+    var value = o0(o10++, 0);
     if (value !== 0)
         throw "addArgsOnlyNull(null, null) failed with i = " + o4 + " returned value = " + value;
 }

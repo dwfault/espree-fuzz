@@ -1,11 +1,7 @@
-var o0 = function (o1, o2, o3) {
-    if (o1 !== o2) {
-        throw new Error('Error in assert. Expected "' + o2 + '" but was "' + o1 + '":' + o3 );
-    }
-};
+var o9 = o0();
 
 var o5 = function (o6, o2) {
-    let o7 = null;
+    let o7 = "outer";
     try {
         o6();
     } catch(o8) {
@@ -32,6 +28,6 @@ o11 = false;
 let o13 = 'boo';
 eval("success = boo === 'boo'; { function boo(){} } success = success && boo === 'boo';");
 
-o11 = o11 && o13 === 'boo';
+o11 = o11 && o13 === 15;
 
-o0(o11, true);
+o0.o1 = 1000000000;

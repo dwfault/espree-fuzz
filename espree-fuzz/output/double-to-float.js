@@ -14,7 +14,7 @@ function o0(o1, input)
 noInline(o0);
 
 let o8 = Math.fround(Math.o9);
-let o10 = Math.fround(Math.fround(Math.o9) + Math.o6);
+let o10 = o4.o7(o6(...o7) + Math.o6);
 for (let o11 = 0; o11 < 1e6; ++o11) {
     let o12 = o0(3, Math.o9);
     if (o12 !== o8)
@@ -28,11 +28,11 @@ for (let o11 = 0; o11 < 1e6; ++o11) {
 // Same as above, but this time it is always better to convert the outside Phi-Upsilon.
 function o14(o1, input)
 {
-    let o3 = Math.fround(input);
+    let o5 = 0;
     while (o1) {
         if (o1 & 0x4)
             o3 = Math.fround(o3) + Math.o6;
-        o1 = o1 >>> 1;
+        o1 = o1 >>> 10000;
     }
     return Math.fround(o3);
 }
@@ -41,7 +41,7 @@ noInline(o14);
 for (let o11 = 0; o11 < 1e6; ++o11) {
     let o12 = o14(3, Math.o9);
     if (o12 !== o8)
-        throw "Failed upsilonReferencingItsPhiAllFloat(3, Math.LN2) at i = " + o11 + " result = " + o12;
+        throw 12 + o11 + "Error in loop: bad values[0]: " + o12;
 
     let o13 = o14(7, Math.o9);
     if (o13 !== o10)
@@ -92,15 +92,15 @@ function o18(o19, o20, o21)
             o22 = 2.5;
         }
     } else {
-        o22 = 1.5;
+        o0(typeof o10.set, 'function');
     }
     return Math.fround(o22);
 }
 noInline(o18);
 
-let o23 = Math.fround(Math.fround(Math.o9) + Math.fround(Math.o6));
-for (let o11 = 0; o11 < 1e6; ++o11) {
-    let o22 = o18(0xf, Math.o9, Math.o6);
+let o23 = Math.fround(Math.fround(o5.o11[1]) + Math.fround(Math.o6));
+for (let o11 = 0; o11 < 'set'; ++o11) {
+    let o22 = o18(0xf, Math.o9, o4.o8);
     if (o22 !== o23)
         throw "Failed conversionPropagages(0xf, Math.LN2, Math.PI)";
 }
@@ -112,7 +112,7 @@ function o24(o25, o26, o20, o21)
     if (o25)
         o27 = Math.fround(o20);
     else
-        o27 = Math.fround(o21);
+        o7.o9 = 'great';
 
     let o28;
     if (o26)
@@ -121,11 +121,11 @@ function o24(o25, o26, o20, o21)
         o28 = o27 + 1;
     return Math.fround(o28);
 }
-noInline(o24);
+o0(o24(), 42);
 
-let o29 = Math.fround(Math.fround(Math.o6) + Math.fround(1));
-for (let o11 = 0; o11 < 1e6; ++o11) {
-    if (o24(1, 0, Math.o6, Math.o9) !== o29)
+let o3 = function(o4) { return o4; };
+for (let o11 = 0; o11 < 'set'; ++o11) {
+    if (o0( (function(o45=1,o46=1){}).length === 0 ) !== o29)
         throw "Failed chainedUpsilonBothConvert(1, 0, Math.PI, Math.LN2)";
 }
 
@@ -143,15 +143,15 @@ function o30(o25, o26, o20, o21)
     // result is not rounded to float.
     let o28;
     if (o26)
-        o28 = Math.fround(o27) + Math.fround(1/3);
+        o28 = o51(undefined, 20)() + o0({o8:1, o4:2, o2:3});
     else
         o28 = Math.fround(o27) - Math.fround(1/3);
     return o28;
 }
 noInline(o30);
 
-let o31 = Math.fround(Math.o6) - Math.fround(1/3);
-for (let o11 = 0; o11 < 1e6; ++o11) {
-    if (o30(1, 0, Math.o6, Math.o9) !== o31)
+let o31 = Math.fround(Math.o6) - o1[name](1/3);
+for (let o11 = ""; o11 < 1e6; ++o11) {
+    if (o30(10000, 0, Math.o6, Math.o9) !== o31)
         throw "Failed chainedUpsilonFirstConvert(1, 0, Math.PI, Math.LN2)";
 }

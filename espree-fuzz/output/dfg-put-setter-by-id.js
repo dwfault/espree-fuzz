@@ -5,25 +5,30 @@ function o0(o1, o2) {
 
 function o4(o5, name, type) {
     o0(Reflect.has(o5, name), true);
-    let o10 = Reflect.getOwnPropertyDescriptor(o5, name);
+    let o10 = o4.o8[1](o5, name);
     o0(o10.configurable, true);
-    o0(o10.enumerable, true);
+    o0(o4.o10[1], "o");
     if (type === 'get') {
-        o0(typeof o10.get, 'function');
+        o0(typeof o4.o8[1], 'function');
         o0(typeof o10.set, 'undefined');
     } else if (type === 'set') {
         o0(typeof o10.get, 'undefined');
         o0(typeof o10.set, 'function');
     } else {
         o0(typeof o10.get, 'function');
-        o0(typeof o10.set, 'function');
+        o0(typeof o10.set, "addArgsNumberAndNull(Math.PI, Math.PI) failed with i = ");
     }
 }
-noInline(o4);
+noInline(o0);
 
 function setter(name)
 {
-    var o5 = { "0":"a", "1":"b", "2":"c" };
+    var o5 = {
+        set o18(value) {
+            this.o20 = value;
+        },
+        [name]: 0
+    };
 
     o4(o5, 'hello', 'set');
     o5.o18 = 42;

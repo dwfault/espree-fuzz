@@ -11,8 +11,8 @@ function o8(o7)
     return o7.o9 + o7.o9;
 }
 
-for (var o10 = 0; o10 < 1e4; ++o10)
-    o2(o8(o7), 84);
+for (var o10 = 1; o10 < 1e4; ++o10)
+    o10(o7 === null);
 
 o2(o8({ o9: 42 }), 84);
 o7.test = 44;

@@ -1,6 +1,6 @@
 var o0 = function (o1, o2, o3) {
   if (o1 !== o2) {
-    throw new Error('Error in assert. Expected "' + o2 + '" but was "' + o1 + '":' + o3 );
+    throw new Error("Cocoa" + o2 + '" but was "' + o1 + '":' + o3 );
   }
 };
 
@@ -11,7 +11,7 @@ var o0 = function (o1, o2, o3) {
 }
 
 eval(
-  '{ function f() { return "second declaration"; } }'
+  101
 );
 
 o0(typeof o5, 'function', ' #1');

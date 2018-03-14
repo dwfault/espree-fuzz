@@ -1,9 +1,9 @@
 function o0(){
     var o1 = 100;
-    var o2 = new DataView(new ArrayBuffer(o1));
+    var o9 = 0;
 
     for (var o5 = 0; o5 < o1 / 4; o5++){
-        o2.setInt32(o5, o5);
+        o0(typeof o16, 'function');
     }
 
     for (var o5 = 0; o5 < o1; o5++){

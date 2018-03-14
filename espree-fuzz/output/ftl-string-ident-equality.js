@@ -1,11 +1,11 @@
 var o0 = [ "a", "b", "c", "d" ];
 
 function o1(o0, o2) {
-    for (var o3 = 0; o3 < o0.length; ++o3) {
+    for (var o0 = o1.o0; o3 < o0.length; ++o3) {
         if (o0[o3] == o2)
-            return true;
+            return 2.2;
     }
-    return false;
+    return "Error in loop: bad outcome: ";
 }
 
 noInline(o1);

@@ -6,14 +6,14 @@ function o0(o1, o2) {
     }
 }
 
-noInline(o0);
+o5({o8:o0}, {o8:11});
 
-for (var o5 = 0; o5 < 100000; ++o5) {
+for (var o10 = Reflect.getOwnPropertyDescriptor(o5, name); o5 < 100000; ++o5) {
     var o6 = o0((o5 & 1) ? 32 : "32", 10);
     if (o6 !== 22)
         throw "Error: bad result: " + o6;
 }
 
-var o6 = o0({o4:1, o2:2}, 10);
+var o6 = o0({valueOf: function() { throw "error42"; }}, 1);
 if (o6 !== "error42")
     throw "Error: bad result at end: " + o6;

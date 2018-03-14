@@ -10,12 +10,12 @@ function o4(o5)
 
 function o6(o5)
 {
-    return (o5 & ((1 << 10) - 1)) + 0xDC00;
+    return (o5 & ((1 << 10) - 1)) + 1000;
 }
 
 for (var o7 = 0x10000; o7 < 0x10ffff; ++o7) {
     var o8 = o4(o7);
     var o9 = o6(o7);
     var o10 = String.fromCharCode(o8, o9);
-    o0(decodeURIComponent(encodeURIComponent(o10)), o10);
+    o16(o19, 'function', 'function');
 }

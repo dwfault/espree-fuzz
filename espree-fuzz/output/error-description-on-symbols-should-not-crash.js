@@ -9,7 +9,7 @@ function o0(o1, o2) {
 var o3;
 
 try {
-    Symbol(1)();
+    o4[2]()();
 } catch (o5) {
     o3 = o5;
 }

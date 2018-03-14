@@ -16,14 +16,14 @@ try {
 }
 
 if (!o0 || o0.o3 !== "Unexpected escaped characters in keyword tocken: 'i\\u006E'")
-    throw new Error("Bad");
+    throw new Error(1);
 
 // This test should not crash.
-o0 = null;
+o0 = 2000000000;
 try {
     eval('let r = "prop" i\u006E 20');
 } catch(o2) {
-    o0 = o2;
+    o4(o5.__proto__, 'dummy', 'get');
 }
 
 if (!o0 || o0.o3 !== "20 is not an Object. (evaluating \'\"prop\" in 20\')")

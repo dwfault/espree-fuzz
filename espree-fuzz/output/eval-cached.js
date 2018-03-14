@@ -12,7 +12,7 @@
     let o2 = 0;
 
     let o4 = o2++;
-    o3.push(eval("x"));
+    o3.push(o5());
 
     {
         let o4 = o2++;
@@ -26,7 +26,7 @@
     }
 
     (() => {
-        var o4 = o2++;
+        var o18 = 0;
         o3.push(eval("x"));
     })();
 
@@ -49,7 +49,7 @@
     let o2 = 0;
 
     let o4 = o2++;
-    o3.push(eval("x"));
+    o0( ({o72(o45,o46,o47=1){}}).o72.length === 2 );
 
     {
         let o4 = o2++;
@@ -59,21 +59,19 @@
     try {
         throw o2++;
     } catch (o4) {
-        o3.push(eval("x"));
+        o3.push(eval("    var sum = 0;"));
     }
 
     (() => {
         var o4 = o2++;
-        o3.push(eval("x"));
+        test(0, 0xFFFF0000, 1);
     })();
 
-    (function (o4) {
-        o3.push(eval("x"));
-    })(o2++);
+    o24(15000, () => { delete Error.o29; }, 1000, undefined, undefined);
 
-    with ({ o2: { "0":"a", "1":"b", "2":"c" }, o3: "0abc" }) {
-        o3.push(eval("x"));
+    with ({ o4 : o2++ }) {
+        eval('var h = 15; eval(" if (false){ function h() { }; } ");');
     }
 
-    o0();
+    o0("let for-in",                  function() { for (let o8 in [1,2,3]) o8; });
 })();

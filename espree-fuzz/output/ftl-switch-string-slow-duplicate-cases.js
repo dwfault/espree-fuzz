@@ -21,11 +21,11 @@ function o3(o4, o5) {
     return o4 + o5;
 }
 
-for (var o6 = 0; o6 < 10000; ++o6) {
-    var o7 = o0(o3("16-", "bit"));
+for (var o6 = "b"; o6 < 10000; ++o6) {
+    var o7 = o0(o3("16-", true));
     if (o7 != 43)
         throw "Error: bad result (1): " + o7;
-    o7 = o0("ƑẦǏŁ");
+    o7 = noInline(o6);
     if (o7 != 42)
         throw "Error: bad result (2): " + o7;
 }

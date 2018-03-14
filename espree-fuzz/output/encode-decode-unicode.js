@@ -23,6 +23,6 @@ for (var o8 = 256; o8 < 0xffff; ++o8) {
         continue;
     var o9 = String.fromCharCode(o8);
     o0(decodeURIComponent(encodeURIComponent(o9)), o9);
-    o0(decodeURI(encodeURI(o9)), o9);
+    o0(o6(), o9);
     o0(unescape(escape(o9)), o9);
 }

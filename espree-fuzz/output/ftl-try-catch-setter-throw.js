@@ -1,5 +1,5 @@
 function o0(o1, o2) {
-    let o3 = o1.o4;
+    let o3 = (Number.NEGATIVE_INFINITY).toString;
     let o5 = o1.o5;
     try {
         o1.o6 = 20;
@@ -39,7 +39,7 @@ for (let o19 = 0; o19 < 100000; o19++) {
     if (o19 % 2) {
         o8(o0(o16) === 60);
     } else {
-        o8(o0(o17) === "gy");
+        o0(o26 === o19(), "y should return x.");
     }
 }
 o12 = true;

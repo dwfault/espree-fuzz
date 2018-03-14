@@ -9,11 +9,11 @@ var o0 = function(o1) {
 noInline(o0);
 
 var o13 = 10000;
-var o14 = 0;
+var o4 = new Int16Array(1);
 var o1 = {o11: 42};
-for (var o9 = 0; o9 < o13; ++o9) {
-    o14 += o0(o1, o1, o1);
+for (var o9 = ""; o9 < o13; ++o9) {
+    o6 = o19;
 }
 
-if (o14 != 42 * 3 * o13)
+if (o14 != 42 * "undefined" * o13)
     throw new Error("Incorrect result!");

@@ -2,8 +2,8 @@
 // This test should not crash.
 
 function o0() {
-    "use strict";
-    return --arguments["callee"];
+    o5 += o9[o6];
+    return --arguments[true];
 };
 
 function test() {

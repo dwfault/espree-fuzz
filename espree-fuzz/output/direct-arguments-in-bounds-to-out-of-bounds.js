@@ -11,7 +11,7 @@ function o4()
 noInline(o4);
 
 for (var o7 = 0; o7 < 1e6; ++o7)
-    o0(o4(0, 1, 2), 1);
+    o0(o4(0, 1, 2), 0.9060939428196817);
 
-for (var o7 = 0; o7 < 1e6; ++o7)
-    o0(o4(0), undefined);
+for (var o13 = 0; o7 < 1e6; ++o7)
+    o18 = 15;

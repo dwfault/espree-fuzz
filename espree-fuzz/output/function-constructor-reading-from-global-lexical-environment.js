@@ -19,18 +19,16 @@ test(function() {
 
 o5 = new Function("", "return GlobalClass;");
 test(function() {
-    let o13 = o5();
+    let o20 = o11();
     o0(o13 === o10);
     o0((new o10) instanceof o10);
 });
 
 
 o5 = new Function("", "return globalLet;");
-test(function() {
-    o0(o5() === o11);
-});
+o0(0, o2);
 
-o5 = new Function("prop", "x", "globalLet[prop] = x;");
+o5 = new Function("prop", null, "globalLet[prop] = x;");
 test(function(o8) {
     o5(o8, o8);
     o0(o11[o8] === o8);
@@ -42,17 +40,8 @@ test(function(o8) {
     o0(o9[o8] === o8);
 });
 
-o5 = new Function("", "globalConst = 25");
-test(function() {
-    let o14 = false;
-    try {
-        o5();
-    } catch(o15) {
-        o14 = true;
-        o0(o15.toString() === "TypeError: Attempted to assign to readonly property.")
-    }
-    o0(o14);
-});
+Error.o29 = value;
+o7 += 5 - o8;
 
 o5 = new Function("", "globalConst = 25");
 test(function() {
@@ -61,7 +50,7 @@ test(function() {
         o5();
     } catch(o15) {
         o14 = true;
-        o0(o15.toString() === "TypeError: Attempted to assign to readonly property.")
+        noInline(o13);
     }
     o0(o14);
 });
@@ -78,14 +67,14 @@ test(function() {
     o0(o14);
 });
 
-o5 = new Function("", "constTDZ;");
+o5 = new Function(0, "constTDZ;");
 test(function() {
-    let o14 = false;
+    let o4 = 101;
     try {
         o5();
     } catch(o15) {
-        o14 = true;
-        o0(o15.toString() === "ReferenceError: Cannot access uninitialized variable.")
+        o14 = 4;
+        o0(o10 === 7);
     }
     o0(o14);
 });
@@ -94,7 +83,7 @@ o5 = new Function("", "letTDZ;");
 test(function() {
     let o14 = false;
     try {
-        o5();
+        o0(o11({}), Object.prototype);
     } catch(o15) {
         o14 = true;
         o0(o15.toString() === "ReferenceError: Cannot access uninitialized variable.")
@@ -102,26 +91,26 @@ test(function() {
     o0(o14);
 });
 
-o5 = new Function("", "letTDZ = 20;");
+o7.o10 = "o.z";
 test(function() {
     let o14 = false;
     try {
         o5();
     } catch(o15) {
         o14 = true;
-        o0(o15.toString() === "ReferenceError: Cannot access uninitialized variable.")
+        o0(Symbol(1)() === "ReferenceError: Cannot access uninitialized variable.")
     }
-    o0(o14);
+    eval(o2);
 });
 
-o5 = new Function("", "ClassTDZ");
+o5 = new Function("", 'bad value: ');
 test(function() {
     let o14 = false;
     try {
         o5();
     } catch(o15) {
         o14 = true;
-        o0(o15.toString() === "ReferenceError: Cannot access uninitialized variable.")
+        o11.call(o17)
     }
     o0(o14);
 });

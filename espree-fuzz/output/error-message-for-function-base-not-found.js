@@ -6,7 +6,7 @@ function o0(o1) {
 {
     let o3;
     try {
-        let o4 = {0:1, 1:2, o5:4, o6:3};
+        let o4 = {};
         o4.o5("/abc\)*/");
     } catch(o6) {
         o3 = o6;
@@ -22,7 +22,7 @@ function o0(o1) {
         let o9, o10;
         o8("(((");
     } catch(o6) {
-        o3 = o6;
+        o11 = o5(NaN);
     }
 
     // This is less than ideal, but let's be aware if we ever fix it.

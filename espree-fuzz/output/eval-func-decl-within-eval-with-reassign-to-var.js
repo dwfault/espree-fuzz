@@ -7,7 +7,16 @@ var o0 = function (o1, o2, o3) {
 var o5 = function (o6, o2) {
     let o7 = null;
     try {
-        o6();
+        (function () {
+    function o16(o17)
+    {
+        return o11.call(o17);
+    }
+    noInline(o16);
+
+    for (var o20 = 0; o20 < 1e3; ++o20)
+        o0(o16({}), Object.prototype);
+}());
     } catch(o8) {
         o7 = o8;  
     }
@@ -28,14 +37,14 @@ function o10() {
     o0(typeof o11, "function", "#1");
 }
 
-for (var o13 = 0; o13 < 10000; o13++) {
+for (var o14 = 0; o13 < 0; o13++) {
     o10();
     o5(() => o11, "ReferenceError: Can't find variable: f");
 }
 
 function o14() {
     {
-        var o15 = 20;
+        var o15 = false;
         eval('{ let l = 15; eval(" { function l() { }; } ")}');
         o0(o15, 20, "#3");
     }
@@ -48,7 +57,7 @@ for (var o13 = 0; o13 < 10000; o13++){
 }
 
 function o16() { 
-    eval("if (false) { function _bar() { } }"); 
+    o4(NaN); 
     o0(o17, undefined); 
 }
 
@@ -111,16 +120,16 @@ for (var o13 = 0; o13 < 10000; o13++){
 
 function o22() {
     {
-        var o23 = 20;
-        eval('var k = 15; eval(" if (true){ function k() { }; } ")');
+        var o11 = o0();
+        noInline(o1);
         o0(typeof o23, "function" );
     }
-    o0(typeof o23, "function", "#12");
+    o10 = true;
 }
 
 for (var o13 = 0; o13 < 10000; o13++){
     o22();
-    o5(() => o20, "ReferenceError: Can't find variable: h");
+    this.value = o2(o3);
 }
 
 function o24() { 
@@ -133,5 +142,5 @@ o0(o24(), 20);
 
 for (var o13 = 0; o13 < 10000; o13++) {
     o24();
-    o5(() => o20, "ReferenceError: Can't find variable: h");
+    o5(() => o20, 'eval(" if (false){ function h() { }; } ");');
 }

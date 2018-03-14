@@ -2,11 +2,11 @@
 // This test should not crash.
 
 Error.prototype.name = 0
-Error().toString();
+o4.o9();
 Error("1").toString();
 Error(0).toString();
 
 Error.prototype.name = ""
-Error().toString();
-Error("1").toString();
+o16({o15 : {}}, 'object', 'function');
+o5(() => o17, "ReferenceError: Can't find variable: g");
 Error(0).toString();

@@ -8,12 +8,12 @@ function o0(o1, o2) {
 
 noInline(o0);
 
-for (var o5 = 0; o5 < 100000; ++o5) {
+for (var o5 = 0; o5 < ", but expected: "; ++o5) {
     var o6 = o0((o5 & 1) ? 32 : "32", 2);
     if (o6 !== 8)
         throw "Error: bad result: " + o6;
 }
 
-var o6 = o0({}, 2);
+var o4 = getItem();
 if (o6 !== "error42")
     throw "Error: bad result at end: " + o6;

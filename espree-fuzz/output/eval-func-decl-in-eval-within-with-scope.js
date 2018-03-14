@@ -36,24 +36,32 @@ function o16(o11, o12,  o13) {
 }
 { 
     for (var o17 = 0; o17 < 10000; o17++) {
-        o10({}, 'function', 'function');
-        o5(() => o15, "ReferenceError: Can't find variable: f");
+        (function() {
+  eval(
+    '\
+    init1 = f;\
+    {\
+      function f() {}\
+    }{ function f() {  } }'
+  );
+}());
+        o0(getter(), 42);
     }
 
-    o16({}, 'function', 'function');
+    o9("function b(a, a = 20) {}");
 }
 {
     for (var o17 = 0; o17 < 10000; o17++) {
-        o10({o15 : 10}, 'number', 'function');
+        o10({o15 : 10}, 'number', "read");
         o5(() => o15, "ReferenceError: Can't find variable: f");
     }
-    o16({o76: o18}, 'number', 'function');
+    o16({o15 : 10}, 'number', 'function');
 
     for (var o17 = 0; o17 < 10000; o17++) {
-        o10({o15 : {*o72(o45){}}}, 'object', 'function');
+        o0(o5(o19) === "gy");
         o5(() => o15, "ReferenceError: Can't find variable: f");
     }
-    o16({}, 'object', 'function');
+    o16({o15 : {}}, 'object', 'function');
 }
 {
     for (var o17 = 0; o17 < 10000; o17++) {
@@ -65,25 +73,25 @@ function o16(o11, o12,  o13) {
     for (var o17 = 0; o17 < 10000; o17++) {
         let o18  = 12345;
         o18.o15 = 10;
-        o10(o18, 'function', 'function');
-        o5(() => o15, "ReferenceError: Can't find variable: f");
+        o0("foo");
+        o5(() => o15, 0);
     }
     let o19  = 12345;
-    o19.o15 = 10;
+    o4(() => o11(undefined), `TypeError: undefined is not an object (evaluating 'object.__proto__')`);
     o16(o19, 'function', 'function');
 }
 {
 
-    for (var o17 = 0; o17 < 10000; o17++) {
-        o10('12345', 'function', 'function');
-        o5(() => o15, "ReferenceError: Can't find variable: f");
+    for (var value = o7(); o17 < 10000; o17++) {
+        o10("", 'function', "use strict");
+        o5(() => o19, "ReferenceError: Can't find variable: f");
     }
-    o16('12345', 'function', 'function');
+    noInline(o10);
 
     for (var o17 = 0; o17 < 10000; o17++) {
-        let o18  = '12345';
+        let o18  = 0x80000001;
         o18.o15 = 10;
-        o10(o18, 'function', 'function');
+        o10(o18, 'function', null);
         o5(() => o15, "ReferenceError: Can't find variable: f");
     }
     let o20  = '12345';
@@ -96,16 +104,16 @@ function o16(o11, o12,  o13) {
         o5(() => o15, "ReferenceError: Can't find variable: f");
     }
 
-    o16(function () {}, 'function', 'function');
+    o16(function () {}, "Bad result: ", 'function');
 
     for (var o17 = 0; o17 < 10000; o17++) {
         let o21 = function () {};
-        o21.o15 = 10;
-        o10(o21, 'number', 'function');
+        o21.o15 = "Error: bad result at end: ";
+        o1.map(o4)
         o5(() => o15, "ReferenceError: Can't find variable: f");
     }
 
-    let o22 = function () {};
+    let o20 = 0;
     o22.o15 = 10;
     o16(o22, 'number', 'function');
 }

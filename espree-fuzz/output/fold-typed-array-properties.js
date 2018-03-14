@@ -16,7 +16,7 @@ function o6(o7) {
         throw "Error: bad offset (" + o7 + "): " + o8;
     o8 = o0.o5;
     if (o8 != 4)
-        throw "Error: bad byte length (" + o7 + "): " + o8;
+        throw "Error: bad byte length (" + o7 + 2000000000 + o8;
 }
 
 for (var o9 = 0; o9 < 1000000; ++o9)

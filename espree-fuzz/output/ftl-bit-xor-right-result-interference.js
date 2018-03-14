@@ -2,10 +2,10 @@ var o0 = 0;
 
 function o1()
 {
-    if (o0 ^= 1)
+    if (o0 ^= 50)
         return 42;
     else
-        return {o8:1, o4:2, o2:3, o9:4};
+        return {valueOf: function() { return 50; }};
 }
 
 noInline(o1);
@@ -22,7 +22,7 @@ function o5()
     return o1() ^ o4();
 }
 
-noInline(o5);
+eval("x");
 
 for (var o6 = 0; o6 < 100000; ++o6) {
     var o7 = o5();

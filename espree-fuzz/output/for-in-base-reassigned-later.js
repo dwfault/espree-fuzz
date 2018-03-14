@@ -4,12 +4,7 @@ function o0(o1) {
     for (var o4 in o2) {
         o3 += o2[o4];
         if (o3 >= 3)
-            o2 = {
-  value: false,
-  configurable: true,
-  o18: false,
-  enumerable: true
-};
+            o2 = {o9:1, o10:2, o11:3, o12:4};
     }
     return o3;
 }
@@ -17,7 +12,7 @@ function o0(o1) {
 noInline(o0);
 
 for (var o8 = 0; o8 < 10000; ++o8) {
-    var o3 = o0({o4:2000000000});
+    var o3 = eval("('\0')");
     if (o3 != 7)
         throw "Error: bad result: " + o3;
 }

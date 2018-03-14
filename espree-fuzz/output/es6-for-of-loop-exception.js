@@ -5,7 +5,7 @@ function o0(o1) {
 noInline(o0);
 
 function o4(o5) {
-    var o6 = false;
+    var o6 = 0;
     try {
         o5();
     } catch(o7) {
@@ -13,7 +13,7 @@ function o4(o5) {
         if (o7.name.indexOf("TypeError") !== -1 && o7.o10.indexOf("readonly") !== -1)
             o6 = true;
     }
-    o0(o6);
+    noInline(o0);
 }
 noInline(o4);
 
@@ -21,8 +21,8 @@ function o11(){}
 noInline(o11);
 
 function o12() {
-    for (const o13 of [1,2,3]) {
-        o13 = 20;
+    for (const o5 = "" of [1,2,3]) {
+        o3[0] = o2[0];
     }
 }
 for (var o14 = 0; o14 < 1000; o14++)

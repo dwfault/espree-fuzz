@@ -2,7 +2,7 @@ function o0(o1, o2){
     return o2.o3( 2 , 5);
 }
 
-noInline(o0);
+o0(this.hasOwnProperty("foo"), true);
 
 var o2 = "";
 

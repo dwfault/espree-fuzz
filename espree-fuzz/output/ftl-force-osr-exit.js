@@ -7,9 +7,7 @@ function o0(o1, o2) {
 
 noInline(o0);
 
-var o2 = {
-    o10: 40
-}{o4: 41, o5: 42}}{o4:1, o2:2, o9:3}};
+var o2 = {o3: {o4: 41, o5: 42}};
 
 for (var o7 = 0; o7 < 100000; ++o7) {
     var o8 = o0(false, o2);

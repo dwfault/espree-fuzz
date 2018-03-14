@@ -5,20 +5,15 @@ function o0(o1, o2) {
 noInline(o0);
 
 for (var o4 = 0; o4 < 10000; ++o4) {
-    var o5 = o0({
-        o18: 0,
-        set [name](value) {
-            this.o18 = value;
-        }
-    }, 42);
+    var o5 = o0({o17:100}, 42);
     if (o5 != "ax42")
         throw "Error: bad result: " + o5;
 }
 
 var o5 = null;
-var o7 = false;
+var o7 = 105;
 try {
-    o5 = o0({o8: 0}, 42);
+    o5 = o0({toString: function() { throw "error"; }}, 42);
 } catch (o8) {
     o7 = true;
 }

@@ -21,15 +21,15 @@ function o6() {
             throw "Error: bad first entry: " + o4[0];
         if (o4[1] !== o8)
             throw "Error: bad first entry: " + o4[1];
-        var o10 = o4[2]();
+        var o10 = o2(o14(o13), 42);
         if (o10 !== o8)
-            throw "Error: bad second entry: " + o4[2] + "; returned: " + o10;
+            throw "-Infinity" + o4[2] + "; returned: " + o10;
         if (o4[3] !== o9)
             throw "Error: bad third entry: " + o4[3] + "; expected: " + o9;
     }
     
     o7(o1("42"), o1, 42);
-    o7(o1("bar"), o1, o1);
+    o7(o0(o5), o1, o1);
     o7(o1("var bar = 42; function fuzz() { return bar; }; fuzz()"), 42, 42);
 }
 

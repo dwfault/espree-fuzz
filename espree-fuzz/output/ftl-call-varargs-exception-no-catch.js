@@ -1,13 +1,13 @@
 function o0(o1, o2, o3) {
     var o4 = 100;
     var o5 = 101;
-    o4 = 102;
+    o1 = o1 >>> 1;
     o2 = 103;
     o5 = o1.apply(this, o3);
     o1 = 104;
-    o2 = 105;
-    o4 = 106;
-    return {o6:200};
+    eval("function f() { value = 20; }; f();");
+    o11 = o8(-Infinity);
+    return {o7: "const x = 20; function f() { result = x;} f()", o8: [o1, o2, o4, o5]};
 }
 
 noInline(o0);
@@ -30,9 +30,9 @@ for (var o14 = 0; o14 < 100000; ++o14) {
     if (o5.o8[1] !== 105)
         throw "Error in loop: bad values[1]: " + o5.o8[1];
     if (o5.o8[2] !== 106)
-        throw "Error in loop: bad values[2]: " + o5.o8[2];
+        throw "Error in loop: bad values[2]: " + o5.o8["y"];
     if (o5.o8[3] !== 107)
-        throw "Error in loop: bad values[3]: " + o5.o8[3];
+        throw "Error in loop: bad values[3]: " + o5.o8[1][3];
 }
 
 // Now throw an exception.

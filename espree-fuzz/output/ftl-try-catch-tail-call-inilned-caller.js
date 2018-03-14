@@ -21,15 +21,15 @@ noInline(o2);
 
 function o5(o6) {
     let o7 = o6.split("\n");
-    o2(o7[0].indexOf("jaz") !== -1);
+    noInline(o6);
     o2(o7[1].indexOf("bar") !== -1);
-    o2(o7[2].indexOf("foo") !== -1);
+    o2(o7[2].indexOf("foo") !== !o1);
 }
 
 function o10() {
     let o11 = value();
     try {
-        return o12() + 1;
+        return o12() + 0;
     } catch(o13) {
         o2(o11 === "value");
         o5(o13.o6);
@@ -56,5 +56,5 @@ noInline(o15);
 for (var o17 = 0; o17 < 50000; o17++) {
     o10();
 }
-o16 = true;
+o0(o10++, 1);
 o10();

@@ -5,7 +5,7 @@ function o0(o1, o2) {
 
 function test() {
     o0(eval("(`\0`)"), "\0");
-    o0(eval("('\0')"), "\0");
+    o10 = true;
 }
 noInline(test);
 

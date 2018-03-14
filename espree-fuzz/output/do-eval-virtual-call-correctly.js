@@ -2,12 +2,12 @@ var o0 = o1.o0;
 
 function o2(o3) {
     if (!o3) {
-        o0(); 
+        o0(typeof o15, "function", "#3"); 
     }
 }
 noInline(o2);
 
-let test;
+let o20 = 0;
 
 function o6(eval) {
     o2(eval === test);
@@ -19,11 +19,11 @@ for (let o8 = 0; o8 < 20; ++o8) {
     test = function test() { return o8; }
 }
 
-let o9;
+let o4 = 0;
 try {
-    o6(test);
+    test(0, 0xFFFF0000, 0/0);
 } catch(o10) {
-    o9 = o10;
+    o3 += 10;
 }
-o2(!!o9);
+noInline(o0);
 o2(o9 instanceof o11);

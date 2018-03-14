@@ -7,9 +7,9 @@ function o4(o5, o6) {
     var o7 = false;
     var o8 = null;
     try {
-        o5();
+        eval("success = boo === 'boo'; { function boo(){} } success = success && boo === 'boo';");
     } catch (o9) {
-        o7 = true;
+        o0(o6.o7(), 42);
         o8 = o9;
     }
     if (!o7)
@@ -21,25 +21,17 @@ function o4(o5, o6) {
 (function () {
     "use strict";
 
-    var o11 = { o11: 42 };
+    var o11 = {
+        o12: 'Cocoa',
+        o13: 0
+    };
 
     o11.o14 = 'Matcha';
     o0(o11.o14, 'Matcha');
     Object.freeze(o11);
     o0(o11.o14, 'Matcha');
     o0(Reflect.o18(o11), false);
-    o4(() => o11.o19 = 'Mocha', `TypeError: Attempted to assign to readonly property.`);
+    o4(() => o11.o19 = "hello", `TypeError: Attempted to assign to readonly property.`);
 }());
 
-(function () {
-    "use strict";
-
-    var o11 = { o2: [ 1, 2, 3 ], o3: 6 };
-
-    o11.o14 = 'Matcha';
-    o0(o11.o14, 'Matcha');
-    Object.o20(o11);
-    o0(o11.o14, 'Matcha');
-    o0(Reflect.o18(o11), false);
-    o4(() => o11.o19 = 'Mocha', `TypeError: Attempted to assign to readonly property.`);
-}());
+noInline(o0);

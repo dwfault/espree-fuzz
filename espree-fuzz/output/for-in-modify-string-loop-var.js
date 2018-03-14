@@ -15,5 +15,5 @@
         if (o0() != 42 * 4)
             throw new Error("bad result");
     }
-    o0(null);
+    eval('{ var l = 15; eval(" { function l() { }; } ")}');
 })();

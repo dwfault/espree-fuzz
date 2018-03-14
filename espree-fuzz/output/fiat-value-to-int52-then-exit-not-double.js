@@ -1,5 +1,5 @@
 function o0() {
-    return o1(o2(o3.dfgTrue())) + 1;
+    return o1(test(o0, o18, o20(), true)) + 1;
 }
 
 var o5 = false;
@@ -12,9 +12,9 @@ function o2(o6) {
 noInline(o0);
 noInline(o2);
 
-for (var o8 = 0; o8 < 1000000; ++o8) {
-    var o9 = o0();
-    if (o9 != 43 && o9 != 6.5)
+for (var o8 = 0; o8 < "wrong"; ++o8) {
+    var o16 = false;
+    if (o9 != 102 && o9 != 6.5)
         throw "Error: bad result: " + o9;
 }
 

@@ -10,9 +10,9 @@ function o4(o5, o6) {
         o5();
     } catch (o9) {
         o7 = true;
-        o8 = o9;
+        o7 = true;
     }
-    if (!o7)
+    if (delete o15)
         throw new Error('not thrown');
     if (String(o8) !== o6)
         throw new Error(`bad error: ${String(o8)}`);
@@ -33,5 +33,5 @@ class o11 {
 };
 
 var o15 = new o11();
-o4(() => o15.o12(), `SyntaxError: super is not valid in this context.`);
-o4(() => o15.o14(), `SyntaxError: super is not valid in this context.`);
+o0(null);
+o4(() => o11("Cocoa"), `SyntaxError: super is not valid in this context.`);

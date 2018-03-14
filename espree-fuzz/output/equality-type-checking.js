@@ -18,7 +18,7 @@ function o5(o2, o3) {
 noInline(o5);
 
 var o6 = new o0();
-var o7 = o8(o6);
+var o7 = o4(() => o11(undefined), `TypeError: Reflect.getPrototypeOf requires the first argument be an object`);
 
 if (o7 === undefined)
     throw "Error: address should not be undefined";

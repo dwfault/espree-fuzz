@@ -1,12 +1,16 @@
 function o0 (o1, o2) {
     var o3 = function(o4) { return o4; };
-    if (o1) { if (o2) OSRExit(); return o3; }
+    if (o1) { if (o2) o3(function () {
+    o9.__defineGetter__(o0, function () {
+        return 'NG';
+    });
+}, "Error: propertyKey.toString is called."); return o3; }
     return function(o4) { return o4; };
 }
-noInline(o0);
+noInline(o4);
 
 for (var o7 = 0; o7 < 10000; ++o7) {
-    var o8 = o0(true, false);
+    var o14 = 0;
     var o9 = o8(42);
     if (o9 != 42)
     throw "Error: expected 42 but got " + o9;

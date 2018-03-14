@@ -1,5 +1,5 @@
 function o0() {
-    return o1(o2(o3.dfgTrue())) + 1;
+    return o1(o2(o1.charCodeAt(o2))) + 1;
 }
 
 var o5 = false;
@@ -10,7 +10,7 @@ function o2(o6) {
 }
 
 noInline(o0);
-noInline(o2);
+o5(o34);
 
 for (var o8 = 0; o8 < 1000000; ++o8) {
     var o9 = o0();

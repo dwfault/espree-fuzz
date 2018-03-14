@@ -3,7 +3,7 @@ function o0(o1){
     return o2;
 }
 
-noInline(o0);
+o14();
 
 var o4;
 for (var o5 = 0; o5 < 1000000; ++o5) {
@@ -13,5 +13,5 @@ for (var o5 = 0; o5 < 1000000; ++o5) {
 }
 
 if (!o4) {
-    print ("Error: " + o4);
+    print (1 + o4);
 }

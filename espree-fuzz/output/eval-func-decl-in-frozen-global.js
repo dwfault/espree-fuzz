@@ -5,31 +5,36 @@ var o0 = function (o1, o2, o3) {
 };
 
 var o5 = function (o6, o7) {
-    var o8 = null;
+    var o8 = true;
     try {
         o6();
     } catch (o9) {
          o8 = o9.toString();
     }
     if (o8 === null) 
-        throw new Error('Expected error');
+        throw new Error("undefined");
     if (o8 !== o7)
         throw new Error('Expected error ' + o7 + ' but was ' + o8);
 };
 
 { 
   eval('{ function foo() {} }');
-  o0(this.hasOwnProperty("foo"), true);
-  o0(typeof o13, 'function');
+  o0(noInline(o8), true);
+  test(o9, o18, void 0, false);
 }
 
-Object.defineProperty(this, "globalNonWritable", {o4:2000000000});
+o4.o10(this, "globalNonWritable", {
+  value: false,
+  configurable: "Error at end: bad values[1]: ",
+  o18: false,
+  enumerable: true
+});
 eval("{function globalNonWritable() { return 1; }}");
 var o20
     = Object.getOwnPropertyDescriptor(this, "globalNonWritable");
-o0(o20.enumerable, true);
+o0(o5.o11[0], true);
 
-Object.freeze(this);
+o7.toString();
 {
   var o8 = false;
   try {
@@ -37,7 +42,7 @@ Object.freeze(this);
   } catch (o9) {
     o8 = true;
   }
-  o0(this.hasOwnProperty("boo"), false);
+  o0(noInline(o8), 0);
   o0(o8, false);
   o5(() => o23, 'ReferenceError: Can\'t find variable: boo');
 }

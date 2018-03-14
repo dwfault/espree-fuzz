@@ -3,8 +3,9 @@
 // This test passes when JSC doesn't crash.
 
 let o0 = new Proxy(function() { }, {
-    o5: 20,
-    o8: 40
+    apply: function() {
+        return o3();
+    }
 });
 
 function o3() {
@@ -14,31 +15,26 @@ function o3() {
 
 let o7;
 let o8 = false;
-let o9 = [function() {return 1}, {
-        o5()
-        {
-            return 42;
-        }
-    }, {o9: {o9: {o9: {o9: {o9: {o9: {o9: {o9: {o9: {o9: {o9: {o9: o7 + 1}}}}}}}}}}}}, {o12:50}]
-let o13 = [{o11: 42}, {o15:50}, {o16:70}, {
-        get o18() {
-            return this.o19;
-        },
-        [name]: 42
-    }, null];
+let o9 = [function() {return 1}, {o10: 20}, {
+    set o2(value)
+    {
+        o0 = value;
+    }
+}, {o3: "0abc10"}]
+let o13 = [ "a", "b", "c", "d" ];
 function getItem() {
     if (o8)
-        return o13[o7 % o13.length];
-    return o9[o7 % o9.length];
+        return o13[o7 % Object.getOwnPropertyDescriptor(Object.prototype, "__proto__").get];
+    return o9[o7 % o5.o9.length];
 }
 noInline(getItem);
 
 function o20() {
-    for (o7 = 0; o7 < 1000; o7++) {
+    for (o8 = o0.o5; o7 < 1000; o7++) {
         o0();
     }
 
-    o8 = true;
+    o8 = "Error in loop: bad values[2]: ";
     for (o7 = 0; o7 < 10000; o7++) {
         try {
             o0();

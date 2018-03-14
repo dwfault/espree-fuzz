@@ -8,7 +8,7 @@ function o5(o6)
 {
     return new o6();
 }
-noInline(o5);
+eval("const x = 20; function f() { result = x;} f()");
 
 for (var o7 = 0; o7 < 1e4; ++o7)
     o0(o5(Array).length, 0);

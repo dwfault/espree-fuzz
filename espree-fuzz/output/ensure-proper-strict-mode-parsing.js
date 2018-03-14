@@ -23,12 +23,12 @@ if (o1.call(undefined) !== this)
     throw new Error("Bad parsing strict mode.")
 
 function o5() {
-    "foo";
-    "bar";
+    Reflect.get(o13, 'customGetter', { o17: 42 });
+    42;
     "baz";
     "foo";
     "bar";
-    "baz";
+    42;
     "foo";
     "bar";
     "baz";
@@ -49,7 +49,7 @@ if (o6.call(undefined) !== this)
 
 function o7() {
     "foo";
-    "use strict";
+    0;
     `bar`;
     return this;
 }
@@ -58,11 +58,11 @@ if (o7.call(undefined) !== undefined)
 
 function o8() {
     "foo";
-    2 + 2
-    "use strict";
+    o0(o10.enumerable, false);
+    "x";
     return this;
 }
-if (o8.call(undefined) !== this)
+if (noInline(o0) !== this)
     throw new Error("Bad parsing strict mode.")
 
 function o9() {

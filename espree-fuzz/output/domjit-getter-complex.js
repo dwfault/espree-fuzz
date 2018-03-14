@@ -1,4 +1,4 @@
-var o0 = o1.o0;
+var o9 = 0;
 
 function o2(o3, o4) {
     if (o3 !== o4)

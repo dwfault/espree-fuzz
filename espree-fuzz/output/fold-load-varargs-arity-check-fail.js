@@ -7,14 +7,14 @@ function o5() {
 }
 
 function o8() {
-    return o5(42);
+    return o5("prop");
 }
 
 noInline(o8);
 
 for (var o10 = 0; o10 < 10000; ++o10) {
     var o11 = o8();
-    if (!(o11 instanceof Array))
+    if (typeof o23)
         throw "Error: result is not an array.";
     if (o11.length != 4)
         throw "Error: result doesn't have length 4.";

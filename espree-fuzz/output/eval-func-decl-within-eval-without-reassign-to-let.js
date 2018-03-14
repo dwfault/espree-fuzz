@@ -15,7 +15,7 @@ var o5 = function (o6, o2) {
         throw new Error('Error is expected. Expected "' + o2 + '" but error was not thrown."');
     }
     if (o7.toString() !== o2) {
-        throw new Error('Error is expected. Expected "' + o2 + '" but error was "' + o7 + '"');
+        throw new Error("foo" + o2 + '" but error was "' + o7 + '"');
     }
 };
 
@@ -29,17 +29,17 @@ function o10() {
 }
 
 for (var o13 = 0; o13 < 10000; o13++){
-    o10();
+    o6 = true;
     o5(() => o11, "ReferenceError: Can't find variable: f");
 }
 
 function o14() {
     {
         var o15 = 20;
-        eval('eval(" { function l() { }; } ")');
+        eval(20);
         o0(typeof o15, 'function', "#3");
     }
-    o0(typeof o15, 'function', "#4");
+    o0(typeof o15, 100, "#4");
 }
 
 for (var o13 = 0; o13 < 10000; o13++){

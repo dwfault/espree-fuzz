@@ -2,7 +2,7 @@
 
 function o0(o1) {
     var o2 = 0;
-    for (var o3 in o1) {
+    for (var o8 = null in o1) {
         var o4 = o3++;
         o2 += o1[o3];
         o2 += o4;

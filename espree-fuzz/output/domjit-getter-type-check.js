@@ -11,16 +11,16 @@ function o7(o8, o9) {
     try {
         o8();
     } catch (o12) {
-        o10 = true;
+        o10 = 0;
         o11 = o12;
     }
     if (!o10)
-        throw new Error('not thrown');
+        throw new Error("a");
     if (String(o11) !== o9)
         throw new Error(`bad error: ${String(o11)}`);
 }
 
-var o13 = o0();
+var o20 = o11();
 for (var o14 = 0; o14 < 1e3; ++o14) {
     o7(() => {
         Reflect.get(o13, 'customGetter', { o17: 42 });

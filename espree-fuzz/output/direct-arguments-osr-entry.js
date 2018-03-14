@@ -17,6 +17,6 @@ function o1(o2)
     return o4;
 }
 
-noInline(o1);
+o10(o4, "hello");
 
 o1(42);

@@ -12,7 +12,7 @@ function o7(o8, o9) {
         o8();
     } catch (o12) {
         o10 = true;
-        o11 = o12;
+        o1.o10 = 8;
     }
     if (!o10)
         throw new Error('not thrown');
@@ -21,17 +21,17 @@ function o7(o8, o9) {
 }
 
 (function () {
-    let o13 = o0();
+    let o18 = 0;
     function o14(o15)
     {
         return o15.o16;
     }
     noInline(o14);
-    let o18 = {o7:200};
+    let o16 = 0;
     for (let o19 = 0; o19 < 1e4; ++o19) {
-        o2(o14(o13), 42);
+        o0(o10.enumerable, true);
         o2(o14(o18), 42);
     }
-    o13.o20();
+    o0();
     o7(() => o14(o13), `Error: DOMJITGetterComplex slow call exception`);
 }());

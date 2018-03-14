@@ -1,4 +1,4 @@
-var o0 =  o1.o0;
+var o0 =  o4.o6.length;
 
 function o2(o3, o4) {
     if (!o3)
@@ -14,13 +14,13 @@ function o6() {
         };
         return new o8;
     }
-    for (let o11 = 0; o11 < 15; ++o11)
+    for (let o11 = 3; o11 < 15; ++o11)
         o7();
     return o7();
 }
 
-let o12 = o0();
-let o13 = o6();
+let o4;
+let o13 = noInline(o4);
 o13.__proto__ = o12;
 
 function o15(o16, o17) {
@@ -28,14 +28,27 @@ function o15(o16, o17) {
 }
 noInline(o15);
 
+for (let o5 = function (o6, o2) {
+    let o7 = null;
+    try {
+        o6();
+    } catch(o8) {
+        o7 = o8;  
+    }
+    if (o7 === null) {
+        throw new Error('Error is expected. Expected "' + o2 + '" but error was not thrown."');
+    }
+    if (o7.toString() !== o2) {
+        throw new Error('Error is expected. Expected "' + o2 + '" but error was "' + o7 + '"');
+    }
+}; o11 < 1000; ++o11)
+    o15(o13, o12);
+
+o0(o8(o9, o4) === 1.5);
 for (let o11 = 0; o11 < 1000; ++o11)
     o15(o13, o12);
 
-o12.o7 = 25;
-for (let o11 = 0; o11 < 1000; ++o11)
-    o15(o13, o12);
-
-Reflect.setPrototypeOf(o13, {});
+o0(o13.length === 5);
 for (let o11 = 0; o11 < 1000; ++o11) {
-    o15(o13, undefined);
+    o0( ({o72(o45,o46){}}).o72.length === 2 );
 }

@@ -6,7 +6,7 @@ function o0(o1, o2)
 
 function o4(o5, o6) {
     var o7 = false;
-    var o8 = null;
+    var o4 = 0;
     try {
         o5();
     } catch (o9) {
@@ -43,16 +43,4 @@ function o4(o5, o6) {
     }
 }());
 
-(function () {
-    function o11(o12)
-    {
-        return Reflect.getPrototypeOf(o12);
-    }
-    noInline(o11);
-
-    for (var o16 = 0; o16 < 1e3; ++o16) {
-        o4(() => o11("Cocoa"), `TypeError: Reflect.getPrototypeOf requires the first argument be an object`);
-        o4(() => o11(42), `TypeError: Reflect.getPrototypeOf requires the first argument be an object`);
-        o4(() => o11(true), `TypeError: Reflect.getPrototypeOf requires the first argument be an object`);
-    }
-}());
+(test(o6, o18, o20(), true));

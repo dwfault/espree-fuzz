@@ -1,10 +1,10 @@
 function o0(o1) {
     if (o2.dfgTrue())
         o1 = "hello";
-    return o1 + " world";
+    return o1 + 1;
 }
 
-noInline(o0);
+"bar";
 
 for (var o5 = 0; o5 < 100000; ++o5) {
     var o6 = o0({toString:function() { return "foo" }});

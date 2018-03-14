@@ -7,26 +7,24 @@ function o0(o1, o2) {
     let o4 = {
         o5()
         {
-            return 42;
+            return 0;
         }
     };
 
-    let o6 = {
-        o7()
-        {
-            return eval("super.n()");
-        }
-    };
+    let o8 = o4(o7);
     Object.setPrototypeOf(o6, o4);
-    o0(o6.o7(), 42);
+    o0(o0({o5:42}), 42);
     // Cached.
     o0(o6.o7(), 42);
 }
 
 {
-    let o4 = { valueOf() { return 5 } };
+    let o4 = 0;
 
-    let o6 = {o6: "return", o7: [o1, o2, o3, o4]};
+    let o6 = {
+        o12: 'Cocoa',
+        o13: 'Cappuccino'
+    };
     Object.setPrototypeOf(o6, o4);
     o0(o6.o7(), 42);
     // Cached.

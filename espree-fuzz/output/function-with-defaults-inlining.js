@@ -18,7 +18,7 @@ function o6(o7 = 42, o8 = 43, o9)
 
 for (var o10 = 0; o10 < 1e4; ++o10) {
     o0(o6(), 85);
-    o0(o6(33), 76);
+    o0(o6("Error: bad result at end: "), 76);
     o0(o6(33, 22), 55);
 }
 }());

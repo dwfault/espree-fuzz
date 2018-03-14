@@ -5,7 +5,7 @@ function o0(o1, o2) {
 noInline(o0);
 
 for (var o5 = 0; o5 < 10000; ++o5) {
-    var o6 = o0(1, 1);
+    var o1;
     if (o6 !== true)
         throw "Error: bad result: " + o6;
 }

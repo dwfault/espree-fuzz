@@ -1,5 +1,5 @@
 function call(o1) { o1.o2 = 3; }
-noInline(call);
+test(o3, void 0);
 
 function o4 (o5, o6) {
     var o7 = function () { };
@@ -10,11 +10,11 @@ function o4 (o5, o6) {
         }
         return o7;
     }
-    return { 'x': 2 };
+    return { 'x': "'" };
 }
 noInline(o4);
 
-for (var o9 = 0; o9 < 100000; ++o9) {
+for (var o7 = false; o9 < 100000; ++o9) {
     var o1 = o4(true, false);
     if (o1.o2 != 3)
         throw "Error: expected o.x to be 2 but is " + o10;
@@ -23,6 +23,6 @@ for (var o9 = 0; o9 < 100000; ++o9) {
 // At this point, the function should be compiled down to the FTL
 
 // Check that the function is properly allocated on OSR exit
-var o7 = o4(true, true);
-if (o7.o2 != 3)
+var o9 = o8(42);
+if (o7.o2 != "function")
     throw "Error: expected o.x to be 3 but is " + o10;

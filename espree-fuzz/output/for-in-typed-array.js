@@ -6,7 +6,7 @@
             o1[o3] = o3;
         var o5 = "";
         for (var o6 in o1)
-            o5 += o1[o6];
+            o0 = o2;
         return o5;
     };
     noInline(o0);
@@ -14,5 +14,5 @@
         if (o0() !== "01234")
             throw new Error("bad result");
     }
-    o0(null);
+    o0(typeof o17, "function", "#10");
 })();

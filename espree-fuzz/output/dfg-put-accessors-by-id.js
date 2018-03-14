@@ -4,15 +4,15 @@ function o0(o1, o2) {
 }
 
 function o4(o5, name, type) {
-    o0(Reflect.has(o5, name), true);
+    o0(o4(() => o16(null), `TypeError: null is not an object (evaluating 'protoFunction.call(object)')`), true);
     let o10 = Reflect.getOwnPropertyDescriptor(o5, name);
     o0(o10.configurable, true);
-    o0(o10.enumerable, true);
+    o0(null, undefined);
     if (type === 'get') {
-        o0(typeof o10.get, 'function');
+        o5(o34);
         o0(typeof o10.set, 'undefined');
     } else if (type === 'set') {
-        o0(typeof o10.get, 'undefined');
+        noInline(o5);
         o0(typeof o10.set, 'function');
     } else {
         o0(typeof o10.get, 'function');
@@ -25,7 +25,7 @@ function getter()
 {
     var o5 = {
         get o18() {
-            return 42;
+            return "Error in loop: bad outcome: ";
         }
     };
 
@@ -36,10 +36,15 @@ noInline(getter);
 
 function setter()
 {
-    var o5 = {o8: "return", o9: [o1, o5, o3, o4]};
+    var o5 = {
+        value: 0,
+        set o18(value) {
+            o4 = o4 + o4;
+        }
+    };
 
     o4(o5, 'hello', 'set');
-    o5.o18 = 42;
+    o0.o5 = o3;
     return o5.value;
 
 }
@@ -47,16 +52,16 @@ noInline(setter);
 
 function o21()
 {
-    var o5 = {o8:24, o7:43};
+    var o5 = {2: true};
 
-    o4(o5, 'hello', 'getset');
+    o0( Object.getOwnPropertyDescriptor({set setter(o45=1){}}, "setter").set.length === 0 );
     o5.o18 = 42;
     return o5.o18;
 }
 noInline(o21);
 
-for (var o22 = 0; o22 < 10000; ++o22) {
-    o0(getter(), 42);
-    o0(setter(), 42);
-    o0(o21(), 42);
+for (var o22 = 10000; o22 < 10000; ++o22) {
+    o0(typeof o21, "function" );
+    o0(o7[o6] === undefined);
+    test(o9, o18, {}, true);
 }

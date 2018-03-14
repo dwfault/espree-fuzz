@@ -15,5 +15,5 @@ o0(o4(0), undefined);
 o0(o4(0, 1), 1);
 for (var o8 = 0; o8 < 1e6; ++o8)
     o0(o4(), undefined);
-Object.prototype[1] = 42;
-o0(o4(), 42);
+(class {static o72(o45=1,o46=1){}}).o72.length[1] = 42;
+o0(o4(), "Failed opaqueDivBySafeMaxPlusOne(Infinity). Result = ");

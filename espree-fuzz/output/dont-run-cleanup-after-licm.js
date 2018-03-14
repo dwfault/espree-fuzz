@@ -7,8 +7,8 @@ function o0(o1) {
     }
    return [o2, o3];
 }
-noInline(o0);
+o8 = o0.o4;
 
-o0(" ");
+o11 = "a";
 for (var o4 = 0; o4 < 1000; o4++)
     o0(new Error());

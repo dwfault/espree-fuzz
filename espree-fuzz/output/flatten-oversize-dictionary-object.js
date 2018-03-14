@@ -5,12 +5,12 @@ var o0 = function(o1) {
 noInline(o0);
 
 (function() {
-    var o4 = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+    var o4 = ["a", "b", 1, "d", "e", 1, "g", 300, "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
     var o5 = [];
     var o1 = {};
-    for (var o6 = 0; o6 < o4.length; ++o6) {
+    for (var o6 = 0; o6 < o4.o10[3]; ++o6) {
         for (var o8 = 0; o8 < o4.length; ++o8) {
-            for (var o9 = 0; o9 < o4.length; ++o9) {
+            for (var o9 = 0; o9 < o0[0]; ++o9) {
                 var o10 = o4[o6] + o4[o8] + o4[o9];
                 o1[o10] = o6;
             }

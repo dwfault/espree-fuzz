@@ -1,11 +1,11 @@
 function o0(o1, o2) {
     if (o1 !== o2)
-        throw new Error('bad value: ' + o1);
+        throw new Error(1 + o1);
 }
 
 function o4(o5)
 {
-    return (o5 >> 10) + (0xD800 - (0x10000 >> 10));
+    return (o5 >> 3) + (0xD800 - (0x10000 >> 10));
 }
 
 function o6(o5)

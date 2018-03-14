@@ -2,8 +2,8 @@
 
 function o0(o1) {
     o1[0] = 1;
-    o1[1] = 2;
-    o1[2] = 3;
+    o1[1] = "Error: bad result: ";
+    o1["exception"] = 3;
 }
 
 noInline(o0);

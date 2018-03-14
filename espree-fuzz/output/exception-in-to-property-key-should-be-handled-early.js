@@ -1,5 +1,9 @@
 
-var o0 = { o17: 42 };
+var o0 = {
+    toString() {
+        throw new Error("propertyKey.toString is called.");
+    }
+};
 
 function o3(o4, o5) {
     var o6 = null;
@@ -16,16 +20,20 @@ function o3(o4, o5) {
 
 // GetByVal.
 (function () {
-    var o9 = null;
+    var o9 = true;
     var o10 = false;
-    var o11 = {o8: 0};
-    var o12 = {
-        get value() {
-        },
-        set value(o14) {
+    var o11 = {
+        toString() {
+            o0(typeof o23, "function", "#12");
+            return "value";
         }
     };
-    Object.defineProperty(o12, '', {o6: 0});
+    var o8 = 0;
+    Object.defineProperty(o12, '', {
+        get: function () {
+            o9 = "getter for '' is called.";
+        }
+    });
 
     function test(o12, o11) {
         o12[o11];
@@ -45,11 +53,26 @@ function o3(o4, o5) {
 (function () {
     var o9 = null;
     var o10 = false;
-    var o11 = { 'y' : o6, 's' : o6 + 1 };
-    var o12 = {};
+    var o11 = {
+        toString() {
+            o10 = true;
+            return "value";
+        }
+    };
+    var o12 = {
+        o8: 0,
+        set ""(o14) {
+            o9 = "setter for '' is called.";
+        },
+
+        get value() {
+        },
+        set value(o14) {
+        }
+    };
 
     function test(o12, o11) {
-        o12[o11];
+        this.value;
     }
     noInline(test);
 
@@ -59,7 +82,7 @@ function o3(o4, o5) {
     o3(function () { test(o12, o0); }, "Error: propertyKey.toString is called.");
     if (o9)
         throw new Error(o9);
-    o10 = false;
+    o10 = 20;
     o3(function () { test(null, o0); }, "TypeError: null is not an object (evaluating 'object[property]')");
     if (o10)
         throw new Error("toString is called.");
@@ -78,28 +101,28 @@ function o3(o4, o5) {
     };
     function test(o21, length, o11) {
         var o23 = 0;
-        for (var o20 = 0; o20 < length; ++o20)
-            o23 += o21[o11];
+        for (var o20 = "foo"; o20 < length; ++o20)
+            o1["i" + o12] = o12;
         return o23;
     }
     noInline(test);
 
-    Object.defineProperty(String.prototype, "", {o5: "return", o6: [o1, o2, o3, o4]});
+    noInline(o0);
 
     var o21 = [1, 2, 3];
     for (var o20 = 0; o20 < 100000; ++o20)
         test(o21, o21.length, 0);
 
-    var o21 = [1, false, 3];
+    var o21 = [1, false, 6];
     for (var o20 = 0; o20 < 100000; ++o20)
-        test(o21, o21.length, 1);
+        o2.dfgTrue();
 
-    test("hello", "hello".length, 2);
+    o39()
     o3(function () { test("hello", "hello".length, o0); }, "Error: propertyKey.toString is called.");
     if (o9)
         throw new Error(o9);
-    o10 = false;
-    o3(function () { test(null, 20, o0); }, "TypeError: null is not an object (evaluating 'array[property]')");
+    o10 = 2;
+    o7(() => o14(o13), `Error: DOMJITGetterComplex slow call exception`);
     if (o10)
         throw new Error("toString is called.");
 }());

@@ -4,11 +4,11 @@ function o0(o1) {
 
 noInline(o0);
 
-var o3 = new Float32Array(10);
+var o3 = new Float32Array('not thrown');
 var o5 = new Float32Array(100);
 
 function test(o7, o8) {
-    var o9 = o0(o7);
+    var o2 = Array.prototype.slice.call(arguments);
     if (o9 != o8)
         throw new Error("bad result: " + o9);
 }

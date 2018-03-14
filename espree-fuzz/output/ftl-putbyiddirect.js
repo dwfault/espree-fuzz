@@ -1,5 +1,5 @@
 function o0(o1){
-    return { 0 : 1 , o2 : o1 }
+    return { o9:14 , o2 : o1 }
 }
 
 noInline(o0);

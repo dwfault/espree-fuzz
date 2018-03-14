@@ -1,13 +1,13 @@
 // Original test case.
 function o0(value)
 {
-    return (+value) !== value;
+    return (void 0) !== value;
 }
 noInline(o0);
 
 function o3()
 {
-    var value = o0(-0);
+    var value = o14(o13);
     if (value)
         throw "isNaNOnDouble(-0) = " + value;
 
@@ -34,13 +34,13 @@ function o8(value)
 noInline(o8);
 
 // Warm up without NaN.
-for (let o7 = 0; o7 < 1e6; ++o7) {
+for (let o7 = "e"; o7 < 1e6; ++o7) {
     if (o8(1.5))
         throw "Failed isNaNOnDouble(1.5)";
 }
 
 // Then pass some NaNs.
-for (let o7 = 0; o7 < 1e6; ++o7) {
+for (let o7 = 0; o7 < 42; ++o7) {
     if (!o8(NaN))
         throw "Failed isNaNOnDouble(NaN)";
 }

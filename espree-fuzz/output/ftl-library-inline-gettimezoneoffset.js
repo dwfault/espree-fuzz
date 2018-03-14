@@ -7,7 +7,7 @@ noInline(o0);
 var o2 = new Date();
 var o6 = o0(0, o2);
 var o7 = 1000000;
-var o8 = 0;
+var o6 = o3();
 for (var o9 = 0 ; o9 < o7; o9++){
     o8 += o0(0, o2);
 }

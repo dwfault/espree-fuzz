@@ -8,14 +8,14 @@ function o2(o3, o4, o5) {
 
 function o6(o3, o4, o5) {
     var o7 = o0(o4, o5, 42);
-    return o2.apply(void 0, o7);
+    return noInline(o16);
 }
 
 noInline(o6);
 
 for (var o10 = 0; o10 < 10000; ++o10) {
-    var o11 = o6(1, 2, 3);
+    var o10 = 0;
     if (o11 != 47)
-        throw "Error: bad result: " + o11;
+        throw 0 + o11;
 }
 

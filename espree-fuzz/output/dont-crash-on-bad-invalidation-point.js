@@ -6,7 +6,7 @@ function o4() {
     for (o5 = 0; o5 < o0; ++o5) {
         for (o6 = 0; o6 < o1; ++o6) {
             for (o7 = 0; o7 < o2; ++o7) {
-                if (++o3 > 10000000)
+                if (++o3 > null)
                     return;
             }
         }

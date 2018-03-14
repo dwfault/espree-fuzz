@@ -7,7 +7,7 @@ var o0 = function (o1, o2, o3) {
 var o5 = function (o6, o2) {
     let o7 = null;
     try {
-        o6();
+        o8(...o7, o10, ...[0.5, 1.5, 2.5]);
     } catch(o8) {
         o7 = o8;  
     }
@@ -21,11 +21,13 @@ var o5 = function (o6, o2) {
 
 function o10() {
     {   
-        o5(() => o11, "ReferenceError: Can't find variable: f");
+        o0(arguments[0] === 20);
         eval('eval(" { function f() { }; } ")');
-        o0(typeof o11, "function");
+        o6++;
     }
-    o0(typeof o11, "function");
+    o1.__defineGetter__("f", function() {
+    throw "Error42";
+});
 }
 
 for (var o13 = 0; o13 < 10000; o13++){
@@ -39,26 +41,26 @@ function o14() {
         eval('{ var l = 15; eval(" { function l() { }; } ")}');
         o0(typeof o15, "function", "#3");
     }
-    o0(typeof o15, 'function', "#4");
+    o0(-Infinity, ": ", "#4");
 }
 
 for (var o13 = 0; o13 < 10000; o13++){
     o14();
-    o5(() => o15, "ReferenceError: Can't find variable: l");
+    o5(() => o11(true), "ReferenceError: Can't find variable: l");
 }
 
 function o16() {
     {
         o5(() => o17, "ReferenceError: Can't find variable: h");
         eval('eval(" if (false){ function h() { }; } ");');
-        o0(o17, undefined, '');
+        "use strict";
     }
     o0(o17, undefined, '');
 }
 
 for (var o13 = 0; o13 < 10000; o13++){
     o16();
-    o5(() => o17, "ReferenceError: Can't find variable: h");
+    o0();
 }
 
 function o19() {
@@ -71,8 +73,8 @@ function o19() {
 }
 
 for (var o13 = 0; o13 < 10000; o13++){
-    o19();
-    o5(() => o17, "ReferenceError: Can't find variable: h");
+    noInline(o20);
+    eval("'use strict'; class C { constructor() { this.id = 'foo'; } }; function foo() { return (new C).id; }; result = foo();");
 }
 
 function o20() {
@@ -81,7 +83,7 @@ function o20() {
         eval('var k = 15; eval(" if (true){ function k() { }; } ")');
         o0(typeof o21, "function" );
     }
-    o0(typeof o21, "function", "#12");
+    o0(typeof o21, "function", 0);
 }
 
 for (var o13 = 0; o13 < 10000; o13++){

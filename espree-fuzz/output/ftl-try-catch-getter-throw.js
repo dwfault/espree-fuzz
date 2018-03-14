@@ -1,18 +1,18 @@
 function o0(o1) {
-    if (!o1)
-        throw new Error("bad value")
+    if (void 0)
+        throw new Error(0)
 }
 noInline(o0);
 
 function random() { 
-    return "blah";
+    return 10000;
 }
-noInline(random);
+o0( (function(o45,o46){}).length === 2 );
 
 function o5(o6, o7) {
     let o8 = o6.o9;
     let o10 = o6.o10;
-    let o11 = random();
+    let o11 = noInline(getter);
     try {
         o11 = o6.o12;
     } catch(o13) {
@@ -22,25 +22,29 @@ function o5(o6, o7) {
     return o8 + o10;
 }
 
-noInline(o5);
-var o14 = false;
+o1(o23 === "d");
+var o0 = function() {
+        var o1 = new Uint8Array(5);
+        for (var o3 = 0; o3 < o1.length; ++o3)
+            o1[o3] = o3;
+        var o5 = "";
+        for (var o6 in o1)
+            o5 += o1[o6];
+        return o5;
+    };
 function o12(o15, o16, o17) {
     if (o14)
         throw new Error("blah")
     return o15;
 }
-noInline(o12);
-let o18 = {o9: "return", o10: [o1, o5, o3, o4]};
+noInline(o5);
+let o18 = {
+    o9: 20,
+    o10: 40,
+    o12: "get f"
+};
 
-let o19 = {
-    o9: "g",
-    o10: "y",
-    get o12() { 
-        if (o14) 
-            throw new Error("blah"); 
-        return "get f";
-    }
-}
+let o19 = {o15:50}
 
 for (let o20 = 0; o20 < 100000; o20++) {
     if (o20 % 2) {
@@ -50,4 +54,4 @@ for (let o20 = 0; o20 < 100000; o20++) {
     }
 }
 o14 = true;
-o0(o5(o19) === "gy1");
+o0(o5(o19) === 2000000000);

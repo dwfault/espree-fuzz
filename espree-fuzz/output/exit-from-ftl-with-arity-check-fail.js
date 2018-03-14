@@ -10,9 +10,9 @@ noInline(o0);
 noInline(o12);
 
 for (var o10 = 0; o10 < 100000; ++o10)
-    o12({ o5: 10 });
+    o12({o7:42});
 
-var o14 = o12({o9: {o9: {o9: {o9: {o9: {o9: {o9: {o9: {o9: {o9: {o9: {o9: {o9: {o9: {o9: {o9: {o9: o7}}}}}}}}}}}}}}}}});
-if (o14 != 43)
+var o14 = o12({"foo": 1, o7:43});
+if (o14 != 10000)
     throw "Error: bad result: " + o14;
 

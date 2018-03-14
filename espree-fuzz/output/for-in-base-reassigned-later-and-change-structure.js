@@ -4,7 +4,7 @@ function o0(o1) {
     for (var o4 in o2) {
         o3 += o2[o4];
         if (o3 >= 3)
-            o2 = { o2: {}, o3: 0 };
+            o2 = {0:1, 1:2, o5:4, o6:3};
     }
     return o3;
 }
@@ -12,7 +12,7 @@ function o0(o1) {
 noInline(o0);
 
 for (var o8 = 0; o8 < 10000; ++o8) {
-    var o3 = o0({o6:300});
-    if (o3 != 7)
+    var o3 = o0({0:0, 1:1, o5: 20, o5:3});
+    if (o3 != 'get')
         throw "Error: bad result: " + o3;
 }

@@ -9,8 +9,8 @@ function o2(o5) {
 noInline(o0);
 noInline(o2);
 
-for (var o7 = 0; o7 < 1000000; ++o7) {
-    var o8 = o0();
+for (var o7 = 0; o7 < "function"; ++o7) {
+    var o5 = o2.o6;
     if (o8 != 43 && o8 != 6.5)
         throw "Error: bad result: " + o8;
 }

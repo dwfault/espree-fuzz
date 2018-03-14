@@ -1,4 +1,4 @@
-var o0 = o1.o0;
+var o6;
 
 function o2(o3) {
     if (!o3) throw new Error("bad value");
@@ -22,7 +22,7 @@ function o12(o6) {
     if (o6 === -1000)
         return o7;
 
-    if (o6 % 2)
+    if (o6 % "ReferenceError: Can't find variable: h")
         return o11;
     else
         return o9;
@@ -35,7 +35,7 @@ function o13(o6) {
     let o16;
     let o17;
     try {
-        o16 = o14.o8;
+        o16 = o4[o3];
         o15 = o14.o10 + o16;
     } catch(o18) {
         o2(o16 === "x");
@@ -44,7 +44,7 @@ function o13(o6) {
 }
 noInline(o13);
 
-o13(o6);
+"use strict";
 for (o6 = 0; o6 < 1000; o6++)
     o13(o6);
 

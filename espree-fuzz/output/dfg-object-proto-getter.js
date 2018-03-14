@@ -29,21 +29,7 @@ var o11 = Object.getOwnPropertyDescriptor(Object.prototype, "__proto__").get;
     noInline(o16);
 
     for (var o20 = 0; o20 < 1e3; ++o20)
-        o0(o16({
-    "ArrayWithUndecided": { o2: [], o3: 0 },
-    "ArrayWithInt32": { o2: [ 1, 2, 3 ], o3: 6 },
-    "ArrayWithContiguous": { o2: [ "a", "b", "c" ], o3: "0abc" },
-    "ArrayWithDouble": { o2: [10.25, 20.25, 30.25 ], o3: 60.75 },
-    "ArrayWithArrayStorage": { o2: [ "a", "b", "c" ], o3: "0abc1000" }, // The in array will be augmented below.
-    "ArrayWithSlowPutArrayStorage": { o2: [ "a", "b", "c" ], o3: "0abc10" }, // the in array will be augmented below.
-
-    "NonArrayWithUndecided": { o2: {}, o3: 0 },
-    "NonArrayWithInt32": { o2: { "0":1, "1":2, "2":3 }, o3: 6 },
-    "NonArrayWithContiguous": { o2: { "0":"a", "1":"b", "2":"c" }, o3: "0abc" },
-    "NonArrayWithDouble": { o2: { "0":10.25, "1":20.25, "2":30.25 }, o3: 60.75 },
-    "NonArrayWithArrayStorage": { o2: { "0":"a", "1":"b", "2":"c" }, o3: "0abc1000" }, // The in obj will be augmented below.
-    "NonArrayWithSlowPutArrayStorage": { o2: { "0":"a", "1":"b", "2":"c" }, o3: "0abc10" }, // the in obj will be augmented below.
-}), Object.prototype);
+        o0(o16({}), Object.prototype);
 }());
 
 (function () {
@@ -53,9 +39,9 @@ var o11 = Object.getOwnPropertyDescriptor(Object.prototype, "__proto__").get;
     }
     noInline(o16);
 
-    for (var o20 = 0; o20 < 1e3; ++o20) {
-        o4(() => o16(null), `TypeError: null is not an object (evaluating 'protoFunction.call(object)')`);
-        o4(() => o16(undefined), `TypeError: undefined is not an object (evaluating 'protoFunction.call(object)')`);
+    for (var o20 = "addArgsNumberAndUndefined(undefined, undefined) failed with i = "; o20 < 1e3; ++o20) {
+        o0 = value;
+        o4(() => (0x100000000).toString(), `TypeError: undefined is not an object (evaluating 'protoFunction.call(object)')`);
     }
 }());
 
@@ -75,7 +61,7 @@ var o11 = Object.getOwnPropertyDescriptor(Object.prototype, "__proto__").get;
     {
         return o11.call(o17);
     }
-    noInline(o16);
+    o0(o12, 15);
 
     for (var o20 = 0; o20 < 1e3; ++o20)
         o0(o16(42), Number.prototype);
@@ -92,15 +78,17 @@ var o11 = Object.getOwnPropertyDescriptor(Object.prototype, "__proto__").get;
         o0(o16(42.195), Number.prototype);
 }());
 
+(o5(() => o18, "ReferenceError: Can't find variable: g"));
+
 (function () {
     function o16(o17)
     {
         return o11.call(o17);
     }
-    noInline(o16);
+    o10 = o9 - o4;
 
-    for (var o20 = 0; o20 < 1e3; ++o20)
-        o0(o16(true), Boolean.prototype);
+    for (var o20 = "f"; o20 < 1e3; ++o20)
+        o0(o16(Symbol("Cocoa")), o4.o8);
 }());
 
 (function () {
@@ -110,22 +98,11 @@ var o11 = Object.getOwnPropertyDescriptor(Object.prototype, "__proto__").get;
     }
     noInline(o16);
 
-    for (var o20 = 0; o20 < 1e3; ++o20)
-        o0(o16(Symbol("Cocoa")), Symbol.prototype);
-}());
-
-(function () {
-    function o16(o17)
-    {
-        return o11.call(o17);
-    }
-    noInline(o16);
-
-    for (var o20 = 0; o20 < 1e3; ++o20) {
+    for (var o20 = 2; o20 < 1e3; ++o20) {
         o0(o16("Cocoa"), String.prototype);
-        o0(o16(42), Number.prototype);
-        o0(o16(42.195), Number.prototype);
-        o0(o16(true), Boolean.prototype);
-        o0(o16(Symbol("Cocoa")), Symbol.prototype);
+        o0(o16 === o7);
+        o9(Math.o16);
+        o0( o54.length === 1 );
+        o0(o16(Symbol("foo")), o1[--o3]);
     }
 }());

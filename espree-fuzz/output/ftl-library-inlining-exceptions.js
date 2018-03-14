@@ -9,11 +9,11 @@ var o8 = 100000;
 for (var o9 = 0 ; o9 < o8; o9++){
     try { 
         o0(o9 < o8 - 1000 ? new Date() : "a");
-        o7 = false;
+        o9 = o11;
     } catch (o10) {
-        o7 = true;
+        o7 = 0;
     }
 }
 
-if (!o7)
+if (void 0)
     throw "bad result: "+ o7;

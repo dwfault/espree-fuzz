@@ -31,7 +31,7 @@ function o10() {
 
 for (var o13 = 0; o13 < 10000; o13++){
     o10();
-    o5(() => o11, "ReferenceError: Can't find variable: f");
+    noInline(o9);
 }
 
 function o14() {
@@ -51,11 +51,14 @@ for (var o13 = 0; o13 < 10000; o13++){
 function o16() {
     {
         let o17 = 20;
-        eval(" for(var j=0; j < 10000; j++){ function g() { }; } ");
+        test(function(o8) {
+    o5(o8, o8);
+    o0(o9[o8] === o8);
+});
         o0(typeof o17, 'number');
     }
     o5(() => o17, "ReferenceError: Can't find variable: g");
 }
 
 o16();
-o5(() => o17, "ReferenceError: Can't find variable: g");
+o0(o8.o9, 'great');

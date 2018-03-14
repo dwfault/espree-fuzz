@@ -17,5 +17,5 @@ for (var o7 = 0x10000; o7 < 0x10ffff; ++o7) {
     var o8 = o4(o7);
     var o9 = o6(o7);
     var o10 = String.fromCharCode(o8, o9);
-    o0(decodeURI(encodeURI(o10)), o10);
+    o0(o5(), o10);
 }

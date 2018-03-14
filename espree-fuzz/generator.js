@@ -9,6 +9,24 @@ const testcaseDir = "./testcase/";
 const testcaseNormalizedDir = "./testcase-normalized/";
 const outputDir = "./output/";
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /**
  * STEP 1, Statitical analysis towards "typed" "identifiers" appeard in testcases.
  * 
@@ -76,6 +94,19 @@ statiticalAnalysis(testcaseDir);
 for (let scalar of identifiersArray)
 	console.log(scalar);
 */
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -245,6 +276,18 @@ statiticalAnalysis(testcaseNormalizedDir);
 //for (let scalar of typesArray)
 //	console.log(scalar);
 
+
+
+
+
+
+
+
+
+
+
+
+
 /**
  * STEP 4, randomly substitute everything from testcase-normalized dir.
  * 
@@ -252,6 +295,16 @@ statiticalAnalysis(testcaseNormalizedDir);
  */
 let typeObjectExpression = typesArray.filter(function (x) { if (x.type == 'ObjectExpression') return x; });
 //console.log(typeObjectExpression);
+let typeProperty = typesArray.filter(function (x) { if (x.type == 'Property') return x; });
+let typeLiteral = typesArray.filter(function (x) { if (x.type == 'Literal') return x; });
+let typeArrayExpression = typesArray.filter(function (x) { if (x.type == 'ArrayExpression') return x; });
+let typeExpressionStatement = typesArray.filter(function (x) { if (x.type == 'ExpressionStatement') return x; });
+let typeMemberExpression = typesArray.filter(function (x) { if (x.type == 'MemberExpression') return x; });
+let typeAssignmentExpression = typesArray.filter(function (x) { if (x.type == 'AssignmentExpression') return x; });
+let typeCallExpression = typesArray.filter(function (x) { if (x.type == 'CallExpression') return x; });
+let typeVariableDeclarator = typesArray.filter(function (x) { if (x.type == 'VariableDeclarator') return x; });
+let typeUnaryExpression = typesArray.filter(function (x) { if (x.type == 'UnaryExpression') return x; });
+let typeArrowFunctionExpression = typesArray.filter(function (x) { if (x.type == 'ArrowFunctionExpression') return x; });
 
 function randomlySubstitue(pathI, pathO) {
 	let files = fs.readdirSync(pathI);
@@ -280,18 +333,131 @@ function randomlySubstitue(pathI, pathO) {
 								type: current.type,
 								code: jsCode.substring(current.start, current.end)
 							});
-							//switch(current.type){
-							//}
-							if (current.type == "ObjectExpression") {
-								//if(true){
-								if (Math.floor(Math.random()*2)+0) {
-									let randomScalar = typeObjectExpression[Math.floor((Math.random() * typeObjectExpression.length) + 0)];
-									toSubstituteTypes.push({
-										start: current.start,
-										end: current.end,
-										code: randomScalar.code
-									});
-								}
+							switch (current.type) {
+								case 'ObjectExpression':
+									if (probability0dot10()) {
+										let randomScalar = typeObjectExpression[Math.floor((Math.random() * (typeObjectExpression.length + 1)) + 0)];
+										toSubstituteTypes.push({
+											start: current.start,
+											end: current.end,
+											code: randomScalar.code
+										});
+										continue;
+									}
+									break;
+
+								case 'Property':
+									if (probability0dot10()) {
+										let randomScalar = typeProperty[Math.floor((Math.random() * (typeProperty.length + 1)) + 0)];
+										toSubstituteTypes.push({
+											start: current.start,
+											end: current.end,
+											code: randomScalar.code
+										});
+										continue;
+									}
+									break;
+								case 'Literal':
+									if (probability0dot10()) {
+										let randomScalar = typeLiteral[Math.floor((Math.random() * (typeLiteral.length + 1)) + 0)];
+										toSubstituteTypes.push({
+											start: current.start,
+											end: current.end,
+											code: randomScalar.code
+										});
+										continue;
+									}
+									break;
+								case 'ArrayExpression':
+									if (probability0dot10()) {
+										let randomScalar = typeArrayExpression[Math.floor((Math.random() * (typeArrayExpression.length + 1)) + 0)];
+										toSubstituteTypes.push({
+											start: current.start,
+											end: current.end,
+											code: randomScalar.code
+										});
+										continue;
+									}
+									break;
+								case 'ExpressionStatement':
+									if (probability0dot10()) {
+										let randomScalar = typeExpressionStatement[Math.floor((Math.random() * (typeExpressionStatement.length + 1)) + 0)];
+										toSubstituteTypes.push({
+											start: current.start,
+											end: current.end,
+											code: randomScalar.code
+										});
+										continue;
+									}
+									break;
+								case 'MemberExpression':
+									if (probability0dot10()) {
+										let randomScalar = typeMemberExpression[Math.floor((Math.random() * (typeMemberExpression.length + 1)) + 0)];
+										toSubstituteTypes.push({
+											start: current.start,
+											end: current.end,
+											code: randomScalar.code
+										});
+										continue;
+									}
+									break;
+								case 'AssignmentExpression':
+									if (probability0dot10()) {
+										let randomScalar = typeAssignmentExpression[Math.floor((Math.random() * (typeAssignmentExpression.length + 1)) + 0)];
+										toSubstituteTypes.push({
+											start: current.start,
+											end: current.end,
+											code: randomScalar.code
+										});
+										continue;
+									}
+									break;
+								case 'CallExpression':
+									if (probability0dot10()) {
+										let randomScalar = typeCallExpression[Math.floor((Math.random() * (typeCallExpression.length + 1)) + 0)];
+										toSubstituteTypes.push({
+											start: current.start,
+											end: current.end,
+											code: randomScalar.code
+										});
+										continue;
+									}
+									break;
+								case 'VariableDeclarator':
+									if (probability0dot10()) {
+										let randomScalar = typeVariableDeclarator[Math.floor((Math.random() * (typeVariableDeclarator.length + 1)) + 0)];
+										toSubstituteTypes.push({
+											start: current.start,
+											end: current.end,
+											code: randomScalar.code
+										});
+										continue;
+									}
+									break;
+								case 'UnaryExpression':
+									if (probability0dot10()) {
+										let randomScalar = typeUnaryExpression[Math.floor((Math.random() * (typeUnaryExpression.length + 1)) + 0)];
+										toSubstituteTypes.push({
+											start: current.start,
+											end: current.end,
+											code: randomScalar.code
+										});
+										continue;
+									}
+									break;
+								case 'ArrowFunctionExpression':
+									if (probability0dot10()) {
+										let randomScalar = typeArrowFunctionExpression[Math.floor((Math.random() * (typeArrowFunctionExpression.length + 1)) + 0)];
+										toSubstituteTypes.push({
+											start: current.start,
+											end: current.end,
+											code: randomScalar.code
+										});
+										continue;
+									}
+									break;
+								default:
+									break;
 							}
 						}
 						traverseNode(current);
@@ -317,3 +483,72 @@ function randomlySubstitue(pathI, pathO) {
 }
 
 randomlySubstitue(testcaseNormalizedDir, outputDir);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * Tools functions
+ */
+function RandomString32() {
+	var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijkmnoprstuvwxyz0123456789';
+	var str = '';
+	for (let i = 0; i < 32; i++) {
+		str += chars.charAt(Math.floor(Math.random() * 60));
+	}
+	return str;
+}
+
+function probability0dot10() {
+	if (Math.floor(Math.random() + 0.10))
+		return true;
+	else
+		return false;
+}

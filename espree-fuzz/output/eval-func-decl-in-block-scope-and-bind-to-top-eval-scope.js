@@ -11,4 +11,4 @@ var o0;
 }());
 
 if (o0 !== undefined)
-  throw new Error('Wrong binding of the function.');
+  throw new Error(2000000000);

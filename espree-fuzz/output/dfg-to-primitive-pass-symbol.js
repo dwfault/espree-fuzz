@@ -23,9 +23,9 @@ for (var o6 = 0; o6 < 10000; ++o6) {
 
 o0 = true;
 
-var o8;
+var o6;
 try {
-    o0 = true;
+    o3 = o5;
     o4();
 } catch (o9) {
     o8 = o9;

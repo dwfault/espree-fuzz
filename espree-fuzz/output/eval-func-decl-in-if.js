@@ -1,8 +1,4 @@
-var o0 = function (o1, o2, o3) {
-    if (o1 !== o2) {
-        throw new Error('Error in assert. Expected-' + o2 + ' but was' + o1 + ':' + o3 );
-    }
-};
+var o7 = null;
 
 var o5;
 

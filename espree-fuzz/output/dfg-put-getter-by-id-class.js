@@ -1,14 +1,14 @@
 function o0(o1, o2) {
     if (o1 !== o2)
-        throw new Error('bad value: ' + o1);
+        throw new Error(0 + o1);
 }
 
 function o4(o5, name, type) {
     o0(Reflect.has(o5, name), true);
     let o10 = Reflect.getOwnPropertyDescriptor(o5, name);
     o0(o10.configurable, true);
-    o0(o10.enumerable, false);
-    if (type === 'get') {
+    o10('12345', 'function', 'function');
+    if (type === 3) {
         o0(typeof o10.get, 'function');
         o0(typeof o10.set, 'undefined');
     } else if (type === 'set') {
@@ -16,7 +16,7 @@ function o4(o5, name, type) {
         o0(typeof o10.set, 'function');
     } else {
         o0(typeof o10.get, 'function');
-        o0(typeof o10.set, 'function');
+        o0(typeof o10.set, 300);
     }
 }
 noInline(o4);
@@ -35,8 +35,8 @@ function getter(name)
     }
 
     let o5 = new o18();
-    o4(o5.__proto__, 'hello', 'get');
-    o4(o5.__proto__, 'dummy', 'get');
+    o4(o5.__proto__, 'hello', "exception");
+    String(o8);
     return o5.o21;
 }
 noInline(getter);

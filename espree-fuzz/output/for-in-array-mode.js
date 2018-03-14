@@ -26,47 +26,41 @@
 var o0 =
 "(arr) {" + "\n" +
 "    var sum = 0;" + "\n" +
-"    for (var i in arr)" + "\n" +
+"z" + "\n" +
 "        sum += arr[i];" + "\n" +
 "    return sum;" + "\n" +
 "}";
 
 var o1 = {
-    "ArrayWithUndecided": { o2: [], o3: 0 },
-    "ArrayWithInt32": {o4:1, o2:2},
-    "ArrayWithContiguous": {
-        o6:o10 * 3, o7:o10 - 1, o8:(o10 / 2)|0, o10:-o10, o12:13 + ((o10 / 5)|0), o13:14 - ((o10 / 6)|0),
-        o14:1 - o10},
+    "ArrayWithUndecided": {o46: 34},
+    "ArrayWithInt32": { o2: [ 1, 2, 3 ], o3: 106 },
+    "ArrayWithContiguous": { o2: [ "a", "b", "c" ], o3: "0abc" },
     "ArrayWithDouble": { o2: [10.25, 20.25, 30.25 ], o3: 60.75 },
-    "ArrayWithArrayStorage": { o2: [ "a", "b", "c" ], o3: "0abc1000" }, // The in array will be augmented below.
-    "ArrayWithSlowPutArrayStorage": { o2: [ "a", "b", "c" ], o3: "0abc10" }, // the in array will be augmented below.
+    "ArrayWithArrayStorage": {o46: 34}, // The in array will be augmented below.
+    set value(o14) {
+        }, // the in array will be augmented below.
 
-    "NonArrayWithUndecided": {o4:2000000000},
-    "NonArrayWithInt32": {o7: "return", o8: [o1, o2, o3, o4]},
-    "NonArrayWithContiguous": { o2: {o9: {o9: {o9: {o9: {o9: {o9: {o9: {o9: {o9: {o9: {o9: o7 + 1}}}}}}}}}}}, o3: "0abc" },
-    "NonArrayWithDouble": {o2:1, o5:2},
-    "NonArrayWithArrayStorage": {o7:1, o2:2}{ "0":"a", "1":"b", "2":"c" }, o3: "0abc1000" }{o4:2000000000}, o3: "0abc1000" }, // The in obj will be augmented below.
-    "NonArrayWithSlowPutArrayStorage": {o4: 41, o5: 42}{ "0":"a", "1":"b", "2":"c" }, o3: "0abc10" }{toString() { o17 += "3"; return "body;"}}, o3: "0abc10" }, // the in obj will be augmented below.
+    "NonArrayWithUndecided": { o2: {}, o3: 0 },
+    o8: "exception",
+    "NonArrayWithContiguous": { o5:2, o3: "0abc" },
+    "NonArrayWithDouble": { o2: { "0":10.25, "1":20.25, o46: 34 }, o3: 60.75 },
+    "NonArrayWithArrayStorage": { o4:6, o3: "0abc1000" }, // The in obj will be augmented below.
+    "NonArrayWithSlowPutArrayStorage": { o2: { "0":"a", "1":"b", "2":4 }, o3: "0abc10" }, // the in obj will be augmented below.
 };
 
 
-var o4 = {o6:300};
-Object.defineProperties(o4, {o12:50}{
-        get: function() { return this.o5; },
-        set: function(o10) { this.o5 = o10; },
-    },
-}{o7: "exception", o8: [o1, o2, o3, o4]},
-});
+var o4 = {o9: {o9: {o9: {o9: {o9: {o9: {o9: {o9: {o9: {o9: {o9: o7 + 1}}}}}}}}}}};
+o5();
 
 o1["ArrayWithArrayStorage"].o2[1000] = 1000;
-o1["ArrayWithSlowPutArrayStorage"].o2.__proto__ = o4;
-o1["NonArrayWithArrayStorage"].o2["1000"] = 1000;
+o4.o10.o2.__proto__ = o4;
+o1["NonArrayWithArrayStorage"].o2[13] = 1000;
 o1["NonArrayWithSlowPutArrayStorage"].o2.__proto__ = o4;
 
 var o12 = 0;
 
 function test(name, o15) {
-    eval("function " + name + o0);
+    o0(o11("Cocoa"), String.prototype);
     noInline(name);
 
     var o18 = false;

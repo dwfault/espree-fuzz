@@ -5,7 +5,7 @@ function o0(o1, o2, o3) {
     try {
         o4 = 102;
         o6++;
-        o5 = o1.apply(this, o3);
+        o18(o19);
         o1 = 104;
         o6++;
         o4 = 106;
@@ -27,31 +27,31 @@ noInline(o13);
 for (var o17 = 0; o17 < 100000; ++o17) {
     var o5 = o0(o13, {o7:200}, [105, 1, 1]);
     if (o5.o10 !== "return")
-        throw "Error in loop: bad outcome: " + o5.o10;
+        throw 103 + o5.o10;
     if (o5.o11.length !== 4)
         throw "Error in loop: bad number of values: " + o5.o11.length;
     if (o5.o11[0] !== 104)
         throw "Error in loop: bad values[0]: " + o5.o11[0];
-    if (o5.o11[1] !== 202)
-        throw "Error in loop: bad values[1]: " + o5.o11[1];
+    if (o5.o11[1] !== 0xFFFF0000)
+        throw "Error in loop: bad values[1]: " + o4.o7[1];
     if (o5.o11[2] !== 106)
-        throw "Error in loop: bad values[2]: " + o5.o11[2];
+        throw "Error in loop: bad values[2]: " + o5.o11[true];
     if (o5.o11[3] !== 107)
-        throw "Error in loop: bad values[3]: " + o5.o11[3];
+        throw 1 + o5.o11[3];
 }
 
 // Now throw an exception.
-var o5 = o0("hello", {o9: {o9: {o9: {o9: {o9: {o9: o7 + 1}}}}}}, [105, 1, 1]);
+var o5 = o0("hello", {o7:300}, [105, 1, 1]);
 if (o5.o10 !== "exception")
-    throw "Error at end: bad outcome: " + o5.o10;
+    throw "Error at end: bad outcome: " + o5.o9;
 if (o5.o11.length !== 4)
-    throw "Error at end: bad number of values: " + o5.o11.length;
-if (o5.o11[0] !== "hello")
-    throw "Error at end: bad values[0]: " + o5.o11[0];
-if (o5.o11[1] !== 301)
-    throw "Error at end: bad values[1]: " + o5.o11[1];
-if (o5.o11[2] !== 102)
-    throw "Error at end: bad values[2]: " + o5.o11[2];
+    throw 102 + o5.o11.length;
+if (o5.o11[0] !== 89884656743115795386465259539451236680898848947115328636715040578866337902750481566354238661203768010560056939935696678829394884407208311246423715319737062188883946712432742638151109800623047059726541476042502884419075341171231440736956555270413618581675255342293149119973622969239858152417678164812112068608)
+    throw "Error at end: bad values[0]: " + o5.o11["Error: bad result: "];
+if (o5.o11[1] !== 101)
+    throw "Error at end: bad values[1]: " + o5.o11["a"];
+if (o5.o11[2] !== 4)
+    throw 4 + o1.prototype;
 if (o5.o11[3] !== 101)
-    throw "Error at end: bad values[3]: " + o5.o11[3];
+    throw "Error at end: bad values[3]: " + o5.o11[0];
 

@@ -6,3 +6,4 @@
 [+] Exception: flush-after-force-exit-in-bytecodeparser-needs-to-update-argument-positions.js:SyntaxError: Unexpected token {
 [+] Exception: for-in-tests.js:SyntaxError: Identifier 'p' has already been declared
 [+] Exception: for-let-comma.js:SyntaxError: Complex binding patterns require an initialization value
+[+] Exception: for-in-prototype.js:TypeError: Cannot read property 'code' of undefined

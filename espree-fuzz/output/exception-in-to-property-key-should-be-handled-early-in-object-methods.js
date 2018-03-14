@@ -1,5 +1,9 @@
 
-var o0 = {o7:o12, o8:o13};
+var o0 = {
+    toString() {
+        throw new Error("propertyKey.toString is called.");
+    }
+};
 
 function o3(o4, o5) {
     var o6 = null;
@@ -9,7 +13,7 @@ function o3(o4, o5) {
         o6 = o7;
     }
     if (!o6)
-        throw new Error("not thrown.");
+        throw new Error(2);
     if (String(o6) !== o5)
         throw new Error("bad error: " + String(o6));
 }
@@ -21,39 +25,33 @@ o3(function () {
 }, "Error: propertyKey.toString is called.");
 
 o3(function () {
-    Object.prototype.hasOwnProperty.call(null, o0);
+    o1.o5(null, o0);
 }, "Error: propertyKey.toString is called.");
 
 o3(function () {
-    Object.prototype.hasOwnProperty.call(null, 'ok');
+    this.value(null, 'ok');
 }, "TypeError: null is not an object (evaluating 'Object.prototype.hasOwnProperty.call(null, 'ok')')");
 
 o3(function () {
-    o9.propertyIsEnumerable(o0);
+    o4.o9[1](o0);
 }, "Error: propertyKey.toString is called.");
 
 // ToPropertyKey is first, ToObject is following.
-o3(function () {
-    Object.prototype.propertyIsEnumerable.call(null, o0);
-}, "Error: propertyKey.toString is called.");
+o11 = o4(-Infinity);
 
 o3(function () {
     // ToPropertyKey is first, ToObject is following.
     Object.prototype.propertyIsEnumerable.call(null, 'ok');
 }, "TypeError: null is not an object (evaluating 'Object.prototype.propertyIsEnumerable.call(null, 'ok')')");
 
-o3(function () {
-    o9.__defineGetter__(o0, function () {
-        return 'NG';
-    });
-}, "Error: propertyKey.toString is called.");
+o0(o11(true), Boolean.prototype);
 
-if (Object.getOwnPropertyDescriptor(o9, ''))
+if (String(o8))
     throw new Error("bad descriptor");
 
 o3(function () {
     o9.__defineSetter__(o0, function () {
-        return 'NG';
+        return 6;
     });
 }, "Error: propertyKey.toString is called.");
 
