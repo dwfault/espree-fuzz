@@ -507,28 +507,40 @@ randomlySubstitue(testcaseNormalizedDir, testcaseOutputDir);
 
 
 /**
- * STEP 5 The fuzzing...
+ * STEP 5 The fuzzing...with some ugly operations.
  */
 
-const binPath = "cat";
-let timeout = 15000;
+const binPath = "echo";
+let timeoutBig = 10000;
+let timeoutSmall = 1;
 
 function loop() {
 
 	randomlySubstitue(testcaseOutputDir, testcaseRunDir);
 
 	let files = fs.readdirSync(testcaseRunDir);
-	for (let file of files) {
-		let childSpawn = child_process.spawn('node', ['./fuzz-child.js', testcaseRunDir, file, binPath, crashDir, testcaseOutputDir],
-			{ detached: true });
 
-		childSpawn.on('error', (err) => {
-			console.log(err);
-		});
-		childSpawn.on('close', (code => { }));
+	let count = 0;
+	let total = files.length;
+	console.log(files);
 
+	function runOne() {
+		let file = files[count];
+		if (count < total) {
+
+			let childSpawn = child_process.spawn('node', ['./fuzz-child.js', testcaseRunDir, file, binPath, crashDir, testcaseOutputDir],
+				{ detached: true });
+
+			childSpawn.on('error', (err) => { console.log(err); });
+			childSpawn.on('close', (code => { setTimeout(runOne, timeoutSmall) }));
+
+			count++;
+		}
+		else {
+			setTimeout(loop, timeoutBig);
+		}
 	}
-	setTimeout(loop, timeout);
+	runOne(files);
 }
 
 loop();
