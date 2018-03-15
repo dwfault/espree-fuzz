@@ -492,7 +492,10 @@ let files = fs.readdirSync(testcaseNormalizedDir);
 for (let file of files) {
 	fs.copyFileSync(testcaseNormalizedDir + file, testcaseOutputDir + file);
 }
-
+let files = fs.readdirSync(testcaseNormalizedDir);
+for (let file of files) {
+	fs.copyFileSync(testcaseNormalizedDir + file, testcaseRunDir + file);
+}
 randomlySubstitue(testcaseNormalizedDir, testcaseOutputDir);
 randomlySubstitue(testcaseNormalizedDir, testcaseOutputDir);
 randomlySubstitue(testcaseNormalizedDir, testcaseOutputDir);
@@ -511,6 +514,7 @@ randomlySubstitue(testcaseNormalizedDir, testcaseOutputDir);
  */
 
 const binPath = "echo";
+//const binPath = "~/Desktop/webkit-320b1fc/bin/jsc";
 let timeoutBig = 10000;
 let timeoutSmall = 1;
 

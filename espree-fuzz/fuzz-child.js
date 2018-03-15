@@ -17,7 +17,8 @@ var jscExecFile = execFile(binPath, [fuzzFilePath + fuzzFileName], { timeout: 10
     console.log('[+] stdout:'+stdout);
     console.log('[+] stderr:'+stderr);
     if (stdout.indexOf('AddressSanitizer') != -1 || (stderr.indexOf('AddressSanitizer') != -1)) {
-        exec('mv ' + fuzzFilePath + fuzzFileName + ' ' + crashDir + fuzzFileName);
+        exec('cp ' + fuzzFilePath + fuzzFileName + ' ' + crashDir + fuzzFileName);
+        exec('mv ' + fuzzFilePath + fuzzFileName + ' ' + recycleDir + fuzzFileName);
     }
     else {
         exec('mv ' + fuzzFilePath + fuzzFileName + ' ' + recycleDir + fuzzFileName);
