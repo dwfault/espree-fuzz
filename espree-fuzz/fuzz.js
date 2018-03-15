@@ -492,7 +492,7 @@ let files = fs.readdirSync(testcaseNormalizedDir);
 for (let file of files) {
 	fs.copyFileSync(testcaseNormalizedDir + file, testcaseOutputDir + file);
 }
-let files = fs.readdirSync(testcaseNormalizedDir);
+files = fs.readdirSync(testcaseNormalizedDir);
 for (let file of files) {
 	fs.copyFileSync(testcaseNormalizedDir + file, testcaseRunDir + file);
 }
@@ -513,10 +513,10 @@ randomlySubstitue(testcaseNormalizedDir, testcaseOutputDir);
  * STEP 5 The fuzzing...with some ugly operations.
  */
 
-const binPath = "echo";
-//const binPath = "~/Desktop/webkit-320b1fc/bin/jsc";
-let timeoutBig = 10000;
-let timeoutSmall = 1;
+//const binPath = "echo";
+const binPath = "~/Desktop/webkit-320b1fc/bin/jsc";
+let timeoutBigLoop = 0;
+let timeoutSmallLoop = 0;
 
 function loop() {
 
@@ -531,17 +531,18 @@ function loop() {
 	function runOne() {
 		let file = files[count];
 		if (count < total) {
-
+			console.log('[+] node ./fuzz-child.js ' + testcaseRunDir + ' ' + file + ' ' + binPath + ' ' + crashDir + ' ' + testcaseOutputDir);
+			
 			let childSpawn = child_process.spawn('node', ['./fuzz-child.js', testcaseRunDir, file, binPath, crashDir, testcaseOutputDir],
 				{ detached: true });
 
 			childSpawn.on('error', (err) => { console.log(err); });
-			childSpawn.on('close', (code => { setTimeout(runOne, timeoutSmall) }));
+			childSpawn.on('close', (code => { setTimeout(runOne, timeoutSmallLoop) }));
 
 			count++;
 		}
 		else {
-			setTimeout(loop, timeoutBig);
+			setTimeout(loop, timeoutBigLoop);
 		}
 	}
 	runOne(files);
