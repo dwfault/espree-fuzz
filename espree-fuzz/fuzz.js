@@ -487,19 +487,31 @@ function randomlySubstitue(pathI, pathO) {
 	}
 }
 
+
+let files = fs.readdirSync(testcaseNormalizedDir);
+for (let file of files) {
+	fs.copyFileSync(testcaseNormalizedDir + file, testcaseOutputDir + file);
+}
+
 randomlySubstitue(testcaseNormalizedDir, testcaseOutputDir);
+randomlySubstitue(testcaseNormalizedDir, testcaseOutputDir);
+randomlySubstitue(testcaseNormalizedDir, testcaseOutputDir);
+randomlySubstitue(testcaseNormalizedDir, testcaseOutputDir);
+randomlySubstitue(testcaseNormalizedDir, testcaseOutputDir);
+randomlySubstitue(testcaseNormalizedDir, testcaseOutputDir);
+randomlySubstitue(testcaseNormalizedDir, testcaseOutputDir);
+randomlySubstitue(testcaseNormalizedDir, testcaseOutputDir);
+
+
+
 
 
 /**
  * STEP 5 The fuzzing...
  */
 
-
-//for (let i = 0; i < 4; i++)
-//	randomlySubstitue(testcaseOutputDir, testcaseOutputDir);
-
-const binPath = "echo";
-const timeout = 15000;
+const binPath = "cat";
+let timeout = 15000;
 
 function loop() {
 
@@ -507,25 +519,19 @@ function loop() {
 
 	let files = fs.readdirSync(testcaseRunDir);
 	for (let file of files) {
-		let childSpawn = child_process.spawn('node', ['./fuzz-child.js', testcaseRunDir, file, binPath, crashDir, testcaseOutputDir], { detached: true });
-		/*
-		childSpawn.stdout.on('data', function (data) {
-			console.log('[+] child stdout:' + data);
-		});
-		childSpawn.stderr.on('data', function (data) {
-			console.log('[+] child stdout:' + data);
-		});
+		let childSpawn = child_process.spawn('node', ['./fuzz-child.js', testcaseRunDir, file, binPath, crashDir, testcaseOutputDir],
+			{ detached: true });
+
 		childSpawn.on('error', (err) => {
-			console.log('[+] Failed to start child process.');
 			console.log(err);
 		});
 		childSpawn.on('close', (code => { }));
-		*/
+
 	}
 	setTimeout(loop, timeout);
 }
 
-setTimeout(loop, timeout);
+loop();
 
 
 

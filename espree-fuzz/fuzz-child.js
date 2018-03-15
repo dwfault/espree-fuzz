@@ -4,20 +4,22 @@ var fs = require('fs');
 
 var arguments = process.argv.splice(2);
 
-var outputFilePath = arguments[0];
-var outputFileName = arguments[1];
+var fuzzFilePath = arguments[0];
+var fuzzFileName = arguments[1];
 var binPath = arguments[2];
 var crashDir = arguments[3];
 var recycleDir = arguments[4];
 
 
-console.log(binPath + ' ' + outputFileName);
+console.log(binPath + ' ' + fuzzFilePath + fuzzFileName);
 
-var jscExecFile = execFile(binPath, [outputFilePath + outputFileName], { timeout: 10000 }, (error, stdout, stderr) => {
-    if (stdout.indexOf('AddressSanitizer') != -1 || (stderr, indexOf('AddressSanitizer') != -1)) {
-        exec('mv ' + outputFilePath + outputFileName + ' ' + crashDir + outputFileName);
+var jscExecFile = execFile(binPath, [fuzzFilePath + fuzzFileName], { timeout: 10000 }, (error, stdout, stderr) => {
+    console.log('[+] stdout:'+stdout);
+    console.log('[+] stderr:'+stderr);
+    if (stdout.indexOf('AddressSanitizer') != -1 || (stderr.indexOf('AddressSanitizer') != -1)) {
+        exec('mv ' + fuzzFilePath + fuzzFileName + ' ' + crashDir + fuzzFileName);
     }
     else {
-        exec('mv ' + outputFilePath + outputFileName + ' ' + recycleDir + outputFileName);
+        exec('mv ' + fuzzFilePath + fuzzFileName + ' ' + recycleDir + fuzzFileName);
     }
 });
