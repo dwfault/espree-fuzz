@@ -1,7 +1,6 @@
 "use strict";
 const Linter = require('eslint').Linter;
 const linter = new Linter();
-//const esutils = require("esutils");
 const espree = require("espree");
 const fs = require("fs");
 
@@ -15,10 +14,6 @@ const testcaseNormalizedDir = "./testcase-normalized/";
 const testcaseOutputDir = "./testcase-output/";
 const testcaseRunDir = "./testcase-run/";
 const crashDir = "./crash/";
-
-
-
-
 
 
 
@@ -534,8 +529,8 @@ function loop() {
 			let childSpawn = child_process.spawn('node', ['./fuzz-child.js', testcaseRunDir, file, binPath, crashDir, testcaseOutputDir],
 				{ detached: true });
 
-			childSpawn.on('error', (err) => { console.log(err); });
-			childSpawn.on('close', (code) => { setTimeout(runOne, timeoutSmallLoop) });
+			childSpawn.on('error', (err) => { console.log(err); count--; exec('kill -9 $(pidof ' + binPath + ')'); setTimeout(runOne, 6000); });
+			childSpawn.on('close', (code) => { setTimeout(runOne, timeoutSmallLoop); });
 
 			count++;
 		}
