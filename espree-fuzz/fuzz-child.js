@@ -21,7 +21,7 @@ jscExec.stderr.on('data', function (data) {
     log += data;
 });
 jscExec.on('exit', function (code, signal) {
-    if (log.indexOf('AddressSanitizer') != -1) {
+    if ((log.indexOf('AddressSanitizer') != -1) && (log.indexOf('LeakSanitizer') == -1)) {
         exec('cp ' + fuzzFilePath + fuzzFileName + ' ' + crashDir + fuzzFileName);
         exec('mv ' + fuzzFilePath + fuzzFileName + ' ' + recycleDir + fuzzFileName);
     }
