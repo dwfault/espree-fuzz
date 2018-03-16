@@ -1,5 +1,4 @@
 var exec = require('child_process').exec;
-var execFile = require('child_process').execFile;
 var fs = require('fs');
 
 var arguments = process.argv.splice(2);
@@ -12,20 +11,8 @@ var recycleDir = arguments[4];
 
 
 console.log('[+] ' + binPath + ' ' + fuzzFilePath + fuzzFileName);
-/*
-var jscExecFile = execFile(binPath, [fuzzFilePath + fuzzFileName], { timeout: 10000 }, (error, stdout, stderr) => {
-    console.log('[+] stdout:' + stdout);
-    console.log('[+] stderr:' + stderr);
-    if ((stdout.indexOf('AddressSanitizer') != -1) || (stderr.indexOf('AddressSanitizer') != -1)) {
-        exec('cp ' + fuzzFilePath + fuzzFileName + ' ' + crashDir + fuzzFileName);
-        exec('mv ' + fuzzFilePath + fuzzFileName + ' ' + recycleDir + fuzzFileName);
-    }
-    else {
-        exec('mv ' + fuzzFilePath + fuzzFileName + ' ' + recycleDir + fuzzFileName);
-    }
-});*/
 
-var jscExec = exec(binPath + ' ' + fuzzFilePath + fuzzFileName);
+var jscExec = exec(binPath + ' ' + fuzzFilePath + fuzzFileName, { timeout: 8000 });
 var log = '';
 jscExec.stdout.on('data', function (data) {
     log += data;
