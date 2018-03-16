@@ -11,12 +11,30 @@ var crashDir = arguments[3];
 var recycleDir = arguments[4];
 
 
-console.log(binPath + ' ' + fuzzFilePath + fuzzFileName);
-
+console.log('[+] ' + binPath + ' ' + fuzzFilePath + fuzzFileName);
+/*
 var jscExecFile = execFile(binPath, [fuzzFilePath + fuzzFileName], { timeout: 10000 }, (error, stdout, stderr) => {
     console.log('[+] stdout:' + stdout);
     console.log('[+] stderr:' + stderr);
-    if (stdout.indexOf('AddressSanitizer') != -1 || (stderr.indexOf('AddressSanitizer') != -1)) {
+    if ((stdout.indexOf('AddressSanitizer') != -1) || (stderr.indexOf('AddressSanitizer') != -1)) {
+        exec('cp ' + fuzzFilePath + fuzzFileName + ' ' + crashDir + fuzzFileName);
+        exec('mv ' + fuzzFilePath + fuzzFileName + ' ' + recycleDir + fuzzFileName);
+    }
+    else {
+        exec('mv ' + fuzzFilePath + fuzzFileName + ' ' + recycleDir + fuzzFileName);
+    }
+});*/
+
+var jscExec = exec(binPath + ' ' + fuzzFilePath + fuzzFileName);
+var log = '';
+jscExec.stdout.on('data', function (data) {
+    log += data;
+});
+jscExec.stderr.on('data', function (data) {
+    log += data;
+});
+jscExec.on('exit', function (code, signal) {
+    if (log.indexOf('AddressSanitizer') != -1) {
         exec('cp ' + fuzzFilePath + fuzzFileName + ' ' + crashDir + fuzzFileName);
         exec('mv ' + fuzzFilePath + fuzzFileName + ' ' + recycleDir + fuzzFileName);
     }

@@ -513,14 +513,12 @@ randomlySubstitue(testcaseNormalizedDir, testcaseOutputDir);
  * STEP 5 The fuzzing...with some ugly operations.
  */
 
-//const binPath = "echo";
 const binPath = "~/Desktop/webkit-320b1fc/bin/jsc";
+
 let timeoutBigLoop = 0;
 let timeoutSmallLoop = 0;
 
 function loop() {
-
-	randomlySubstitue(testcaseOutputDir, testcaseRunDir);
 
 	let files = fs.readdirSync(testcaseRunDir);
 
@@ -532,12 +530,12 @@ function loop() {
 		let file = files[count];
 		if (count < total) {
 			console.log('[+] node ./fuzz-child.js ' + testcaseRunDir + ' ' + file + ' ' + binPath + ' ' + crashDir + ' ' + testcaseOutputDir);
-			
+
 			let childSpawn = child_process.spawn('node', ['./fuzz-child.js', testcaseRunDir, file, binPath, crashDir, testcaseOutputDir],
 				{ detached: true });
 
 			childSpawn.on('error', (err) => { console.log(err); });
-			childSpawn.on('close', (code => { setTimeout(runOne, timeoutSmallLoop) }));
+			childSpawn.on('close', (code) => { setTimeout(runOne, timeoutSmallLoop) });
 
 			count++;
 		}
@@ -546,6 +544,7 @@ function loop() {
 		}
 	}
 	runOne(files);
+	randomlySubstitue(testcaseOutputDir, testcaseRunDir);
 }
 
 loop();
