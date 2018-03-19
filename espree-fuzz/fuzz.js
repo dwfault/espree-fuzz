@@ -529,7 +529,7 @@ function loop() {
 			let childSpawn = child_process.spawn('node', ['./fuzz-child.js', testcaseRunDir, file, binPath, crashDir, testcaseOutputDir],
 				{ detached: true });
 
-			childSpawn.on('error', (err) => { console.log(err); count--; exec('kill -9 $(pidof ' + binPath + ')'); setTimeout(runOne, 6000); });
+			childSpawn.on('error', (err) => { console.log('[-] Child process failed.\n'+err); count--; exec('kill -9 $(pidof ' + binPath + ')'); setTimeout(runOne, 6000); });
 			childSpawn.on('close', (code) => { setTimeout(runOne, timeoutSmallLoop); });
 
 			count++;
