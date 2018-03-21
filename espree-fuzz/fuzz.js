@@ -526,13 +526,17 @@ function loop() {
 		if (count < total) {
 			console.log('[+] node ./fuzz-child.js ' + testcaseRunDir + ' ' + file + ' ' + binPath + ' ' + crashDir + ' ' + testcaseOutputDir);
 
-			let childSpawn = child_process.spawn('node', ['./fuzz-child.js', testcaseRunDir, file, binPath, crashDir, testcaseOutputDir],
-				{ detached: true });
+			try {
+				let childSpawn = child_process.spawn('node', ['./fuzz-child.js', testcaseRunDir, file, binPath, crashDir, testcaseOutputDir],
+					{ detached: true });
 
-			childSpawn.on('error', (err) => { console.log('[-] Child process failed.\n'+err); count--; exec('kill -9 $(pidof ' + binPath + ')'); setTimeout(runOne, 6000); });
-			childSpawn.on('close', (code) => { setTimeout(runOne, timeoutSmallLoop); });
+				childSpawn.on('error', (err) => { console.log('[-] Child process failed.\n' + err); count--; exec('kill -9 $(pidof ' + binPath + ')'); setTimeout(runOne, 6000); });
+				childSpawn.on('close', (code) => { setTimeout(runOne, timeoutSmallLoop); });
 
-			count++;
+				count++;
+			} catch (e) {
+				exec('kill -9 $(pidof ' + binPath + ')'); setTimeout(runOne, 6000);
+			}
 		}
 		else {
 			setTimeout(loop, timeoutBigLoop);
