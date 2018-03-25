@@ -8,11 +8,17 @@ var crashPath = arguments[1];
 
 var files = fs.readdirSync(crashPath);
 
-var filterNos = ["asanUnsafeJSValue",];
+var filterNos = ["asanUnsafeJSValue", "JSC::ConservativeRoots::genericAddSpan","LeakSanitizer"];
 
-for (file of files) {
+var i = 0;
 
-    var reproduce = exec(fuzzeePath + ' ' + file);
+function reproduceOne(files) {
+    if (i == files.length)
+        return;
+
+    var file = files[i];
+
+    var reproduce = exec(fuzzeePath + ' ' + crashPath + file);
     var reproduceLog = '[-] ' + file + ':\n';
     reproduce.stderr.on('data', function (data) {
         reproduceLog += data;
@@ -21,14 +27,20 @@ for (file of files) {
         reproduceLog += data;
     });
     reproduce.on('close', function (code, signal) {
-        reproduceLog += '--------------------';
+        reproduceLog += '--------------------\n\n\n\n';
         var filted = false;
-        for (filterNo of fileterNos) {
-            if (reproduceLog.indexOf(filterNos) != -1) {
+        for (filterNo of filterNos) {
+            if (reproduceLog.indexOf(filterNo) != -1) {
                 filted = true;
             }
         }
-        if(filted == false)
+        if (filted == false)
             console.log(reproduceLog);
+        else {
+            exec("rm " + crashPath + file);
+        }
+        i++;
+        reproduceOne(files);
     });
 }
+reproduceOne(files);
