@@ -12,8 +12,8 @@ var recycleDir = arguments[4];
 
 console.log('[+] ' + binPath + ' ' + fuzzFilePath + fuzzFileName);
 
-var jscExec = exec(binPath + ' ' + fuzzFilePath + fuzzFileName, { timeout: 8000 });
-//var jscExec = exec('ASAN_OPTIONS=detect_leaks=0 ' +binPath + ' ' + fuzzFilePath + fuzzFileName, { timeout: 8000 });
+//var jscExec = exec(binPath + ' ' + fuzzFilePath + fuzzFileName, { timeout: 8000 });
+var jscExec = exec('ASAN_OPTIONS=detect_leaks=0 ' +binPath + ' ' + fuzzFilePath + fuzzFileName, { timeout: 8000 });
 var log = '';
 jscExec.stdout.on('data', function (data) {
     log += data;

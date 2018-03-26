@@ -306,7 +306,7 @@ let typeVariableDeclarator = typesArray.filter(function (x) { if (x.type == 'Var
 let typeUnaryExpression = typesArray.filter(function (x) { if (x.type == 'UnaryExpression') return x; });
 let typeArrowFunctionExpression = typesArray.filter(function (x) { if (x.type == 'ArrowFunctionExpression') return x; });
 
-function randomlySubstitue(pathI, pathO) {
+function randomlySubstitute(pathI, pathO) {
 	let files = fs.readdirSync(pathI);
 	for (let file of files) {
 		let jsCode = fs.readFileSync(pathI + file, 'utf-8');
@@ -489,7 +489,7 @@ function randomlySubstitue(pathI, pathO) {
 				fs.writeFileSync(pathO + file.substring(0, file.length - 3) + randomString2() + '.js', newContent);
 			}
 		} catch (e) {
-			console.log('[+] Exception: ' + file + ':' + e);
+			console.log('[+] Exception in randomlySubstitute : ' + file + ':' + e);
 		}
 	}
 }
@@ -498,19 +498,17 @@ function randomlySubstitue(pathI, pathO) {
 let files = fs.readdirSync(testcaseNormalizedDir);
 for (let file of files) {
 	fs.copyFileSync(testcaseNormalizedDir + file, testcaseOutputDir + file);
-}
-files = fs.readdirSync(testcaseNormalizedDir);
-for (let file of files) {
 	fs.copyFileSync(testcaseNormalizedDir + file, testcaseRunDir + file);
 }
-randomlySubstitue(testcaseNormalizedDir, testcaseOutputDir);
-randomlySubstitue(testcaseNormalizedDir, testcaseOutputDir);
-randomlySubstitue(testcaseNormalizedDir, testcaseOutputDir);
-randomlySubstitue(testcaseNormalizedDir, testcaseOutputDir);
-randomlySubstitue(testcaseNormalizedDir, testcaseOutputDir);
-randomlySubstitue(testcaseNormalizedDir, testcaseOutputDir);
-randomlySubstitue(testcaseNormalizedDir, testcaseOutputDir);
-randomlySubstitue(testcaseNormalizedDir, testcaseOutputDir);
+
+randomlySubstitute(testcaseNormalizedDir, testcaseOutputDir);
+randomlySubstitute(testcaseNormalizedDir, testcaseOutputDir);
+randomlySubstitute(testcaseNormalizedDir, testcaseOutputDir);
+randomlySubstitute(testcaseNormalizedDir, testcaseOutputDir);
+randomlySubstitute(testcaseOutpuDir, testcaseOutputDir);
+randomlySubstitute(testcaseOutpuDir, testcaseOutputDir);
+randomlySubstitute(testcaseOutpuDir, testcaseOutputDir);
+randomlySubstitute(testcaseOutpuDir, testcaseOutputDir);
 
 
 
@@ -520,7 +518,7 @@ randomlySubstitue(testcaseNormalizedDir, testcaseOutputDir);
  * STEP 5 The fuzzing...with some ugly operations.
  */
 
-const binPath = "~/Desktop/webkit-320b1fc/bin/jsc";
+const binPath = "~/Desktop/webkit-dfc36ec-asan/WebKitBuild/Debug/bin/jsc";
 
 let timeoutBigLoop = 0;
 let timeoutSmallLoop = 0;
@@ -532,7 +530,6 @@ function loop() {
 
 	let count = 0;
 	let total = files.length;
-	console.log(files);
 
 	function runOne() {
 		let file = files[count];
@@ -556,10 +553,70 @@ function loop() {
 		}
 	}
 	runOne(files);
-	randomlySubstitue(testcaseOutputDir, testcaseRunDir);
+	randomlySubstitute(testcaseOutputDir, testcaseRunDir);
 }
 
 loop();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
