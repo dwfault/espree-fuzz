@@ -1,68 +1,25 @@
 module.exports = [
 	{ oldName: "Array", newName: "Array", count: 1 }
-	/*
-	, { oldName: "Array.prototype.reverse.call", newName: "Array.prototype.reverse.call", count: 1 }
-	, { oldName: "Array.prototype.splice.call", newName: "Array.prototype.splice.call", count: 1 }
-	, { oldName: "Array.prototype.toLocaleString.call", newName: "Array.prototype.toLocaleString.call", count: 1 }
-	, { oldName: "Array.prototype.toString.call", newName: "Array.prototype.toString.call", count: 1 }
-	, { oldName: "Array.prototype.unshift.call", newName: "Array.prototype.unshift.call", count: 1 }
-	, { oldName: "Array.prototype.concat.call", newName: "Array.prototype.concat.call", count: 1 }
-	, { oldName: "Array.prototype.join.call", newName: "Array.prototype.join.call", count: 1 }
-	, { oldName: "Array.prototype.sort.call", newName: "Array.prototype.sort.call", count: 1 }
-	, { oldName: "Array.prototype.pop.call", newName: "Array.prototype.pop.call", count: 1 }
-	, { oldName: "Array.prototype.push.call", newName: "Array.prototype.push.call", count: 1 }
-	, { oldName: "Array.prototype.shift.call", newName: "Array.prototype.shift.call", count: 1 }
-	, { oldName: "Array.prototype.slice.call", newName: "Array.prototype.slice.call", count: 1 }
-	*/
 	, { oldName: "ArrayBuffer", newName: "ArrayBuffer", count: 1 }
 	, { oldName: "Atomics", newName: "Atomics", count: 1 }
 	, { oldName: "Boolean", newName: "Boolean", count: 1 }
-	/*
-	, { oldName: "Boolean.prototype.toString.call", newName: "Boolean.prototype.toString.call", count: 1 }
-	, { oldName: "Boolean.prototype.toJSON.call", newName: "Boolean.prototype.toJSON.call", count: 1 }
-	, { oldName: "Boolean.prototype.valueOf.call", newName: "Boolean.prototype.valueOf.call", count: 1 }
-	*/
 	, { oldName: "Collator", newName: "Collator", count: 1 }
 	, { oldName: "DataView", newName: "DataView", count: 1 }
 	, { oldName: "Date", newName: "Date", count: 1 }
-	/*
-	, { oldName: "Date.UTC", newName: "Date.UTC", count: 1 }
-	, { oldName: "Date.parse", newName: "Date.parse", count: 1 }
-	, { oldName: "Date.prototype.valueOf.call", newName: "Date.prototype.valueOf.call", count: 1 }
-	, { oldName: "Date.prototype.toJSON.call", newName: "Date.prototype.toJSON.call", count: 1 }
-	, { oldName: "Date.prototype.toLocaleTimeString.call", newName: "Date.prototype.toLocaleTimeString.call", count: 1 }
-	, { oldName: "Date.prototype.toLocaleString.call", newName: "Date.prototype.toLocaleString.call", count: 1 }
-	, { oldName: "Date.prototype.toUTCString.call", newName: "Date.prototype.toUTCString.call", count: 1 }
-	, { oldName: "Date.prototype.setUTCHours.call", newName: "Date.prototype.setUTCHours.call", count: 1 }
-	, { oldName: "Date.prototype.setUTCFullYear.call", newName: "Date.prototype.setUTCFullYear.call", count: 1 }
-	, { oldName: "Date.prototype.getTimezoneOffset.call", newName: "Date.prototype.getTimezoneOffset.call", count: 1 }
-	, { oldName: "Date.prototype.getFullYear.call", newName: "Date.prototype.getFullYear.call", count: 1 }
-	, { oldName: "Date.prototype.getMilliseconds.call", newName: "Date.prototype.getMilliseconds.call", count: 1 }
-	*/
 	, { oldName: "Debug", newName: "Debug", count: 1 }
-	/*
-	, { oldName: "Debug.write", newName: "Debug.write", count: 1 }
-	, { oldName: "Debug.writeln", newName: "Debug.writeln", count: 1 }
-	*/
 	, { oldName: "Enumerator", newName: "Enumerator", count: 1 }
-	/*
-	, { oldName: "Enumerator.prototype.atEnd.call", newName: "Enumerator.prototype.atEnd.call", count: 1 }
-	, { oldName: "Enumerator.prototype.moveNext.call", newName: "Enumerator.prototype.moveNext.call", count: 1 }
-	, { oldName: "Enumerator.prototype.moveFirst.call", newName: "Enumerator.prototype.moveFirst.call", count: 1 }
-	*/
 	, { oldName: "Error", newName: "Error", count: 1 }
 	, { oldName: "EPSILON", newName: "EPSILON", count: 1 }
 	, { oldName: "Float32Array", newName: "Float32Array", count: 1 }
 	, { oldName: "Float64Array", newName: "Float64Array", count: 1 }
+	, { oldName: "FromCharCode", newName: "FromCharCode", count: 1 }
 	, { oldName: "Function", newName: "Function", count: 1 }
-	/*
-	, { oldName: "Function.prototype.toString.call", newName: "Function.prototype.toString.call", count: 1 }
-	, { oldName: "Function.prototype.call.call", newName: "Function.prototype.call.call", count: 1 }
-	, { oldName: "Function.prototype.apply.call", newName: "Function.prototype.apply.call", count: 1 }
-	*/
 	, { oldName: "Infinity", newName: "Infinity", count: 1 }
+	, { oldName: "Intl", newName: "Intl", count: 1 }
+	, { oldName: "Instance", newName: "Instance", count: 1 }
 	, { oldName: "Int16Array", newName: "Int16Array", count: 1 }
 	, { oldName: "Int32Array", newName: "Int32Array", count: 1 }
+	, { oldName: "Int32x4", newName: "Int32x4", count: 1 }
 	, { oldName: "Int8Array", newName: "Int8Array", count: 1 }
 	, { oldName: "JSON", newName: "JSON", count: 1 }
 	, { oldName: "MAX_SAFE_INTEGER", newName: "MAX_SAFE_INTEGER", count: 1 }
@@ -72,76 +29,38 @@ module.exports = [
 	, { oldName: "Map", newName: "Map", count: 1 }
 	, { oldName: "Math", newName: "Math", count: 1 }
 	, { oldName: "Memory", newName: "Memory", count: 1 }
+	, { oldName: "Module", newName: "Module", count: 1 }
 	, { oldName: "NaN", newName: "NaN", count: 1 }
 	, { oldName: "NEGATIVE_INFINITY", newName: "NEGATIVE_INFINITY", count: 1 }
 	, { oldName: "Number", newName: "Number", count: 1 }
+	, { oldName: "NumberFormat", newName: "NumberFormat", count: 1 }
 	, { oldName: "Object", newName: "Object", count: 1 }
 	, { oldName: "Promise", newName: "Promise", count: 1 }
 	, { oldName: "Proxy", newName: "Proxy", count: 1 }
 	, { oldName: "Reflect", newName: "Reflect", count: 1 }
 	, { oldName: "RegExp", newName: "RegExp", count: 1 }
-	/*
-	, { oldName: "RegExp.leftContext", newName: "RegExp.leftContext", count: 1 }
-	, { oldName: "RegExp.rightContext", newName: "RegExp.rightContext", count: 1 }
-	, { oldName: "RegExp.lastMatch", newName: "RegExp.lastMatch", count: 1 }
-	, { oldName: "RegExp.lastParent", newName: "RegExp.lastParent", count: 1 }
-	, { oldName: "RegExp.index", newName: "RegExp.index", count: 1 }
-	, { oldName: "RegExp.lastMatch", newName: "RegExp.lastMatch", count: 1 }
-	, { oldName: "RegExp.input", newName: "RegExp.input", count: 1 }
-	, { oldName: "RegExp.prototype.compile.call", newName: "RegExp.prototype.compile.call", count: 1 }
-	, { oldName: "RegExp.prototype.test.call", newName: "RegExp.prototype.test.call", count: 1 }
-	, { oldName: "RegExp.prototype.exec.call", newName: "RegExp.prototype.exec.call", count: 1 }
-	*/
 	, { oldName: "POSTIVE_INFINITY", newName: "POSTIVE_INFINITY", count: 1 }
+	, { oldName: "SIMD", newName: "SIMD", count: 1 }
 	, { oldName: "Set", newName: "Set", count: 1 }
 	, { oldName: "SharedArrayBuffer", newName: "SharedArrayBuffer", count: 1 }
 	, { oldName: "String", newName: "String", count: 1 }
-	/*
-	, { oldName: "String.FromCharCode", newName: "String.FromCharCode", count: 1 }
-	, { oldName: "String.prototype.substr.call", newName: "String.prototype.substr.call", count: 1 }
-	, { oldName: "String.prototype.substring.call", newName: "String.prototype.substring.call", count: 1 }
-	, { oldName: "String.prototype.search.call", newName: "String.prototype.search.call", count: 1 }
-	, { oldName: "String.prototype.strike.call", newName: "String.prototype.strike.call", count: 1 }
-	, { oldName: "String.prototype.concat.call", newName: "String.prototype.concat.call", count: 1 }
-	, { oldName: "String.prototype.concat.call", newName: "String.prototype.concat.call", count: 1 }
-	, { oldName: "String.prototype.split.call", newName: "String.prototype.split.call", count: 1 }
-	, { oldName: "String.prototype.split.call", newName: "String.prototype.split.call", count: 1 }
-	, { oldName: "String.prototype.anchor.call", newName: "String.prototype.anchor.call", count: 1 }
-	, { oldName: "String.prototype.charAt.call", newName: "String.prototype.charAt.call", count: 1 }
-	, { oldName: "String.prototype.slice.call", newName: "String.prototype.slice.call", count: 1 }
-	, { oldName: "String.prototype.slice.call", newName: "String.prototype.slice.call", count: 1 }
-	, { oldName: "String.prototype.match.call", newName: "String.prototype.match.call", count: 1 }
-	, { oldName: "String.prototype.indexOf.call", newName: "String.prototype.indexOf.call", count: 1 }
-	, { oldName: "String.prototype.indexOf.call", newName: "String.prototype.indexOf.call", count: 1 }
-	, { oldName: "String.prototype.lastIndexOf.call", newName: "String.prototype.lastIndexOf.call", count: 1 }
-	, { oldName: "String.prototype.lastIndexOf.call", newName: "String.prototype.lastIndexOf.call", count: 1 }
-	, { oldName: "String.prototype.replace.call", newName: "String.prototype.replace.call", count: 1 }
-	, { oldName: "String.prototype.replace.call", newName: "String.prototype.replace.call", count: 1 }
-	, { oldName: "String.prototype.toUpperCase.call", newName: "String.prototype.toUpperCase.call", count: 1 }
-	, { oldName: "String.prototype.toLowerCase.call", newName: "String.prototype.toLowerCase.call", count: 1 }
-	, { oldName: "String.prototype.toLocaleLowerCase.call", newName: "String.prototype.toLocaleLowerCase.call", count: 1 }
-	, { oldName: "String.prototype.toLocaleUpperCase.call", newName: "String.prototype.toLocaleUpperCase.call", count: 1 }
-	, { oldName: "String.prototype.localeCompare.call", newName: "String.prototype.localeCompare.call", count: 1 }
-	*/
 	, { oldName: "Symbol", newName: "Symbol", count: 1 }
+	, { oldName: "Table", newName: "Table", count: 1 }
 	, { oldName: "Uint16Array", newName: "Uint16Array", count: 1 }
 	, { oldName: "Uint32Array", newName: "Uint32Array", count: 1 }
 	, { oldName: "Uint8Array", newName: "Uint8Array", count: 1 }
 	, { oldName: "Uint8ClampedArray", newName: "Uint8ClampedArray", count: 1 }
+	, { oldName: "UTC", newName: "UTC", count: 1 }
 	, { oldName: "VBArray", newName: "VBArray", count: 1 }
-	/*
-	, { oldName: "VBArray.prototype.dimensions.call", newName: "VBArray.prototype.dimensions.call", count: 1 }
-	, { oldName: "VBArray.prototype.getItem.call", newName: "VBArray.prototype.getItem.call", count: 1 }
-	, { oldName: "VBArray.prototype.getItem.call", newName: "VBArray.prototype.getItem.call", count: 1 }
-	, { oldName: "VBArray.prototype.toArray.call", newName: "VBArray.prototype.toArray.call", count: 1 }
-	, { oldName: "VBArray.prototype.lbound.call", newName: "VBArray.prototype.lbound.call", count: 1 }
-	, { oldName: "VBArray.prototype.ubound.call", newName: "VBArray.prototype.ubound.call", count: 1 }
-	*/
 	, { oldName: "WebAssembly", newName: "WebAssembly", count: 1 }
+	, { oldName: "WasmModuleBuilder", newName: "WasmModuleBuilder", count: 1 }
 	, { oldName: "abs", newName: "abs", count: 1 }
 	, { oldName: "acos", newName: "acos", count: 1 }
 	, { oldName: "acosh", newName: "acosh", count: 1 }
 	, { oldName: "add", newName: "add", count: 1 }
+	, { oldName: "addBody", newName: "addBody", count: 1 }
+	, { oldName: "addFunction", newName: "addFunction", count: 1 }
+	, { oldName: "addImportedTable", newName: "addImportedTable", count: 1 }
 	, { oldName: "all", newName: "all", count: 1 }
 	, { oldName: "and", newName: "and", count: 1 }
 	, { oldName: "anchor", newName: "anchor", count: 1 }
@@ -151,6 +70,7 @@ module.exports = [
 	, { oldName: "asinh", newName: "asinh", count: 1 }
 	, { oldName: "atanh", newName: "atanh", count: 1 }
 	, { oldName: "atan2", newName: "atan2", count: 1 }
+	, { oldName: "atEnd", newName: "atEnd", count: 1 }
 	, { oldName: "bind", newName: "bind", count: 1 }
 	, { oldName: "call", newName: "call", count: 1 }
 	, { oldName: "callee", newName: "callee", count: 1 }
@@ -168,6 +88,7 @@ module.exports = [
 	, { oldName: "cos", newName: "cos", count: 1 }
 	, { oldName: "cosh", newName: "cosh", count: 1 }
 	, { oldName: "create", newName: "create", count: 1 }
+	, { oldName: "customSections", newName: "customSections", count: 1 }
 	, { oldName: "decodeURI", newName: "decodeURI", count: 1 }
 	, { oldName: "decodeURIComponent", newName: "decodeURIComponent", count: 1 }
 	, { oldName: "deferred", newName: "deferred", count: 1 }
@@ -183,6 +104,8 @@ module.exports = [
 	, { oldName: "every", newName: "every", count: 1 }
 	, { oldName: "exec", newName: "exec", count: 1 }
 	, { oldName: "exchange", newName: "exchange", count: 1 }
+	, { oldName: "export", newName: "export", count: 1 }
+	, { oldName: "exportAs", newName: "exportAs", count: 1 }
 	, { oldName: "escape", newName: "escape", count: 1 }
 	, { oldName: "fill", newName: "fill", count: 1 }
 	, { oldName: "filter", newName: "filter", count: 1 }
@@ -196,6 +119,7 @@ module.exports = [
 	, { oldName: "fromCharCode", newName: "fromCharCode", count: 1 }
 	, { oldName: "fround", newName: "fround", count: 1 }
 	, { oldName: "get", newName: "get", count: 1 }
+	, { oldName: "getCanonicalLocales", newName: "getCanonicalLocales", count: 1 }
 	, { oldName: "getter", newName: "getter", count: 1 }
 	, { oldName: "getItem", newName: "getItem", count: 1 }
 	, { oldName: "getInt8", newName: "getInt8", count: 1 }
@@ -206,22 +130,27 @@ module.exports = [
 	, { oldName: "getUint32", newName: "getUint32", count: 1 }
 	, { oldName: "getFloat32", newName: "getFloat32", count: 1 }
 	, { oldName: "getFloat64", newName: "getFloat64", count: 1 }
+	, { oldName: "getMilliseconds", newName: "getMilliseconds", count: 1 }
 	, { oldName: "getOwnPropertyDescriptor", newName: "getOwnPropertyDescriptor", count: 1 }
 	, { oldName: "getOwnPropertyNames", newName: "getOwnPropertyNames", count: 1 }
 	, { oldName: "getPrototypeOf", newName: "getPrototypeOf", count: 1 }
 	, { oldName: "getTimezoneOffset", newName: "getTimezoneOffset", count: 1 }
+	, { oldName: "getFullYear", newName: "getFullYear", count: 1 }
 	, { oldName: "getter", newName: "getter", count: 1 }
 	, { oldName: "global", newName: "global", count: 1 }
+	, { oldName: "grow", newName: "grow", count: 1 }
 	, { oldName: "has", newName: "has", count: 1 }
 	, { oldName: "hasInstance", newName: "hasInstance", count: 1 }
 	, { oldName: "hasOwnProperty", newName: "hasOwnProperty", count: 1 }
 	, { oldName: "hypot", newName: "hypot", count: 1 }
 	, { oldName: "includes", newName: "includes", count: 1 }
+	, { oldName: "index", newName: "index", count: 1 }
 	, { oldName: "indexOf", newName: "indexOf", count: 1 }
 	, { oldName: "input", newName: "input", count: 1 }
-	, { oldName: "instanceOf", newName: "instanceOf", count: 1 }                                 //?
+	, { oldName: "instanceOf", newName: "instanceOf", count: 1 }                                 
 	, { oldName: "iterator", newName: "iterator", count: 1 }
 	, { oldName: "isArray", newName: "isArray", count: 1 }
+	, { oldName: "isConcatSpreadable", newName: "isConcatSpreadable", count: 1 }
 	, { oldName: "isFinite", newName: "isFinite", count: 1 }
 	, { oldName: "isNaN", newName: "isNaN", count: 1 }
 	, { oldName: "isObject", newName: "isObject", count: 1 }
@@ -229,8 +158,12 @@ module.exports = [
 	, { oldName: "join", newName: "join", count: 1 }
 	, { oldName: "key", newName: "key", count: 1 }
 	, { oldName: "keys", newName: "keys", count: 1 }
+	, { oldName: "lastMatch", newName: "lastMatch", count: 1 }
+	, { oldName: "lastParent", newName: "lastParent", count: 1 }
 	, { oldName: "lastIndexOf", newName: "lastIndexOf", count: 1 }
+	, { oldName: "lbound", newName: "lbound", count: 1 }
 	, { oldName: "length", newName: "length", count: 1 }
+	, { oldName: "leftContext", newName: "leftContext", count: 1 }
 	, { oldName: "link", newName: "link", count: 1 }
 	, { oldName: "localeCompare", newName: "localeCompare", count: 1 }
 	, { oldName: "log10", newName: "log10", count: 1 }
@@ -238,9 +171,11 @@ module.exports = [
 	, { oldName: "log2", newName: "log2", count: 1 }
 	, { oldName: "map", newName: "map", count: 1 }
 	, { oldName: "match", newName: "match", count: 1 }
+	, { oldName: "movNext", newName: "movNext", count: 1 }
+	, { oldName: "movFirst", newName: "movFirst", count: 1 }
 	, { oldName: "name", newName: "name", count: 1 }
 	, { oldName: "null", newName: "null", count: 1 }
-	, { oldName: "of", newName: "of", count: 1 }                                                     //?
+	, { oldName: "of", newName: "of", count: 1 }                                                     
 	, { oldName: "or", newName: "or", count: 1 }
 	, { oldName: "ownKeys", newName: "ownKeys", count: 1 }
 	, { oldName: "padEnd", newName: "padEnd", count: 1 }
@@ -250,6 +185,7 @@ module.exports = [
 	, { oldName: "parseFloat", newName: "parseFloat", count: 1 }
 	, { oldName: "parseDouble", newName: "parseDouble", count: 1 }
 	, { oldName: "parseString", newName: "parseString", count: 1 }
+	, { oldName: "pop", newName: "pop", count: 1 }
 	, { oldName: "postMessage", newName: "postMessage", count: 1 }
 	, { oldName: "print", newName: "print", count: 1 }
 	, { oldName: "promise", newName: "promise", count: 1 }
@@ -262,13 +198,16 @@ module.exports = [
 	, { oldName: "reduce", newName: "reduce", count: 1 }
 	, { oldName: "reduceRight", newName: "reduceRight", count: 1 }
 	, { oldName: "reject", newName: "reject", count: 1 }
+	, { oldName: "removeItem", newName: "removeItem", count: 1 }
 	, { oldName: "repeat", newName: "repeat", count: 1 }
 	, { oldName: "replace", newName: "replace", count: 1 }
 	, { oldName: "resolve", newName: "resolve", count: 1 }
 	, { oldName: "reverse", newName: "reverse", count: 1 }
+	, { oldName: "rightContext", newName: "rightContext", count: 1 }
 	, { oldName: "search", newName: "search", count: 1 }
 	, { oldName: "set", newName: "set", count: 1 }
 	, { oldName: "setter", newName: "setter", count: 1 }
+	, { oldName: "setItem", newName: "setItem", count: 1 }
 	, { oldName: "setInt8", newName: "setInt8", count: 1 }
 	, { oldName: "setUint8", newName: "setUint8", count: 1 }
 	, { oldName: "setInt16", newName: "setInt16", count: 1 }
@@ -278,8 +217,11 @@ module.exports = [
 	, { oldName: "setFloat32", newName: "setFloat32", count: 1 }
 	, { oldName: "setFloat64", newName: "setFloat64", count: 1 }
 	, { oldName: "setPrototypeOf", newName: "setPrototypeOf", count: 1 }
+	, { oldName: "setUTCHours", newName: "setUTCHours", count: 1 }
+	, { oldName: "setUTCFullYear", newName: "setUTCFullYear", count: 1 }
 	, { oldName: "setter", newName: "setter", count: 1 }
 	, { oldName: "shift", newName: "shift", count: 1 }
+	, { oldName: "sign", newName: "sign", count: 1 }
 	, { oldName: "sin", newName: "sin", count: 1 }
 	, { oldName: "sinh", newName: "sinh", count: 1 }
 	, { oldName: "some", newName: "some", count: 1 }
@@ -290,13 +232,20 @@ module.exports = [
 	, { oldName: "splice", newName: "splice", count: 1 }
 	, { oldName: "split", newName: "split", count: 1 }
 	, { oldName: "sqrt", newName: "sqrt", count: 1 }
+	, { oldName: "stdlib", newName: "stdlib", count: 1 }
 	, { oldName: "strike", newName: "strike", count: 1 }
+	, { oldName: "stringify", newName: "stringify", count: 1 }
 	, { oldName: "sub", newName: "sub", count: 1 }
+	, { oldName: "substr", newName: "substr", count: 1 }
+	, { oldName: "substring", newName: "substring", count: 1 }
 	, { oldName: "subarray", newName: "subarray", count: 1 }
+	, { oldName: "super", newName: "super", count: 1 }
 	, { oldName: "tan", newName: "tan", count: 1 }
 	, { oldName: "tanh", newName: "tanh", count: 1 }
 	, { oldName: "test", newName: "test", count: 1 }
 	, { oldName: "then", newName: "then", count: 1 }
+	, { oldName: "toArray", newName: "toArray", count: 1 }
+	, { oldName: "toBuffer", newName: "toBuffer", count: 1 }
 	, { oldName: "toDateString", newName: "toDateString", count: 1 }
 	, { oldName: "toExponential", newName: "toExponential", count: 1 }
 	, { oldName: "toFixed", newName: "toFixed", count: 1 }
@@ -306,6 +255,7 @@ module.exports = [
 	, { oldName: "toLowerCase", newName: "toLowerCase", count: 1 }
 	, { oldName: "toLocaleLowerCase", newName: "toLocaleLowerCase", count: 1 }
 	, { oldName: "toLocaleUpperCase", newName: "toLocaleUpperCase", count: 1 }
+	, { oldName: "toLocaleTimeString", newName: "toLocaleTimeString", count: 1 }
 	, { oldName: "toLocaleDateString", newName: "toLocaleDateString", count: 1 }
 	, { oldName: "toLocaleString", newName: "toLocaleString", count: 1 }
 	, { oldName: "toLocaleTimeString", newName: "toLocaleTimeString", count: 1 }
@@ -315,8 +265,10 @@ module.exports = [
 	, { oldName: "toString", newName: "toString", count: 1 }
 	, { oldName: "toTimeString", newName: "toTimeString", count: 1 }
 	, { oldName: "toUpperCase", newName: "toUpperCase", count: 1 }
+	, { oldName: "toUTCString", newName: "toUTCString", count: 1 }
 	, { oldName: "trunc", newName: "trunc", count: 1 }
 	, { oldName: "type", newName: "type", count: 1 }
+	, { oldName: "ubound", newName: "ubound", count: 1 }
 	, { oldName: "unescape", newName: "unescape", count: 1 }
 	, { oldName: "undefined", newName: "undefined", count: 1 }
 	, { oldName: "unshift", newName: "unshift", count: 1 }
@@ -325,6 +277,8 @@ module.exports = [
 	, { oldName: "wait", newName: "wait", count: 1 }
 	, { oldName: "wake", newName: "wake", count: 1 }
 	, { oldName: "writeable", newName: "writeable", count: 1 }
+	, { oldName: "write", newName: "write", count: 1 }
+	, { oldName: "writeln", newName: "writeln", count: 1 }
 	, { oldName: "xor", newName: "xor", count: 1 }
 	, { oldName: "__proto__", newName: "__proto__", count: 1 }
 	, { oldName: "__lookupGetter__", newName: "__lookupGetter__", count: 1 }
@@ -334,6 +288,7 @@ module.exports = [
 
 
 	//WebKit JavaScriptCore
+	, { oldName: "$vm", newName: "$vm", count: 1 }
 	, { oldName: "noInline", newName: "noInline", count: 1 }
 	, { oldName: "dfgTrue", newName: "dfgTrue", count: 1 }
 	, { oldName: "noFTL", newName: "noFTL", count: 1 }
