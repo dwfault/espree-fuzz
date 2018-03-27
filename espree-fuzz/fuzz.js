@@ -505,10 +505,10 @@ randomlySubstitute(testcaseNormalizedDir, testcaseOutputDir);
 randomlySubstitute(testcaseNormalizedDir, testcaseOutputDir);
 randomlySubstitute(testcaseNormalizedDir, testcaseOutputDir);
 randomlySubstitute(testcaseNormalizedDir, testcaseOutputDir);
-randomlySubstitute(testcaseOutpuDir, testcaseOutputDir);
-randomlySubstitute(testcaseOutpuDir, testcaseOutputDir);
-randomlySubstitute(testcaseOutpuDir, testcaseOutputDir);
-randomlySubstitute(testcaseOutpuDir, testcaseOutputDir);
+randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
+randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
+randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
+randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
 
 
 
