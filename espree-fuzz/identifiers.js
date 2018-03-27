@@ -53,6 +53,8 @@ module.exports = [
 	, { oldName: "UTC", newName: "UTC", count: 1 }
 	, { oldName: "VBArray", newName: "VBArray", count: 1 }
 	, { oldName: "WebAssembly", newName: "WebAssembly", count: 1 }
+	, { oldName: "WeakMap", newName: "WeakMap", count: 1 }
+	, { oldName: "WeakSet", newName: "WeakSet", count: 1 }
 	, { oldName: "WasmModuleBuilder", newName: "WasmModuleBuilder", count: 1 }
 	, { oldName: "abs", newName: "abs", count: 1 }
 	, { oldName: "acos", newName: "acos", count: 1 }
@@ -68,21 +70,30 @@ module.exports = [
 	, { oldName: "arguments", newName: "arguments", count: 1 }
 	, { oldName: "assign", newName: "assign", count: 1 }
 	, { oldName: "asinh", newName: "asinh", count: 1 }
+	, { oldName: "at", newName: "at", count: 1 }
 	, { oldName: "atanh", newName: "atanh", count: 1 }
 	, { oldName: "atan2", newName: "atan2", count: 1 }
 	, { oldName: "atEnd", newName: "atEnd", count: 1 }
 	, { oldName: "bind", newName: "bind", count: 1 }
+	, { oldName: "buffer", newName: "buffer", count: 1 }
+	, { oldName: "byteLength", newName: "byteLength", count: 1 }
+	, { oldName: "byteOffset", newName: "byteOffset", count: 1 }
 	, { oldName: "call", newName: "call", count: 1 }
 	, { oldName: "callee", newName: "callee", count: 1 }
 	, { oldName: "caller", newName: "caller", count: 1 }
+	, { oldName: "catch", newName: "catch", count: 1 }
 	, { oldName: "cbrt", newName: "cbrt", count: 1 }
 	, { oldName: "ceil", newName: "ceil", count: 1 }
+	, { oldName: "create", newName: "create", count: 1 }
 	, { oldName: "charAt", newName: "charAt", count: 1 }
 	, { oldName: "charCodeAt", newName: "charCodeAt", count: 1 }
+	, { oldName: "codePointAt", newName: "codePointAt", count: 1 }
+	, { oldName: "clz32", newName: "clz32", count: 1 }
 	, { oldName: "compile", newName: "compile", count: 1 }
 	, { oldName: "compareExchange", newName: "compareExchange", count: 1 }
 	, { oldName: "concat", newName: "concat", count: 1 }
 	, { oldName: "configurable", newName: "configurable", count: 1 }
+	, { oldName: "construct", newName: "construct", count: 1 }
 	, { oldName: "constructor", newName: "constructor", count: 1 }
 	, { oldName: "copyWithin", newName: "copyWithin", count: 1 }
 	, { oldName: "cos", newName: "cos", count: 1 }
@@ -96,8 +107,10 @@ module.exports = [
 	, { oldName: "defineProperties", newName: "defineProperties", count: 1 }
 	, { oldName: "deleteProperty", newName: "deleteProperty", count: 1 }
 	, { oldName: "dimensions", newName: "dimensions", count: 1 }
+	, { oldName: "done", newName: "done", count: 1 }
 	, { oldName: "encodeURI", newName: "encodeURI", count: 1 }
 	, { oldName: "encodeURIComponent", newName: "encodeURIComponent", count: 1 }
+	, { oldName: "endsWith", newName: "endsWith", count: 1 }
 	, { oldName: "entries", newName: "entries", count: 1 }
 	, { oldName: "enumerable", newName: "enumerable", count: 1 }
 	, { oldName: "eval", newName: "eval", count: 1 }
@@ -109,14 +122,17 @@ module.exports = [
 	, { oldName: "escape", newName: "escape", count: 1 }
 	, { oldName: "fill", newName: "fill", count: 1 }
 	, { oldName: "filter", newName: "filter", count: 1 }
+	, { oldName: "finally", newName: "finally", count: 1 }
 	, { oldName: "find", newName: "find", count: 1 }
 	, { oldName: "findIndex", newName: "findIndex", count: 1 }
 	, { oldName: "firstIndexOf", newName: "firstIndexOf", count: 1 }
+	, { oldName: "flags", newName: "flags", count: 1 }
 	, { oldName: "floor", newName: "floor", count: 1 }
 	, { oldName: "forEach", newName: "forEach", count: 1 }
 	, { oldName: "freeze", newName: "freeze", count: 1 }
 	, { oldName: "from", newName: "from", count: 1 }
 	, { oldName: "fromCharCode", newName: "fromCharCode", count: 1 }
+	, { oldName: "fromCodePoint", newName: "fromCodePoint", count: 1 }
 	, { oldName: "fround", newName: "fround", count: 1 }
 	, { oldName: "get", newName: "get", count: 1 }
 	, { oldName: "getCanonicalLocales", newName: "getCanonicalLocales", count: 1 }
@@ -143,20 +159,28 @@ module.exports = [
 	, { oldName: "hasInstance", newName: "hasInstance", count: 1 }
 	, { oldName: "hasOwnProperty", newName: "hasOwnProperty", count: 1 }
 	, { oldName: "hypot", newName: "hypot", count: 1 }
+	, { oldName: "imul", newName: "imul", count: 1 }
 	, { oldName: "includes", newName: "includes", count: 1 }
 	, { oldName: "index", newName: "index", count: 1 }
 	, { oldName: "indexOf", newName: "indexOf", count: 1 }
 	, { oldName: "input", newName: "input", count: 1 }
 	, { oldName: "instanceOf", newName: "instanceOf", count: 1 }                                 
 	, { oldName: "iterator", newName: "iterator", count: 1 }
+	, { oldName: "is", newName: "is", count: 1 }
 	, { oldName: "isArray", newName: "isArray", count: 1 }
 	, { oldName: "isConcatSpreadable", newName: "isConcatSpreadable", count: 1 }
+	, { oldName: "isExtensible", newName: "isExtensible", count: 1 }
 	, { oldName: "isFinite", newName: "isFinite", count: 1 }
+	, { oldName: "isFrozen", newName: "isFrozen", count: 1 }
 	, { oldName: "isNaN", newName: "isNaN", count: 1 }
 	, { oldName: "isObject", newName: "isObject", count: 1 }
 	, { oldName: "isPrototypeOf", newName: "isPrototypeOf", count: 1 }
+	, { oldName: "isSealed", newName: "isSealed", count: 1 }
+	, { oldName: "isSafeInteger", newName: "isSafeInteger", count: 1 }
+	, { oldName: "isView", newName: "isView", count: 1 }
 	, { oldName: "join", newName: "join", count: 1 }
 	, { oldName: "key", newName: "key", count: 1 }
+	, { oldName: "keyFor", newName: "keyFor", count: 1 }
 	, { oldName: "keys", newName: "keys", count: 1 }
 	, { oldName: "lastMatch", newName: "lastMatch", count: 1 }
 	, { oldName: "lastParent", newName: "lastParent", count: 1 }
@@ -174,6 +198,9 @@ module.exports = [
 	, { oldName: "movNext", newName: "movNext", count: 1 }
 	, { oldName: "movFirst", newName: "movFirst", count: 1 }
 	, { oldName: "name", newName: "name", count: 1 }
+	, { oldName: "next", newName: "next", count: 1 }
+	, { oldName: "new", newName: "new", count: 1 }
+	, { oldName: "normalize", newName: "normalize", count: 1 }
 	, { oldName: "null", newName: "null", count: 1 }
 	, { oldName: "of", newName: "of", count: 1 }                                                     
 	, { oldName: "or", newName: "or", count: 1 }
@@ -188,6 +215,7 @@ module.exports = [
 	, { oldName: "pop", newName: "pop", count: 1 }
 	, { oldName: "postMessage", newName: "postMessage", count: 1 }
 	, { oldName: "print", newName: "print", count: 1 }
+	, { oldName: "preventExtensions", newName: "preventExtensions", count: 1 }
 	, { oldName: "promise", newName: "promise", count: 1 }
 	, { oldName: "propertyIsEnumerable", newName: "propertyIsEnumerable", count: 1 }
 	, { oldName: "prototype", newName: "prototype", count: 1 }
@@ -202,9 +230,12 @@ module.exports = [
 	, { oldName: "repeat", newName: "repeat", count: 1 }
 	, { oldName: "replace", newName: "replace", count: 1 }
 	, { oldName: "resolve", newName: "resolve", count: 1 }
+	, { oldName: "return", newName: "return", count: 1 }
 	, { oldName: "reverse", newName: "reverse", count: 1 }
+	, { oldName: "revocable", newName: "revocable", count: 1 }
 	, { oldName: "rightContext", newName: "rightContext", count: 1 }
 	, { oldName: "search", newName: "search", count: 1 }
+	, { oldName: "seal", newName: "seal", count: 1 }
 	, { oldName: "set", newName: "set", count: 1 }
 	, { oldName: "setter", newName: "setter", count: 1 }
 	, { oldName: "setItem", newName: "setItem", count: 1 }
@@ -222,6 +253,7 @@ module.exports = [
 	, { oldName: "setter", newName: "setter", count: 1 }
 	, { oldName: "shift", newName: "shift", count: 1 }
 	, { oldName: "sign", newName: "sign", count: 1 }
+	, { oldName: "signbit", newName: "signbit", count: 1 }
 	, { oldName: "sin", newName: "sin", count: 1 }
 	, { oldName: "sinh", newName: "sinh", count: 1 }
 	, { oldName: "some", newName: "some", count: 1 }
@@ -232,7 +264,9 @@ module.exports = [
 	, { oldName: "splice", newName: "splice", count: 1 }
 	, { oldName: "split", newName: "split", count: 1 }
 	, { oldName: "sqrt", newName: "sqrt", count: 1 }
+	, { oldName: "startsWith", newName: "startsWith", count: 1 }
 	, { oldName: "stdlib", newName: "stdlib", count: 1 }
+	, { oldName: "sticky", newName: "sticky", count: 1 }
 	, { oldName: "strike", newName: "strike", count: 1 }
 	, { oldName: "stringify", newName: "stringify", count: 1 }
 	, { oldName: "sub", newName: "sub", count: 1 }
@@ -242,8 +276,10 @@ module.exports = [
 	, { oldName: "super", newName: "super", count: 1 }
 	, { oldName: "tan", newName: "tan", count: 1 }
 	, { oldName: "tanh", newName: "tanh", count: 1 }
+	, { oldName: "target", newName: "target", count: 1 }
 	, { oldName: "test", newName: "test", count: 1 }
 	, { oldName: "then", newName: "then", count: 1 }
+	, { oldName: "throw", newName: "throw", count: 1 }
 	, { oldName: "toArray", newName: "toArray", count: 1 }
 	, { oldName: "toBuffer", newName: "toBuffer", count: 1 }
 	, { oldName: "toDateString", newName: "toDateString", count: 1 }
@@ -261,22 +297,27 @@ module.exports = [
 	, { oldName: "toLocaleTimeString", newName: "toLocaleTimeString", count: 1 }
 	, { oldName: "toNumber", newName: "toNumber", count: 1 }
 	, { oldName: "toPrecision", newName: "toPrecision", count: 1 }
+	, { oldName: "toPrimitive", newName: "toPrimitive", count: 1 }
 	, { oldName: "toSource", newName: "toSource", count: 1 }
 	, { oldName: "toString", newName: "toString", count: 1 }
+	, { oldName: "toStringTag", newName: "toStringTag", count: 1 }
 	, { oldName: "toTimeString", newName: "toTimeString", count: 1 }
 	, { oldName: "toUpperCase", newName: "toUpperCase", count: 1 }
 	, { oldName: "toUTCString", newName: "toUTCString", count: 1 }
 	, { oldName: "trunc", newName: "trunc", count: 1 }
+	, { oldName: "try", newName: "try", count: 1 }
 	, { oldName: "type", newName: "type", count: 1 }
 	, { oldName: "ubound", newName: "ubound", count: 1 }
 	, { oldName: "unescape", newName: "unescape", count: 1 }
 	, { oldName: "undefined", newName: "undefined", count: 1 }
 	, { oldName: "unshift", newName: "unshift", count: 1 }
+	, { oldName: "unscopables", newName: "unscopables", count: 1 }
 	, { oldName: "value", newName: "value", count: 1 }
+	, { oldName: "values", newName: "values", count: 1 }
 	, { oldName: "valueOf", newName: "valueOf", count: 1 }
 	, { oldName: "wait", newName: "wait", count: 1 }
 	, { oldName: "wake", newName: "wake", count: 1 }
-	, { oldName: "writeable", newName: "writeable", count: 1 }
+	, { oldName: "writable", newName: "writable", count: 1 }
 	, { oldName: "write", newName: "write", count: 1 }
 	, { oldName: "writeln", newName: "writeln", count: 1 }
 	, { oldName: "xor", newName: "xor", count: 1 }
