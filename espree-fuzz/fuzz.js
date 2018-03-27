@@ -489,7 +489,7 @@ function randomlySubstitute(pathI, pathO) {
 				fs.writeFileSync(pathO + file.substring(0, file.length - 3) + randomString2() + '.js', newContent);
 			}
 		} catch (e) {
-			console.log('[+] Exception in randomlySubstitute : ' + file + ':' + e);
+			console.log('[+] Exception in AST parse STAGE randomlySubstitute : ' + file + ':' + e);
 		}
 	}
 }
@@ -498,7 +498,6 @@ function randomlySubstitute(pathI, pathO) {
 let files = fs.readdirSync(testcaseNormalizedDir);
 for (let file of files) {
 	fs.copyFileSync(testcaseNormalizedDir + file, testcaseOutputDir + file);
-	fs.copyFileSync(testcaseNormalizedDir + file, testcaseRunDir + file);
 }
 
 randomlySubstitute(testcaseNormalizedDir, testcaseOutputDir);
@@ -510,7 +509,10 @@ randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
 randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
 randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
 
-
+files = fs.readdirSync(testcaseOutputDir);
+for (let file of files) {
+	fs.copyFileSync(testcaseOutputDir + file, testcaseRunDir + file);
+}
 
 
 
