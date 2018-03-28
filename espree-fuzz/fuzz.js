@@ -430,7 +430,7 @@ function randomlySubstitute(pathI, pathO) {
 	}
 	
 	let cminI = pathO;
-	let cminO = 'cminO/'
+	let cminO = './cminO/'
 	aflcmin(cminI, cminO);
 	let files = fs.readdirSync(cminI);
 	for(let file of files){
@@ -445,6 +445,22 @@ function randomlySubstitute(pathI, pathO) {
 		fs.unlinkSync(cminO + file);
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 let files = fs.readdirSync(testcaseNormalizedDir);
@@ -465,6 +481,19 @@ files = fs.readdirSync(testcaseOutputDir);
 for (let file of files) {
 	fs.copyFileSync(testcaseOutputDir + file, testcaseRunDir + file);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
