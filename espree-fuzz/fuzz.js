@@ -549,7 +549,8 @@ function loop() {
 				if (count % 100 == 0)
 					exec('kill -9 $(pidof ' + binPath + ')');
 			} catch (e) {
-				exec('kill -9 $(pidof ' + binPath + ')'); setTimeout(runOne, 6000);
+				exec('kill -9 $(pidof ' + binPath + ')'); 
+				setTimeout(runOne, 6000);
 			}
 		}
 		else {
