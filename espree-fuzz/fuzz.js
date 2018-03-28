@@ -501,7 +501,7 @@ for (let file of files) {
  * STEP 5 The fuzzing...with some ugly operations.
  */
 
-const binPath = "~/Desktop/webkit-dfc36ec-asan/WebKitBuild/Debug/bin/jsc";
+const binPath = "~/Desktop/webkit-dfc36ec-asan/bin/jsc";
 
 let timeoutBigLoop = 0;
 let timeoutSmallLoop = 0;
