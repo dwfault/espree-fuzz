@@ -429,18 +429,20 @@ function randomlySubstitute(pathI, pathO) {
 		}
 	}
 	
-	aflcmin(pathO, 'cmin/');
-	let files = fs.readdirSync(pathO);
+	let cminI = pathO;
+	let cminO = 'cminO/'
+	aflcmin(cminI, cminO);
+	let files = fs.readdirSync(cminI);
 	for(let file of files){
-		fs.unlinkSync(pathO + file);
+		fs.unlinkSync(cminI + file);
 	}
-	files = fs.readdirSync('cmin/');
+	files = fs.readdirSync(cminO);
 	for (let file of files) {
 		fs.copyFileSync(testcaseNormalizedDir + file, testcaseOutputDir + file);
 	}
-	files = fs.readdirSync('cmin/');
+	files = fs.readdirSync(cminO);
 	for(let file of files){
-		fs.unlinkSync('cmin/' + file);
+		fs.unlinkSync(cminO + file);
 	}
 }
 
