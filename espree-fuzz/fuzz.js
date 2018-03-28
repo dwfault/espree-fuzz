@@ -112,80 +112,6 @@ for (let scalar of identifiersArray)
 
 
 
-
-
-
-
-/**
- * STEP 2, Substitutions, change the Identifiers using "start" "end" "oldName" "newName". VERSION 1.
- * 
- * From testcase dir transport to testcase-normalized.
- */
-/*
-function substituteIdentifiers(pathI, pathO) {
-	let files = fs.readdirSync(pathI);
-	for (let file of files) {
-		let jsCode = fs.readFileSync(pathI + file, 'utf-8');
-		try {
-			let ast = espree.parse(jsCode, {
-				ecmaVersion: 9, sourceType: "script", ecmaFeatures: {
-					jsx: true,
-					globalReturn: true,
-					impliedStrict: false,
-					experimentalObjectRestSpread: true
-				}
-			});
-			//console.log('======================================================');
-			//console.log(ast);
-			let toSubstituteIdentifiers = [];
-			function traverseNode(node) {
-				for (let i in node) {
-					let current = node[i];
-					//console.log(current);
-					if ((current == node) || (typeof current == "string") || (typeof current == "number") || current == null) { }
-					else {
-						if (current.hasOwnProperty("type")) {
-							typesArray.push({
-								type: current.type,
-								code: jsCode.substring(current.start, current.end)
-							});
-							if (current.type == "Identifier") {
-								let scalar = identifiersArray.filter(function (x) { if (x.oldName == current.name) return x; })[0];
-								//assert(scalar != undefined);
-								toSubstituteIdentifiers.push({
-									oldName: current.name,
-									newName: scalar.newName,
-									start: current.start,
-									end: current.end
-								});
-							}
-						}
-						traverseNode(current);
-					}
-				}
-			}
-			traverseNode(ast);
-
-			let newContent = "";
-			let fp = 0;
-			for (let scalar in toSubstituteIdentifiers) {
-				newContent += jsCode.substring(fp, toSubstituteIdentifiers[scalar].start);
-				newContent += toSubstituteIdentifiers[scalar].newName;
-				fp = toSubstituteIdentifiers[scalar].end;
-			}
-			newContent += jsCode.substring(fp, jsCode.length);
-			fs.writeFileSync(pathO + file, newContent);
-
-		} catch (e) {
-			console.log('[+] Exception: ' + file + ':' + e);
-		}
-	}
-}
-
-substituteIdentifiers(testcaseDir, testcaseNormalizedDir);
-*/
-
-
 /**
  * STEP 2, Substitutions, change the Identifiers using "start" "end" "oldName" "on". VERSION 2.
  * 
@@ -489,9 +415,32 @@ function randomlySubstitute(pathI, pathO) {
 				fs.writeFileSync(pathO + file.substring(0, file.length - 3) + randomString2() + '.js', newContent);
 			}
 		} catch (e) {
-			console.log('[+] Exception in randomlySubstitute : ' + file + ':' + e);
-			exec('rm ' + pathI + file);
+			if (e.toString().indexOf('SyntaxError') != -1) {
+				console.log('[+] Exception in randomlySubstitute : ' + file + ':' + e);
+				exec('rm ' + pathI + file);
+				console.log('[+] rm ' + pathI + file);
+			}
+			else if (e.toString().indexOf('ENOSPC') != -1) {
+				console.log('[+] Exception in randomlySubstitute : ' + file + ':' + e);
+			}
+			else {
+				console.log('[+] Exception in randomlySubstitute : ' + file + ':' + e);
+			}
 		}
+	}
+	
+	aflcmin(pathO, 'cmin/');
+	let files = fs.readdirSync(pathO);
+	for(let file of files){
+		fs.unlinkSync(pathO + file);
+	}
+	files = fs.readdirSync('cmin/');
+	for (let file of files) {
+		fs.copyFileSync(testcaseNormalizedDir + file, testcaseOutputDir + file);
+	}
+	files = fs.readdirSync('cmin/');
+	for(let file of files){
+		fs.unlinkSync('cmin/' + file);
 	}
 }
 
@@ -689,4 +638,19 @@ function probability0dot10() {
 		return true;
 	else
 		return false;
+}
+
+
+function aflcmin(pathI, pathO) {
+	let aflcminExec = exec(`afl-cmin -i ${pathI} -o ${pathO} -m 81920 -t 6000 -- ${binPath} @@`);
+	let cminLog = '';
+	aflcminExec.stdout.on('data', function (data) {
+		cminLog += data;
+	});
+	aflcminExec.stderr.on('data', function (data) {
+		cminLog += data;
+	});
+	aflcminExec.on('exit', function (code, signal) {
+		console.log(cminLog);
+	});
 }
