@@ -219,18 +219,18 @@ statiticalAnalysis(testcaseNormalizedDir);
  * 
  * ObjectExpression - ObjectExpression
  */
-let typeObjectExpression = typesArray.filter(function (x) { if (x.type == 'ObjectExpression') return x; });
+const typeObjectExpression = typesArray.filter(function (x) { if (x.type == 'ObjectExpression') return x; });
 //console.log(typeObjectExpression);
-let typeProperty = typesArray.filter(function (x) { if (x.type == 'Property') return x; });
-let typeLiteral = typesArray.filter(function (x) { if (x.type == 'Literal') return x; });
-let typeArrayExpression = typesArray.filter(function (x) { if (x.type == 'ArrayExpression') return x; });
-let typeExpressionStatement = typesArray.filter(function (x) { if (x.type == 'ExpressionStatement') return x; });
-let typeMemberExpression = typesArray.filter(function (x) { if (x.type == 'MemberExpression') return x; });
-let typeAssignmentExpression = typesArray.filter(function (x) { if (x.type == 'AssignmentExpression') return x; });
-let typeCallExpression = typesArray.filter(function (x) { if (x.type == 'CallExpression') return x; });
-let typeVariableDeclarator = typesArray.filter(function (x) { if (x.type == 'VariableDeclarator') return x; });
-let typeUnaryExpression = typesArray.filter(function (x) { if (x.type == 'UnaryExpression') return x; });
-let typeArrowFunctionExpression = typesArray.filter(function (x) { if (x.type == 'ArrowFunctionExpression') return x; });
+const typeProperty = typesArray.filter(function (x) { if (x.type == 'Property') return x; });
+const typeLiteral = typesArray.filter(function (x) { if (x.type == 'Literal') return x; });
+const typeArrayExpression = typesArray.filter(function (x) { if (x.type == 'ArrayExpression') return x; });
+const typeExpressionStatement = typesArray.filter(function (x) { if (x.type == 'ExpressionStatement') return x; });
+const typeMemberExpression = typesArray.filter(function (x) { if (x.type == 'MemberExpression') return x; });
+const typeAssignmentExpression = typesArray.filter(function (x) { if (x.type == 'AssignmentExpression') return x; });
+const typeCallExpression = typesArray.filter(function (x) { if (x.type == 'CallExpression') return x; });
+const typeVariableDeclarator = typesArray.filter(function (x) { if (x.type == 'VariableDeclarator') return x; });
+const typeUnaryExpression = typesArray.filter(function (x) { if (x.type == 'UnaryExpression') return x; });
+const typeArrowFunctionExpression = typesArray.filter(function (x) { if (x.type == 'ArrowFunctionExpression') return x; });
 
 function randomlySubstitute(pathI, pathO) {
 	let files = fs.readdirSync(pathI);
@@ -418,7 +418,7 @@ function randomlySubstitute(pathI, pathO) {
 			if ((e.toString().indexOf('SyntaxError') != -1) || (e.toString().indexOf('TypeError') != -1)) {
 				console.log('[+] Exception in randomlySubstitute : ' + file + ':' + e);
 				exec('rm ' + pathI + file);
-				console.log('[+] rm ' + pathI + file);
+				console.log('[-] rm ' + pathI + file);
 			}
 			else if (e.toString().indexOf('ENOSPC') != -1) {
 				console.log('[+] Exception in randomlySubstitute : ' + file + ':' + e);
@@ -500,8 +500,8 @@ for (let file of files) {
  * STEP 5 The fuzzing...with some ugly operations.
  */
 
-let timeoutBigLoop = 0;
-let timeoutSmallLoop = 0;
+const timeoutBigLoop = 0;
+const timeoutSmallLoop = 0;
 
 function loop() {
 	exec('kill -9 $(pidof ' + binPath + ')');
