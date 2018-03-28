@@ -415,7 +415,7 @@ function randomlySubstitute(pathI, pathO) {
 				fs.writeFileSync(pathO + file.substring(0, file.length - 3) + randomString2() + '.js', newContent);
 			}
 		} catch (e) {
-			if ((e.toString().indexOf('SyntaxError') != -1)||(e.toString().indexOf('TypeError') != -1)) {
+			if ((e.toString().indexOf('SyntaxError') != -1) || (e.toString().indexOf('TypeError') != -1)) {
 				console.log('[+] Exception in randomlySubstitute : ' + file + ':' + e);
 				exec('rm ' + pathI + file);
 				console.log('[+] rm ' + pathI + file);
