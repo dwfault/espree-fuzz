@@ -489,7 +489,8 @@ function randomlySubstitute(pathI, pathO) {
 				fs.writeFileSync(pathO + file.substring(0, file.length - 3) + randomString2() + '.js', newContent);
 			}
 		} catch (e) {
-			console.log('[+] Exception in AST parse STAGE randomlySubstitute : ' + file + ':' + e);
+			console.log('[+] Exception in randomlySubstitute : ' + file + ':' + e);
+			exec('rm ' + pathI + file);
 		}
 	}
 }
@@ -549,7 +550,7 @@ function loop() {
 				if (count % 100 == 0)
 					exec('kill -9 $(pidof ' + binPath + ')');
 			} catch (e) {
-				exec('kill -9 $(pidof ' + binPath + ')'); 
+				exec('kill -9 $(pidof ' + binPath + ')');
 				setTimeout(runOne, 6000);
 			}
 		}
