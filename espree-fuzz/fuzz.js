@@ -6,7 +6,7 @@ const fs = require("fs");
 
 const child_process = require('child_process');
 const exec = child_process.exec;
-
+const execSync = child_process.execSync;
 
 
 const testcaseDir = "./testcase-raw/";
@@ -14,7 +14,7 @@ const testcaseNormalizedDir = "./testcase-normalized/";
 const testcaseOutputDir = "./testcase-output/";
 const testcaseRunDir = "./testcase-run/";
 const crashDir = "./crash/";
-
+const binPath = "~/Desktop/webkit-dfc36ec-asan/bin/jsc";
 
 
 
@@ -422,27 +422,26 @@ function randomlySubstitute(pathI, pathO) {
 			}
 			else if (e.toString().indexOf('ENOSPC') != -1) {
 				console.log('[+] Exception in randomlySubstitute : ' + file + ':' + e);
+				let cminI = pathO;
+				let cminO = './cminO/'
+				aflcmin(cminI, cminO);
+				let files = fs.readdirSync(cminI);
+				for (let file of files) {
+					fs.unlinkSync(cminI + file);
+				}
+				files = fs.readdirSync(cminO);
+				for (let file of files) {
+					fs.copyFileSync(cminO + file, cminI + file);
+				}
+				files = fs.readdirSync(cminO);
+				for (let file of files) {
+					fs.unlinkSync(cminO + file);
+				}
 			}
 			else {
 				console.log('[+] Exception in randomlySubstitute : ' + file + ':' + e);
 			}
 		}
-	}
-	
-	let cminI = pathO;
-	let cminO = './cminO/'
-	aflcmin(cminI, cminO);
-	let files = fs.readdirSync(cminI);
-	for(let file of files){
-		fs.unlinkSync(cminI + file);
-	}
-	files = fs.readdirSync(cminO);
-	for (let file of files) {
-		fs.copyFileSync(testcaseNormalizedDir + file, testcaseOutputDir + file);
-	}
-	files = fs.readdirSync(cminO);
-	for(let file of files){
-		fs.unlinkSync(cminO + file);
 	}
 }
 
@@ -501,8 +500,6 @@ for (let file of files) {
  * STEP 5 The fuzzing...with some ugly operations.
  */
 
-const binPath = "~/Desktop/webkit-dfc36ec-asan/bin/jsc";
-
 let timeoutBigLoop = 0;
 let timeoutSmallLoop = 0;
 
@@ -527,7 +524,7 @@ function loop() {
 				childSpawn.on('close', (code) => { setTimeout(runOne, timeoutSmallLoop); });
 
 				count++;
-				if (count % 100 == 0)
+				if (count % 0x10 == 0)
 					exec('kill -9 $(pidof ' + binPath + ')');
 			} catch (e) {
 				exec('kill -9 $(pidof ' + binPath + ')');
@@ -673,7 +670,7 @@ function probability0dot10() {
 
 
 function aflcmin(pathI, pathO) {
-	let aflcminExec = exec(`afl-cmin -i ${pathI} -o ${pathO} -m 81920 -t 6000 -- ${binPath} @@`);
+	let aflcminExec = execSync(`afl-cmin -i ${pathI} -o ${pathO} -m 81920000 -t 6000 -- ${binPath} @@`);
 	let cminLog = '';
 	aflcminExec.stdout.on('data', function (data) {
 		cminLog += data;
