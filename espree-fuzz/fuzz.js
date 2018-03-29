@@ -82,7 +82,7 @@ function statiticalAnalysis(path) {
 			}
 			traverseNode(ast);
 		} catch (e) {
-			console.log('[+] Exception: ' + file + ':' + e);
+			console.log('[+] Exception in staticalAnalysis: ' + file + ':' + e);
 			//console.log(linter.verifyAndFix(jsCode,{rules:{semi: 2}}));
 		}
 	}
@@ -199,10 +199,11 @@ substituteIdentifiers(testcaseDir, testcaseNormalizedDir);
 
 typesArray = [];
 statiticalAnalysis(testcaseNormalizedDir);
-//for (let scalar of typesArray)
-//	console.log(scalar);
-
-
+/*
+for (let scalar of typesArray)
+	console.log(scalar);
+process.exit(0);
+*/
 
 
 
@@ -219,18 +220,81 @@ statiticalAnalysis(testcaseNormalizedDir);
  * 
  * ObjectExpression - ObjectExpression
  */
-const typeObjectExpression = typesArray.filter(function (x) { if (x.type == 'ObjectExpression') return x; });
-//console.log(typeObjectExpression);
-const typeProperty = typesArray.filter(function (x) { if (x.type == 'Property') return x; });
-const typeLiteral = typesArray.filter(function (x) { if (x.type == 'Literal') return x; });
-const typeArrayExpression = typesArray.filter(function (x) { if (x.type == 'ArrayExpression') return x; });
-const typeExpressionStatement = typesArray.filter(function (x) { if (x.type == 'ExpressionStatement') return x; });
-const typeMemberExpression = typesArray.filter(function (x) { if (x.type == 'MemberExpression') return x; });
-const typeAssignmentExpression = typesArray.filter(function (x) { if (x.type == 'AssignmentExpression') return x; });
-const typeCallExpression = typesArray.filter(function (x) { if (x.type == 'CallExpression') return x; });
+
+String.prototype.endsWith = function (suffix) {
+	return this.indexOf(suffix, this.length - suffix.length) != -1;
+};
+
+
+const typeIdentifier = [];
+const typeExpression = typesArray.filter(function (x) { if (x.type.toString().endsWith('Expression')) return x; });
+//AssignmentExpression
+//ArrayExpression
+//ArrowFunctionExpression
+//AwaitExpression
+//BinaryExpression
+//CallExpression
+//ClassExpression
+//ConditionExpression
+//FunctionExpression
+//LogicalExpression
+//MemberExpression
+//NewExpression
+//ObjectExpression
+//SequenceExpression
+//TaggedTemplateExpression
+//ThisExpression
+//UnaryExpression
+//UpdateExpression
+//YieldExpression
+//JSX...
+const typeStatement = typesArray.filter(function (x) { if (x.type.toString().endsWith('Statement')) return x; });
+//AssignmentStatement
+//BlockStatement
+//BreakStatement
+//ContinueStatement
+//DoWhileStatement
+//DebuggerStatement
+//EmptyStatement
+//ExpressionStatement
+//ForStatement
+//ForInStatement
+//ForOfStatement
+//IfStatement
+//LabeledStatement
+//ReturnStatement
+//SwitchStatement
+//ThrowStatement
+//TryStatement
+//WhileStatement
+//WithStatement
+const typePattern = typesArray.filter(function (x) { if (x.type.toString().endsWith('Pattern')) return x; });
+//AssignmentPattern
+//ArrayPattern
+//ObjectPattern
+const typeProperty = typesArray.filter(function (x) { if (x.type.toString().endsWith('Property')) return x; });
+//Property
+//ExperimentalRestProperty
+//ExperimentalSpreadProperty
+//MetaProperty
+const typeElement = typesArray.filter(function (x) { if (x.type.toString().endsWith('Element')) return x; });
+//RestElement
+//SpreadElement
+//TemplateElement
+//JSX...
+const typeLiteral = typesArray.filter(function (x) { if (x.type.toString().endsWith('Literal')) return x; });
+//Literal
+//TemplateLiteral
+const typeDeclaration = typesArray.filter(function (x) { if (x.type.toString().endsWith('Declaration')) return x; });
+//ClassDeclaration
+//FunctionDeclaration
+//VariableDeclaration
+//Export...
+//Import...
 const typeVariableDeclarator = typesArray.filter(function (x) { if (x.type == 'VariableDeclarator') return x; });
-const typeUnaryExpression = typesArray.filter(function (x) { if (x.type == 'UnaryExpression') return x; });
-const typeArrowFunctionExpression = typesArray.filter(function (x) { if (x.type == 'ArrowFunctionExpression') return x; });
+const typeClassBody = typesArray.filter(function (x) { if (x.type == 'ClassBody') return x; });
+const typeMethodDefinition = typesArray.filter(function (x) { if (x.type == 'MethodDefinition') return x; });;
+const typeSwitchCase = typesArray.filter(function (x) { if (x.type == 'SwitchCase') return x; });;
 
 function randomlySubstitute(pathI, pathO) {
 	let files = fs.readdirSync(pathI);
@@ -260,142 +324,144 @@ function randomlySubstitute(pathI, pathO) {
 								type: current.type,
 								code: jsCode.substring(current.start, current.end)
 							});
-							switch (current.type) {
-								case 'ObjectExpression':
-									if (probability0dot10()) {
-										mutated = true;
-										let randomScalar = typeObjectExpression[Math.floor((Math.random() * (typeObjectExpression.length + 1)) + 0)];
-										toSubstituteTypes.push({
-											start: current.start,
-											end: current.end,
-											code: randomScalar.code
-										});
-										continue;
-									}
-									break;
+							if (current.type.toString().endsWith("Expression")) {
+								if (probability0dot10()) {
+									mutated = true;
+									let randomScalar = typeExpression[Math.floor((Math.random() * (typeExpression.length + 1)) + 0)];
+									toSubstituteTypes.push({
+										start: current.start,
+										end: current.end,
+										code: randomScalar.code
+									});
+									continue;
+								}
+							}
+							else if (current.type.toString().endsWith("Statement")) {
+								if (probability0dot10()) {
+									mutated = true;
+									let randomScalar = typeStatement[Math.floor((Math.random() * (typeStatement.length + 1)) + 0)];
+									toSubstituteTypes.push({
+										start: current.start,
+										end: current.end,
+										code: randomScalar.code
+									});
+									continue;
+								}
+							}
+							else if (current.type.toString().endsWith("Pattern")) {
+								if (probability0dot10()) {
+									mutated = true;
+									let randomScalar = typePattern[Math.floor((Math.random() * (typePattern.length + 1)) + 0)];
+									toSubstituteTypes.push({
+										start: current.start,
+										end: current.end,
+										code: randomScalar.code
+									});
+									continue;
+								}
+							}
+							else if (current.type.toString().endsWith("Property")) {
+								if (probability0dot10()) {
+									mutated = true;
+									let randomScalar = typeProperty[Math.floor((Math.random() * (typeProperty.length + 1)) + 0)];
+									toSubstituteTypes.push({
+										start: current.start,
+										end: current.end,
+										code: randomScalar.code
+									});
+									continue;
+								}
+							}
+							else if (current.type.toString().endsWith("Element")) {
+								if (probability0dot10()) {
+									mutated = true;
+									let randomScalar = typeElement[Math.floor((Math.random() * (typeElement.length + 1)) + 0)];
+									toSubstituteTypes.push({
+										start: current.start,
+										end: current.end,
+										code: randomScalar.code
+									});
+									continue;
+								}
+							}
+							else if (current.type.toString().endsWith("Literal")) {
+								if (probability0dot10()) {
+									mutated = true;
+									let randomScalar = typeLiteral[Math.floor((Math.random() * (typeLiteral.length + 1)) + 0)];
+									toSubstituteTypes.push({
+										start: current.start,
+										end: current.end,
+										code: randomScalar.code
+									});
+									continue;
+								}
+							}
+							else if (current.type.toString().endsWith("Declaration")) {
+								if (probability0dot10()) {
+									mutated = true;
+									let randomScalar = typeDeclaration[Math.floor((Math.random() * (typeDeclaration.length + 1)) + 0)];
+									toSubstituteTypes.push({
+										start: current.start,
+										end: current.end,
+										code: randomScalar.code
+									});
+									continue;
+								}
+							}
+							else {
+								switch (current.type) {
+									case 'VariableDeclarator':
+										if (probability0dot10()) {
+											mutated = true;
+											let randomScalar = typeVariableDeclarator[Math.floor((Math.random() * (typeVariableDeclarator.length + 1)) + 0)];
+											toSubstituteTypes.push({
+												start: current.start,
+												end: current.end,
+												code: randomScalar.code
+											});
+											continue;
+										}
+										break;
+									case 'ClassBody':
+										if (probability0dot10()) {
+											mutated = true;
+											let randomScalar = typeClassBody[Math.floor((Math.random() * (typeClassBody.length + 1)) + 0)];
+											toSubstituteTypes.push({
+												start: current.start,
+												end: current.end,
+												code: randomScalar.code
+											});
+											continue;
+										}
+										break;
+									case 'MethodDefinition':
+										if (probability0dot10()) {
+											mutated = true;
+											let randomScalar = typeMethodDefinition[Math.floor((Math.random() * (typeMethodDefinition.length + 1)) + 0)];
+											toSubstituteTypes.push({
+												start: current.start,
+												end: current.end,
+												code: randomScalar.code
+											});
+											continue;
+										}
+										break;
+									case 'SwitchCase':
+										if (probability0dot10()) {
+											mutated = true;
+											let randomScalar = typeSwitchCase[Math.floor((Math.random() * (typeSwitchCase.length + 1)) + 0)];
+											toSubstituteTypes.push({
+												start: current.start,
+												end: current.end,
+												code: randomScalar.code
+											});
+											continue;
+										}
+										break;
+									default:
+										break;
 
-								case 'Property':
-									if (probability0dot10()) {
-										mutated = true;
-										let randomScalar = typeProperty[Math.floor((Math.random() * (typeProperty.length + 1)) + 0)];
-										toSubstituteTypes.push({
-											start: current.start,
-											end: current.end,
-											code: randomScalar.code
-										});
-										continue;
-									}
-									break;
-								case 'Literal':
-									if (probability0dot10()) {
-										mutated = true;
-										let randomScalar = typeLiteral[Math.floor((Math.random() * (typeLiteral.length + 1)) + 0)];
-										toSubstituteTypes.push({
-											start: current.start,
-											end: current.end,
-											code: randomScalar.code
-										});
-										continue;
-									}
-									break;
-								case 'ArrayExpression':
-									if (probability0dot10()) {
-										mutated = true;
-										let randomScalar = typeArrayExpression[Math.floor((Math.random() * (typeArrayExpression.length + 1)) + 0)];
-										toSubstituteTypes.push({
-											start: current.start,
-											end: current.end,
-											code: randomScalar.code
-										});
-										continue;
-									}
-									break;
-								case 'ExpressionStatement':
-									if (probability0dot10()) {
-										mutated = true;
-										let randomScalar = typeExpressionStatement[Math.floor((Math.random() * (typeExpressionStatement.length + 1)) + 0)];
-										toSubstituteTypes.push({
-											start: current.start,
-											end: current.end,
-											code: randomScalar.code
-										});
-										continue;
-									}
-									break;
-								case 'MemberExpression':
-									if (probability0dot10()) {
-										mutated = true;
-										let randomScalar = typeMemberExpression[Math.floor((Math.random() * (typeMemberExpression.length + 1)) + 0)];
-										toSubstituteTypes.push({
-											start: current.start,
-											end: current.end,
-											code: randomScalar.code
-										});
-										continue;
-									}
-									break;
-								case 'AssignmentExpression':
-									if (probability0dot10()) {
-										mutated = true;
-										let randomScalar = typeAssignmentExpression[Math.floor((Math.random() * (typeAssignmentExpression.length + 1)) + 0)];
-										toSubstituteTypes.push({
-											start: current.start,
-											end: current.end,
-											code: randomScalar.code
-										});
-										continue;
-									}
-									break;
-								case 'CallExpression':
-									if (probability0dot10()) {
-										mutated = true;
-										let randomScalar = typeCallExpression[Math.floor((Math.random() * (typeCallExpression.length + 1)) + 0)];
-										toSubstituteTypes.push({
-											start: current.start,
-											end: current.end,
-											code: randomScalar.code
-										});
-										continue;
-									}
-									break;
-								case 'VariableDeclarator':
-									if (probability0dot10()) {
-										mutated = true;
-										let randomScalar = typeVariableDeclarator[Math.floor((Math.random() * (typeVariableDeclarator.length + 1)) + 0)];
-										toSubstituteTypes.push({
-											start: current.start,
-											end: current.end,
-											code: randomScalar.code
-										});
-										continue;
-									}
-									break;
-								case 'UnaryExpression':
-									if (probability0dot10()) {
-										mutated = true;
-										let randomScalar = typeUnaryExpression[Math.floor((Math.random() * (typeUnaryExpression.length + 1)) + 0)];
-										toSubstituteTypes.push({
-											start: current.start,
-											end: current.end,
-											code: randomScalar.code
-										});
-										continue;
-									}
-									break;
-								case 'ArrowFunctionExpression':
-									if (probability0dot10()) {
-										mutated = true;
-										let randomScalar = typeArrowFunctionExpression[Math.floor((Math.random() * (typeArrowFunctionExpression.length + 1)) + 0)];
-										toSubstituteTypes.push({
-											start: current.start,
-											end: current.end,
-											code: randomScalar.code
-										});
-										continue;
-									}
-									break;
-								default:
-									break;
+								}
 							}
 						}
 						traverseNode(current);
@@ -415,7 +481,7 @@ function randomlySubstitute(pathI, pathO) {
 				fs.writeFileSync(pathO + file.substring(0, file.length - 3) + randomString2() + '.js', newContent);
 			}
 		} catch (e) {
-			if ((e.toString().indexOf('SyntaxError') != -1) || (e.toString().indexOf('TypeError') != -1)) {
+			if (e.toString().indexOf('SyntaxError') != -1) {
 				console.log('[+] Exception in randomlySubstitute : ' + file + ':' + e);
 				exec('rm ' + pathI + file);
 				console.log('[-] rm ' + pathI + file);
@@ -451,17 +517,6 @@ function randomlySubstitute(pathI, pathO) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 let files = fs.readdirSync(testcaseNormalizedDir);
 for (let file of files) {
 	fs.copyFileSync(testcaseNormalizedDir + file, testcaseOutputDir + file);
@@ -475,6 +530,10 @@ randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
 randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
 randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
 randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
+
+
+process.exit(0);
+
 
 files = fs.readdirSync(testcaseOutputDir);
 for (let file of files) {

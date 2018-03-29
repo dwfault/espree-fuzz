@@ -324,7 +324,7 @@ ASTtypes = {
     /*
         o.b = Object.toString(o)    test3.js
     */
-    AssignmentExpression: "AssignmentExpression",
+    AssignmentExpression: "AssignmentExpression", // yes
     /*
         o.b = Object.toString(o);    test3.js
     
@@ -334,7 +334,7 @@ ASTtypes = {
         o.b = Object.toString(o);    test3.js
     ExpressionStatement:"ExpressionStatement".
     */
-    AssignmentPattern: "AssignmentPattern",
+    AssignmentPattern: "AssignmentPattern", //
     /*
         []       test3.js
     */
@@ -518,9 +518,16 @@ ASTtypes = {
 };
 
 
-Property: kind["init", ""];
 
-VariableDeclaration: kind["var", "let", "const"];
 
-Identifier: random["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "__proto__", "Object", "Array", "Error", "apply", "length"];
+originSampleCount = 2100;
+    succeedGenerateCount = 677064;
+    failedGenerateCount = 30738;
+totalGetnerateCount = 707802;
 
+totalGetnerateRate = (totalGetnerateCount / originSampleCount) = 337;
+
+duplicateGenerateCount = 16245;
+
+succeedGenerateRate = 0.9565;
+duplicateGenerateRate = (duplicateGenerateCount / succeedGenerateCount) = 0.0239;
