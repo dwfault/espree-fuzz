@@ -532,7 +532,6 @@ randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
 randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
 
 
-process.exit(0);
 
 
 files = fs.readdirSync(testcaseOutputDir);
