@@ -487,9 +487,9 @@ function randomlySubstitute(pathI, pathO) {
 			}
 		} catch (e) {
 			if (e.toString().indexOf('SyntaxError') != -1) {
-				//console.log('[+] Exception in randomlySubstitute : ' + file + ':' + e);
-				exec('rm ' + pathI + file);
-				//console.log('[-] rm ' + pathI + file);
+				//console.log('[+] Exception in randomlySubstitute SyntaxError: ' + file + ':' + e);
+				fs.unlinkSync(pathI + file);
+				//console.log('[-] delete ' + pathI + file);
 			}
 			else if (e.toString().indexOf('ENOSPC') != -1) {
 				console.log('[+] Exception in randomlySubstitute : ' + file + ':' + e);
