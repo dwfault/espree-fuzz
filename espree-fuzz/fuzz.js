@@ -9,7 +9,7 @@ const exec = child_process.exec;
 const execSync = child_process.execSync;
 
 
-const testcaseDir = "./testcase-raw/";
+const testcaseRawDir = "./testcase-raw/";
 const testcaseNormalizedDir = "./testcase-normalized/";
 const testcaseOutputDir = "./testcase-output/";
 const testcaseRunDir = "./testcase-run/";
@@ -88,7 +88,7 @@ function statiticalAnalysis(path) {
 	}
 }
 
-statiticalAnalysis(testcaseDir);
+statiticalAnalysis(testcaseRawDir);
 /*for (let scalar of typesArray)
 	console.log(scalar);
 for (let scalar of identifiersArray)
@@ -113,7 +113,7 @@ for (let scalar of identifiersArray)
 
 
 /**
- * STEP 2, Substitutions, change the Identifiers using "start" "end" "oldName" "on". VERSION 2.
+ * STEP 2, Substitutions, change the Identifiers using "start" "end" "oldName" "on".
  * 
  * From testcase dir transport to testcase-normalized. Prepare a new types array.
  */
@@ -195,7 +195,7 @@ function substituteIdentifiers(pathI, pathO) {
 	}
 }
 
-substituteIdentifiers(testcaseDir, testcaseNormalizedDir);
+substituteIdentifiers(testcaseRawDir, testcaseNormalizedDir);
 
 typesArray = [];
 statiticalAnalysis(testcaseNormalizedDir);
@@ -298,7 +298,7 @@ const typeSwitchCase = typesArray.filter(function (x) { if (x.type == 'SwitchCas
 
 let round = 0;
 
-console.log(`${typeExpression.length} ${typeStatement.length} ${typePattern.length} ${typeProperty.length} ${typeElement.length} ${typeLiteral.length} ${typeDeclaration.length} ${typeVariableDeclarator.length} ${typeClassBody.length} ${typeMethodDefinition.length} ${typeSwitchCase.length}`);
+//console.log(`${typeExpression.length} ${typeStatement.length} ${typePattern.length} ${typeProperty.length} ${typeElement.length} ${typeLiteral.length} ${typeDeclaration.length} ${typeVariableDeclarator.length} ${typeClassBody.length} ${typeMethodDefinition.length} ${typeSwitchCase.length}`);
 
 function randomlySubstitute(pathI, pathO) {
 	console.log('[+] ROUND ' + ++round + '.');
