@@ -330,7 +330,7 @@ function randomlySubstitute(pathI, pathO) {
 								code: jsCode.substring(current.start, current.end)
 							});
 							if (current.type.toString().endsWith("Expression")) {
-								if (probability0dot10()) {
+								if (probability0dot20()) {
 									mutated = true;
 									let randomScalar = typeExpression[Math.floor((Math.random() * (typeExpression.length)) + 0)];
 									toSubstituteTypes.push({
@@ -727,6 +727,13 @@ function randomString2() {
 
 function probability0dot10() {
 	if (Math.floor(Math.random() + 0.10))
+		return true;
+	else
+		return false;
+}
+
+function probability0dot20() {
+	if (Math.floor(Math.random() + 0.20))
 		return true;
 	else
 		return false;
