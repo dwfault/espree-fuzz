@@ -493,6 +493,7 @@ function randomlySubstitute(pathI, pathO) {
 			}
 			else if (e.toString().indexOf('ENOSPC') != -1) {
 				console.log('[+] Exception in randomlySubstitute : ' + file + ':' + e);
+				/*
 				let cminI = pathO;
 				let cminO = './cminO/'
 				aflcmin(cminI, cminO);
@@ -508,6 +509,7 @@ function randomlySubstitute(pathI, pathO) {
 				for (let file of files) {
 					fs.unlinkSync(cminO + file);
 				}
+				*/
 			}
 			else {
 				console.log(`[+] Exception in randomlySubstitute ROUND ${round} : ${file} : ${e}`);
@@ -532,6 +534,14 @@ randomlySubstitute(testcaseNormalizedDir, testcaseOutputDir);
 randomlySubstitute(testcaseNormalizedDir, testcaseOutputDir);
 randomlySubstitute(testcaseNormalizedDir, testcaseOutputDir);
 randomlySubstitute(testcaseNormalizedDir, testcaseOutputDir);
+randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
+randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
+randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
+randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
+randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
+randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
+randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
+randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
 randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
 randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
 randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
