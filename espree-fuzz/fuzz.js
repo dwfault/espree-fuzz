@@ -8,6 +8,8 @@ const child_process = require('child_process');
 const exec = child_process.exec;
 const execSync = child_process.execSync;
 
+const heapdump = require("heapdump");
+
 
 const testcaseRawDir = "./testcase-raw/";
 const testcaseNormalizedDir = "./testcase-normalized/";
@@ -325,10 +327,7 @@ function randomlySubstitute(pathI, pathO) {
 					if ((current == node) || (typeof current == "string") || (typeof current == "number") || current == null) { }
 					else {
 						if (current.hasOwnProperty("type")) {
-							typesArray.push({
-								type: current.type,
-								code: jsCode.substring(current.start, current.end)
-							});
+							
 							if (current.type.toString().endsWith("Expression")) {
 								if (probability0dot20()) {
 									mutated = true;
@@ -546,6 +545,9 @@ randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
 randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
 randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
 randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
+randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
+randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
+heapdump.writeSnapshot(Date.now() + '.heapsnapshot', );
 process.exit(0);
 
 
