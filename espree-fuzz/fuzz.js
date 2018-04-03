@@ -506,6 +506,7 @@ function randomlySubstitute(pathI, pathO) {
 			}
 			else if (e.toString().indexOf('ENOSPC') != -1) {
 				console.log('[+] Exception in randomlySubstitute : ' + file + ':' + e);
+				execSync('node duplicate.js');
 				/*
 				let cminI = pathO;
 				let cminO = './cminO/'
