@@ -228,7 +228,6 @@ String.prototype.endsWith = function (suffix) {
 };
 
 
-const typeIdentifier = [];
 const typeExpression = typesArray.filter(function (x) { if (x.type.toString().endsWith('Expression')) return x; });
 //AssignmentExpression
 //ArrayExpression
@@ -293,6 +292,7 @@ const typeDeclaration = typesArray.filter(function (x) { if (x.type.toString().e
 //VariableDeclaration
 //Export...
 //Import...
+const typeIdentifier = typesArray.filter(function (x) { if (x.type == 'Identifier') return x; });
 const typeVariableDeclarator = typesArray.filter(function (x) { if (x.type == 'VariableDeclarator') return x; });
 const typeClassBody = typesArray.filter(function (x) { if (x.type == 'ClassBody') return x; });
 const typeMethodDefinition = typesArray.filter(function (x) { if (x.type == 'MethodDefinition') return x; });;
@@ -340,6 +340,7 @@ function randomlySubstitute(pathI, pathO) {
 									continue;
 								}
 							}
+							/*
 							else if (current.type.toString().endsWith("Statement")) {
 								if (probability0dot10()) {
 									mutated = true;
@@ -352,6 +353,7 @@ function randomlySubstitute(pathI, pathO) {
 									continue;
 								}
 							}
+							*/
 							else if (current.type.toString().endsWith("Pattern")) {
 								if (probability0dot10()) {
 									mutated = true;
@@ -414,6 +416,18 @@ function randomlySubstitute(pathI, pathO) {
 							}
 							else {
 								switch (current.type) {
+									case 'Identifier':
+										if (probability0dot10()) {
+											mutated = true;
+											let randomScalar = typeIdentifier[Math.floor((Math.random() * (typeIdentifier.length)) + 0)];
+											toSubstituteTypes.push({
+												start: current.start,
+												end: current.end,
+												code: randomScalar.code
+											});
+											continue;
+										}
+										break;
 									case 'VariableDeclarator':
 										if (probability0dot10()) {
 											mutated = true;
@@ -547,8 +561,8 @@ randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
 randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
 randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
 randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
-heapdump.writeSnapshot(Date.now() + '.heapsnapshot', );
-process.exit(0);
+//heapdump.writeSnapshot(Date.now() + '.heapsnapshot', );
+//process.exit(0);
 
 
 
