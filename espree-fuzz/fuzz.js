@@ -394,36 +394,23 @@ function randomlySubstitute(pathI, pathO) {
 							}
 							else if (current.type.toString().endsWith("Literal")) {
 								if (probability0dot10()) {
+									mutated = true;
+									let randomScalar = [];
 									if (probability0dot33()) {
-										mutated = true;
-										let randomScalar = typeIdentifier[Math.floor((Math.random() * (typeLiteral.length)) + 0)];
-										toSubstituteTypes.push({
-											start: current.start,
-											end: current.end,
-											code: randomScalar.code
-										});
-										continue;
+										typeIdentifier[Math.floor((Math.random() * (typeLiteral.length)) + 0)];
 									}
 									else if (probability0dot33()) {
-										mutated = true;
-										let randomScalar = typeExpression[Math.floor((Math.random() * (typeLiteral.length)) + 0)];
-										toSubstituteTypes.push({
-											start: current.start,
-											end: current.end,
-											code: randomScalar.code
-										});
-										continue;
+										typeExpression[Math.floor((Math.random() * (typeLiteral.length)) + 0)];
 									}
 									else {
-										mutated = true;
-										let randomScalar = typeLiteral[Math.floor((Math.random() * (typeLiteral.length)) + 0)];
-										toSubstituteTypes.push({
-											start: current.start,
-											end: current.end,
-											code: randomScalar.code
-										});
-										continue;
+										typeLiteral[Math.floor((Math.random() * (typeLiteral.length)) + 0)];
 									}
+									toSubstituteTypes.push({
+										start: current.start,
+										end: current.end,
+										code: randomScalar.code
+									});
+									continue;
 								}
 							}
 							else if (current.type.toString().endsWith("Declaration")) {
@@ -442,36 +429,23 @@ function randomlySubstitute(pathI, pathO) {
 								switch (current.type) {
 									case 'Identifier':
 										if (probability0dot10()) {
+											mutated = true;
+											let randomScalar = [];
 											if (probability0dot33()) {
-												mutated = true;
-												let randomScalar = typeLiteral[Math.floor((Math.random() * (typeIdentifier.length)) + 0)];
-												toSubstituteTypes.push({
-													start: current.start,
-													end: current.end,
-													code: randomScalar.code
-												});
-												continue;
+												typeLiteral[Math.floor((Math.random() * (typeLiteral.length)) + 0)];
 											}
 											else if (probability0dot33()) {
-												mutated = true;
-												let randomScalar = typeExpression[Math.floor((Math.random() * (typeIdentifier.length)) + 0)];
-												toSubstituteTypes.push({
-													start: current.start,
-													end: current.end,
-													code: randomScalar.code
-												});
-												continue;
+												typeExpression[Math.floor((Math.random() * (typeLiteral.length)) + 0)];
 											}
 											else {
-												mutated = true;
-												let randomScalar = typeIdentifier[Math.floor((Math.random() * (typeIdentifier.length)) + 0)];
-												toSubstituteTypes.push({
-													start: current.start,
-													end: current.end,
-													code: randomScalar.code
-												});
-												continue;
+												typeIdentifier[Math.floor((Math.random() * (typeLiteral.length)) + 0)];
 											}
+											toSubstituteTypes.push({
+												start: current.start,
+												end: current.end,
+												code: randomScalar.code
+											});
+											continue;
 										}
 										break;
 									case 'VariableDeclarator':
