@@ -27,13 +27,12 @@ const binPath = "~/Desktop/webkit-dfc36ec-asan/bin/jsc";
 
 
 
-
-
 /**
  * STEP 1, Statitical analysis towards "typed" "identifiers" appeard in testcases.
  * 
  * havent done any substitutions, just try some fix.
  */
+console.log('[+] STEP 1.');
 
 let identifiersArray = require("./identifiers.js");
 let typesArray = [];
@@ -65,6 +64,7 @@ function statiticalAnalysis(path) {
 								code: jsCode.substring(current.start, current.end)
 							});
 							if (current.type == "Identifier") {
+								console.log(current);
 								let scalar = identifiersArray.filter(function (x) { if (x.oldName == current.name) return x; })[0];
 								if (scalar != undefined) {
 									++scalar.count;
@@ -91,6 +91,7 @@ function statiticalAnalysis(path) {
 }
 
 statiticalAnalysis(testcaseRawDir);
+process.exit(0);
 /*for (let scalar of typesArray)
 	console.log(scalar);
 for (let scalar of identifiersArray)
@@ -119,6 +120,7 @@ for (let scalar of identifiersArray)
  * 
  * From testcase dir transport to testcase-normalized. Prepare a new types array.
  */
+console.log('[+] STEP 2.');
 function substituteIdentifiers(pathI, pathO) {
 	let files = fs.readdirSync(pathI);
 	for (let file of files) {
@@ -201,11 +203,12 @@ substituteIdentifiers(testcaseRawDir, testcaseNormalizedDir);
 
 typesArray = [];
 statiticalAnalysis(testcaseNormalizedDir);
-/*
+
 for (let scalar of typesArray)
 	console.log(scalar);
 process.exit(0);
-*/
+
+
 
 
 
@@ -218,11 +221,11 @@ process.exit(0);
 
 
 /**
- * STEP 4, randomly substitute everything from testcase-normalized dir.
+ * STEP 3, randomly substitute everything from testcase-normalized dir.
  * 
  * ObjectExpression - ObjectExpression
  */
-
+console.log('[+] STEP 3.');
 String.prototype.endsWith = function (suffix) {
 	return this.indexOf(suffix, this.length - suffix.length) != -1;
 };
@@ -588,9 +591,9 @@ for (let file of files) {
 
 
 /**
- * STEP 5 The fuzzing...with some ugly operations.
+ * STEP 4 The fuzzing...with some ugly operations.
  */
-
+console.log('[+] STEP 4.');
 const timeoutBigLoop = 0;
 const timeoutSmallLoop = 0;
 
