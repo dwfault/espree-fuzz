@@ -64,7 +64,6 @@ function statiticalAnalysis(path) {
 								code: jsCode.substring(current.start, current.end)
 							});
 							if (current.type == "Identifier") {
-								console.log(current);
 								let scalar = identifiersArray.filter(function (x) { if (x.oldName == current.name) return x; })[0];
 								if (scalar != undefined) {
 									++scalar.count;
@@ -330,7 +329,7 @@ function randomlySubstitute(pathI, pathO) {
 					if ((current == node) || (typeof current == "string") || (typeof current == "number") || current == null) { }
 					else {
 						if (current.hasOwnProperty("type")) {
-							
+
 							if (current.type.toString().endsWith("Expression")) {
 								if (probability0dot20()) {
 									mutated = true;
@@ -395,14 +394,36 @@ function randomlySubstitute(pathI, pathO) {
 							}
 							else if (current.type.toString().endsWith("Literal")) {
 								if (probability0dot10()) {
-									mutated = true;
-									let randomScalar = typeLiteral[Math.floor((Math.random() * (typeLiteral.length)) + 0)];
-									toSubstituteTypes.push({
-										start: current.start,
-										end: current.end,
-										code: randomScalar.code
-									});
-									continue;
+									if (probability0dot33()) {
+										mutated = true;
+										let randomScalar = typeIdentifier[Math.floor((Math.random() * (typeLiteral.length)) + 0)];
+										toSubstituteTypes.push({
+											start: current.start,
+											end: current.end,
+											code: randomScalar.code
+										});
+										continue;
+									}
+									else if (probability0dot33()) {
+										mutated = true;
+										let randomScalar = typeExpression[Math.floor((Math.random() * (typeLiteral.length)) + 0)];
+										toSubstituteTypes.push({
+											start: current.start,
+											end: current.end,
+											code: randomScalar.code
+										});
+										continue;
+									}
+									else {
+										mutated = true;
+										let randomScalar = typeLiteral[Math.floor((Math.random() * (typeLiteral.length)) + 0)];
+										toSubstituteTypes.push({
+											start: current.start,
+											end: current.end,
+											code: randomScalar.code
+										});
+										continue;
+									}
 								}
 							}
 							else if (current.type.toString().endsWith("Declaration")) {
@@ -421,14 +442,36 @@ function randomlySubstitute(pathI, pathO) {
 								switch (current.type) {
 									case 'Identifier':
 										if (probability0dot10()) {
-											mutated = true;
-											let randomScalar = typeIdentifier[Math.floor((Math.random() * (typeIdentifier.length)) + 0)];
-											toSubstituteTypes.push({
-												start: current.start,
-												end: current.end,
-												code: randomScalar.code
-											});
-											continue;
+											if (probability0dot33()) {
+												mutated = true;
+												let randomScalar = typeLiteral[Math.floor((Math.random() * (typeIdentifier.length)) + 0)];
+												toSubstituteTypes.push({
+													start: current.start,
+													end: current.end,
+													code: randomScalar.code
+												});
+												continue;
+											}
+											else if (probability0dot33()) {
+												mutated = true;
+												let randomScalar = typeExpression[Math.floor((Math.random() * (typeIdentifier.length)) + 0)];
+												toSubstituteTypes.push({
+													start: current.start,
+													end: current.end,
+													code: randomScalar.code
+												});
+												continue;
+											}
+											else {
+												mutated = true;
+												let randomScalar = typeIdentifier[Math.floor((Math.random() * (typeIdentifier.length)) + 0)];
+												toSubstituteTypes.push({
+													start: current.start,
+													end: current.end,
+													code: randomScalar.code
+												});
+												continue;
+											}
 										}
 										break;
 									case 'VariableDeclarator':
@@ -764,6 +807,13 @@ function probability0dot10() {
 
 function probability0dot20() {
 	if (Math.floor(Math.random() + 0.20))
+		return true;
+	else
+		return false;
+}
+
+function probability0dot33() {
+	if (Math.floor(Math.random() + 0.33))
 		return true;
 	else
 		return false;
