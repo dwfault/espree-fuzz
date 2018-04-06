@@ -90,7 +90,6 @@ function statiticalAnalysis(path) {
 }
 
 statiticalAnalysis(testcaseRawDir);
-process.exit(0);
 /*for (let scalar of typesArray)
 	console.log(scalar);
 for (let scalar of identifiersArray)
@@ -202,9 +201,10 @@ substituteIdentifiers(testcaseRawDir, testcaseNormalizedDir);
 
 typesArray = [];
 statiticalAnalysis(testcaseNormalizedDir);
-
+/*
 for (let scalar of typesArray)
 	console.log(scalar);
+*/
 process.exit(0);
 
 
@@ -331,15 +331,46 @@ function randomlySubstitute(pathI, pathO) {
 						if (current.hasOwnProperty("type")) {
 
 							if (current.type.toString().endsWith("Expression")) {
-								if (probability0dot20()) {
-									mutated = true;
-									let randomScalar = typeExpression[Math.floor((Math.random() * (typeExpression.length)) + 0)];
-									toSubstituteTypes.push({
-										start: current.start,
-										end: current.end,
-										code: randomScalar.code
-									});
-									continue;
+								console.log(current);
+								if (current.type.toString() == 'CallExpression') {
+									if (true) {
+										mutated = true;
+										if (current.arguments == []) {
+											let randomScalar = 'randomScalar';
+											let newCallExpression = jsCode.substring(0, jsCode.indexOf('(')) + randomScalar + jsCode.substring(jsCode.lastIndexOf(')'), jsCode.length - 1);
+											toSubstituteTypes.push({
+												start: current.start,
+												end: current.end,
+												code: newCallExpression
+											});
+											console.log(`[+] ${jsCode.substring(current.start, current.end)}:${newCallExpression}`);
+										}
+										continue;
+									}
+								}
+								else if (current.type.toString() == ObjectExpression) {
+									if (probability0dot50()) {
+										mutated = true;
+										let randomScalar = typeExpression[Math.floor((Math.random() * (typeExpression.length)) + 0)];
+										toSubstituteTypes.push({
+											start: current.start,
+											end: current.end,
+											code: randomScalar.code
+										});
+										continue;
+									}
+								}
+								else {
+									if (probability0dot10()) {
+										mutated = true;
+										let randomScalar = typeExpression[Math.floor((Math.random() * (typeExpression.length)) + 0)];
+										toSubstituteTypes.push({
+											start: current.start,
+											end: current.end,
+											code: randomScalar.code
+										});
+										continue;
+									}
 								}
 							}
 							/*
@@ -527,7 +558,7 @@ function randomlySubstitute(pathI, pathO) {
 			else if (e.toString().indexOf('ENOSPC') != -1) {
 				console.log('[+] Exception in randomlySubstitute : ' + file + ':' + e);
 				execSync('node duplicate.js');
-				/*
+				
 				let cminI = pathO;
 				let cminO = './cminO/'
 				aflcmin(cminI, cminO);
@@ -543,7 +574,7 @@ function randomlySubstitute(pathI, pathO) {
 				for (let file of files) {
 					fs.unlinkSync(cminO + file);
 				}
-				*/
+				
 			}
 			else {
 				console.log(`[+] Exception in randomlySubstitute ROUND ${round} : ${file} : ${e}`);
@@ -565,20 +596,10 @@ for (let file of files) {
 }
 
 randomlySubstitute(testcaseNormalizedDir, testcaseOutputDir);
+process.exit(0);
 randomlySubstitute(testcaseNormalizedDir, testcaseOutputDir);
 randomlySubstitute(testcaseNormalizedDir, testcaseOutputDir);
 randomlySubstitute(testcaseNormalizedDir, testcaseOutputDir);
-randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
-randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
-randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
-randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
-randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
-randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
-randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
-randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
-randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
-randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
-randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
 randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
 randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
 randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
@@ -793,6 +814,12 @@ function probability0dot33() {
 		return false;
 }
 
+function probability0dot50() {
+	if (Math.floor(Math.random() + 0.50))
+		return true;
+	else
+		return false;
+}
 
 function aflcmin(pathI, pathO) {
 	let aflcminExec = execSync(`afl-cmin -i ${pathI} -o ${pathO} -m 81920000 -t 6000 -- ${binPath} @@`);
