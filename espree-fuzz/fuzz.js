@@ -599,6 +599,7 @@ for (let file of files) {
 	fs.copyFileSync(testcaseNormalizedDir + file, testcaseOutputDir + file);
 }
 
+
 randomlySubstitute(testcaseNormalizedDir, testcaseOutputDir);
 process.exit(0);
 randomlySubstitute(testcaseNormalizedDir, testcaseOutputDir);
