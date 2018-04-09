@@ -149,12 +149,14 @@ function substituteIdentifiers(pathI, pathO) {
 							if (current.type == "Identifier") {
 								let scalar = identifiersArray.filter(function (x) { if (x.oldName == current.name) return x; })[0];
 								//assert(scalar != undefined);
-								toSubstituteIdentifiers.push({
-									oldName: current.name,
-									newName: scalar.newName,
-									start: current.start,
-									end: current.end
-								});
+								if (scalar.newName != current.name) {
+									toSubstituteIdentifiers.push({
+										oldName: current.name,
+										newName: scalar.newName,
+										start: current.start,
+										end: current.end
+									});
+								}
 							}
 						}
 						traverseNode(current);
@@ -378,7 +380,7 @@ function randomlySubstitute(pathI, pathO) {
 								}
 							}
 							else if (current.type.toString().endsWith("Statement")) {
-								if (probability0dot10()) {
+								if (probability0dot10() && probability0dot10()) {
 									mutated = true;
 									let randomScalar = typeStatement[Math.floor((Math.random() * (typeStatement.length)) + 0)];
 									toSubstituteNodes.push({
@@ -473,7 +475,7 @@ function randomlySubstitute(pathI, pathO) {
 										if (probability0dot10()) {
 											mutated = true;
 											let randomScalar = [];
-											if (probability0dot33()) {
+											if (probability0dot10()) {
 												randomScalar = typeLiteral[Math.floor((Math.random() * (typeLiteral.length)) + 0)];
 											}
 											else if (probability0dot33()) {
@@ -544,7 +546,8 @@ function randomlySubstitute(pathI, pathO) {
 								}
 							}
 						}
-						traverseNode(current);
+						if (mutated == false)
+							traverseNode(current);
 					}
 				}
 			}

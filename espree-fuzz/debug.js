@@ -23,8 +23,11 @@ try {
             if ((current == node) || (typeof current == "string") || (typeof current == "number") || current == null) {
             }
             else {
-                if (current.type != undefined)
+                if (current.type != undefined){
                     console.log(`[+] ${current.type}:${jsCode.substring(current.start, current.end)}`);
+                    console.log(current);
+                    console.log('\n-----------------------\n');
+                }
                 traverseNode(current);
             }
         }
