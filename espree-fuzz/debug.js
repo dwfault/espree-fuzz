@@ -1,5 +1,7 @@
 var espree = require("espree");
 var fs = require("fs");
+var Linter = require('eslint').Linter;
+var linter = new Linter();
 
 var arguments = process.argv.splice(2);
 
@@ -30,4 +32,5 @@ try {
     traverseNode(ast);
 } catch (e) {
     console.log('[+] Exception in staticalAnalysis: ' + e);
+    console.log(linter.verifyAndFix(jsCode, { rules: { semi: 2 } }, { fix: true }));
 }

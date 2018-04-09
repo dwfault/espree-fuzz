@@ -349,7 +349,7 @@ function randomlySubstitute(pathI, pathO) {
 										else {
 											//console.log(current);
 										}
-										continue;
+										return;
 									}
 								}
 								else if (current.type.toString() == 'ObjectExpression') {
@@ -361,7 +361,7 @@ function randomlySubstitute(pathI, pathO) {
 											end: current.end,
 											code: randomScalar.code
 										});
-										continue;
+										return;
 									}
 								}
 								else {
@@ -373,11 +373,10 @@ function randomlySubstitute(pathI, pathO) {
 											end: current.end,
 											code: randomScalar.code
 										});
-										continue;
+										return;
 									}
 								}
 							}
-							/*
 							else if (current.type.toString().endsWith("Statement")) {
 								if (probability0dot10()) {
 									mutated = true;
@@ -387,10 +386,9 @@ function randomlySubstitute(pathI, pathO) {
 										end: current.end,
 										code: randomScalar.code
 									});
-									continue;
+									return;
 								}
 							}
-							*/
 							else if (current.type.toString().endsWith("Pattern")) {
 								if (probability0dot10()) {
 									mutated = true;
@@ -400,7 +398,7 @@ function randomlySubstitute(pathI, pathO) {
 										end: current.end,
 										code: randomScalar.code
 									});
-									continue;
+									return;
 								}
 							}
 							else if (current.type.toString().endsWith("Property")) {
@@ -412,7 +410,7 @@ function randomlySubstitute(pathI, pathO) {
 										end: current.end,
 										code: randomScalar.code
 									});
-									continue;
+									return;
 								}
 							}
 							else if (current.type.toString().endsWith("Element")) {
@@ -424,7 +422,7 @@ function randomlySubstitute(pathI, pathO) {
 										end: current.end,
 										code: randomScalar.code
 									});
-									continue;
+									return;
 								}
 							}
 							else if (current.type.toString().endsWith("Literal")) {
@@ -432,32 +430,41 @@ function randomlySubstitute(pathI, pathO) {
 									mutated = true;
 									let randomScalar = [];
 									if (probability0dot33()) {
-										typeIdentifier[Math.floor((Math.random() * (typeIdentifier.length)) + 0)];
+										randomScalar = typeIdentifier[Math.floor((Math.random() * (typeIdentifier.length)) + 0)];
 									}
 									else if (probability0dot33()) {
-										typeExpression[Math.floor((Math.random() * (typeExpression.length)) + 0)];
+										randomScalar = typeExpression[Math.floor((Math.random() * (typeExpression.length)) + 0)];
 									}
 									else {
-										typeLiteral[Math.floor((Math.random() * (typeLiteral.length)) + 0)];
+										randomScalar = typeLiteral[Math.floor((Math.random() * (typeLiteral.length)) + 0)];
 									}
 									toSubstituteNodes.push({
 										start: current.start,
 										end: current.end,
 										code: randomScalar.code
 									});
-									continue;
+									return;
 								}
 							}
 							else if (current.type.toString().endsWith("Declaration")) {
 								if (probability0dot10()) {
 									mutated = true;
 									let randomScalar = typeDeclaration[Math.floor((Math.random() * (typeDeclaration.length)) + 0)];
+									let code = '';
+									if (jsCode.substring(current.start, current.end).indexOf(';') == -1) {
+										code = randomScalar.code.replace(/;/, '');
+									}
+									else {
+										if (!randomScalar.code.endsWith(';')) {
+											code = randomScalar.code + ';';
+										}
+									}
 									toSubstituteNodes.push({
 										start: current.start,
 										end: current.end,
-										code: randomScalar.code
+										code: code
 									});
-									continue;
+									return;
 								}
 							}
 							else {
@@ -467,20 +474,20 @@ function randomlySubstitute(pathI, pathO) {
 											mutated = true;
 											let randomScalar = [];
 											if (probability0dot33()) {
-												typeLiteral[Math.floor((Math.random() * (typeLiteral.length)) + 0)];
+												randomScalar = typeLiteral[Math.floor((Math.random() * (typeLiteral.length)) + 0)];
 											}
 											else if (probability0dot33()) {
-												typeExpression[Math.floor((Math.random() * (typeExpression.length)) + 0)];
+												randomScalar = typeExpression[Math.floor((Math.random() * (typeExpression.length)) + 0)];
 											}
 											else {
-												typeIdentifier[Math.floor((Math.random() * (typeIdentifier.length)) + 0)];
+												randomScalar = typeIdentifier[Math.floor((Math.random() * (typeIdentifier.length)) + 0)];
 											}
 											toSubstituteNodes.push({
 												start: current.start,
 												end: current.end,
 												code: randomScalar.code
 											});
-											continue;
+											return;
 										}
 										break;
 									case 'VariableDeclarator':
@@ -492,7 +499,7 @@ function randomlySubstitute(pathI, pathO) {
 												end: current.end,
 												code: randomScalar.code
 											});
-											continue;
+											return;
 										}
 										break;
 									case 'ClassBody':
@@ -504,7 +511,7 @@ function randomlySubstitute(pathI, pathO) {
 												end: current.end,
 												code: randomScalar.code
 											});
-											continue;
+											return;
 										}
 										break;
 									case 'MethodDefinition':
@@ -516,7 +523,7 @@ function randomlySubstitute(pathI, pathO) {
 												end: current.end,
 												code: randomScalar.code
 											});
-											continue;
+											return;
 										}
 										break;
 									case 'SwitchCase':
@@ -528,7 +535,7 @@ function randomlySubstitute(pathI, pathO) {
 												end: current.end,
 												code: randomScalar.code
 											});
-											continue;
+											return;
 										}
 										break;
 									default:
