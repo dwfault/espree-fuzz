@@ -229,6 +229,7 @@ module.exports = [
 	, { oldName: "removeItem", newName: "removeItem", count: 1 }
 	, { oldName: "repeat", newName: "repeat", count: 1 }
 	, { oldName: "replace", newName: "replace", count: 1 }
+	, { oldName: "require", newName: "require", count: 1 }
 	, { oldName: "resolve", newName: "resolve", count: 1 }
 	, { oldName: "return", newName: "return", count: 1 }
 	, { oldName: "reverse", newName: "reverse", count: 1 }
@@ -330,8 +331,41 @@ module.exports = [
 
 	//WebKit JavaScriptCore
 	, { oldName: "$vm", newName: "$vm", count: 1 }
+	, { oldName: "basicBlockExecutionCount", newName: "basicBlockExecutionCount", count: 1 }
+	, { oldName: "createBuiltin", newName: "createBuiltin", count: 1 }
+	, { oldName: "abort", newName: "abort", count: 1 }
+	, { oldName: "createImpureGetter", newName: "createImpureGetter", count: 1 }
+	, { oldName: "createProxy", newName: "createProxy", count: 1 }
+	, { oldName: "createRuntimeArray", newName: "createRuntimeArray", count: 1 }
+	, { oldName: "createCustomTestGetterSetter", newName: "createCustomTestGetterSetter", count: 1 }
+	, { oldName: "createCustomGetterObject", newName: "createCustomGetterObject", count: 1 }
+	, { oldName: "createDOMJITFunctionObject", newName: "createDOMJITFunctionObject", count: 1 }
+	, { oldName: "createDOMJITCheckSubClassObject", newName: "createDOMJITCheckSubClassObject", count: 1 }
+	, { oldName: "createDOMJITNodeObject", newName: "createDOMJITNodeObject", count: 1 }
+	, { oldName: "createDOMJITGetterObject", newName: "createDOMJITGetterObject", count: 1 }
+	, { oldName: "createDOMJITGetterBaseObject", newName: "createDOMJITGetterBaseObject", count: 1 }
+	, { oldName: "createDOMJITGetterComplexObject", newName: "createDOMJITGetterComplexObject", count: 1 }
+	, { oldName: "enableExceptionFuzz", newName: "enableExceptionFuzz", count: 1 }
+	, { oldName: "setImpureGetterDelegate", newName: "setImpureGetterDelegate", count: 1 }
+	, { oldName: "setGlobalConstRedeclarationShouldNotThrow", newName: "setGlobalConstRedeclarationShouldNotThrow", count: 1 }
+	, { oldName: "shadowChickenFunctionOnStack", newName: "shadowChickenFunctionOnStack", count: 1 }
+	, { oldName: "getGetterSetter", newName: "getGetterSetter", count: 1 }
+	, { oldName: "getHiddenValue", newName: "getHiddenValue", count: 1 }
+	, { oldName: "setHiddenValue", newName: "setHiddenValue", count: 1 }
+	, { oldName: "loadGetterFromGetterSetter", newName: "loadGetterFromGetterSetter", count: 1 }
+	, { oldName: "hasBasicBlockExecuted", newName: "hasBasicBlockExecuted", count: 1 }
+	, { oldName: "findTypeForExpression", newName: "findTypeForExpression", count: 1 }
+	, { oldName: "returnTypeFor", newName: "returnTypeFor", count: 1 }
+	, { oldName: "Element", newName: "Element", count: 1 }
+	, { oldName: "Root", newName: "Root", count: 1 }
+	, { oldName: "SimpleObject", newName: "SimpleObject", count: 1 }
+	, { oldName: "getElement", newName: "getElement", count: 1 }
+	, { oldName: "globalObjectForObject", newName: "globalObjectForObject", count: 1 }
+
+	, { oldName: "load", newName: "load", count: 1 }
 	, { oldName: "noInline", newName: "noInline", count: 1 }
 	, { oldName: "dfgTrue", newName: "dfgTrue", count: 1 }
+	, { oldName: "ftlTrue", newName: "ftlTrue", count: 1 }
 	, { oldName: "noFTL", newName: "noFTL", count: 1 }
 	, { oldName: "OSRExit", newName: "OSRExit", count: 1 }
 ];
