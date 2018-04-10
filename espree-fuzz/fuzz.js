@@ -19,7 +19,7 @@ const crashDir = "./crash/";
 const binPath = "~/Desktop/webkit-dfc36ec-asan/bin/jsc";
 
 
-const ARGUMENT_MUTATION_COUNT = 2;
+const ARGUMENT_MUTATION_COUNT = 6;
 
 
 
@@ -304,6 +304,7 @@ const typeMethodDefinition = typesArray.filter(function (x) { if (x.type == 'Met
 const typeSwitchCase = typesArray.filter(function (x) { if (x.type == 'SwitchCase') return x; });;
 
 let round = 0;
+const p = probability;
 
 //console.log(`${typeExpression.length} ${typeStatement.length} ${typePattern.length} ${typeProperty.length} ${typeElement.length} ${typeLiteral.length} ${typeDeclaration.length} ${typeVariableDeclarator.length} ${typeClassBody.length} ${typeMethodDefinition.length} ${typeSwitchCase.length}`);
 
@@ -335,7 +336,7 @@ function randomlySubstitute(pathI, pathO) {
 
 							if (current.type.toString().endsWith("Expression")) {
 								if (current.type.toString() == 'CallExpression') {
-									if (probability0dot50()) {
+									if (p(0.5)) {
 										mutated++;
 										if (current.arguments.length == 0) {
 											let randomScalar = typeExpression[Math.floor((Math.random() * (typeExpression.length)) + 0)];
@@ -355,7 +356,7 @@ function randomlySubstitute(pathI, pathO) {
 									}
 								}
 								else if (current.type.toString() == 'ObjectExpression') {
-									if (probability0dot50()) {
+									if (p(0.5)) {
 										mutated++;
 										let randomScalar = typeExpression[Math.floor((Math.random() * (typeExpression.length)) + 0)];
 										toSubstituteNodes.push({
@@ -367,7 +368,7 @@ function randomlySubstitute(pathI, pathO) {
 									}
 								}
 								else {
-									if (probability0dot10()) {
+									if (p(0.1)) {
 										mutated++;
 										let randomScalar = typeExpression[Math.floor((Math.random() * (typeExpression.length)) + 0)];
 										toSubstituteNodes.push({
@@ -380,7 +381,7 @@ function randomlySubstitute(pathI, pathO) {
 								}
 							}
 							else if (current.type.toString().endsWith("Statement")) {
-								if (probability0dot10() && probability0dot10()) {
+								if (p(0.01)) {
 									mutated++;
 									let randomScalar = typeStatement[Math.floor((Math.random() * (typeStatement.length)) + 0)];
 									toSubstituteNodes.push({
@@ -392,7 +393,7 @@ function randomlySubstitute(pathI, pathO) {
 								}
 							}
 							else if (current.type.toString().endsWith("Pattern")) {
-								if (probability0dot10()) {
+								if (p(0.1)) {
 									mutated++;
 									let randomScalar = typePattern[Math.floor((Math.random() * (typePattern.length)) + 0)];
 									toSubstituteNodes.push({
@@ -404,7 +405,7 @@ function randomlySubstitute(pathI, pathO) {
 								}
 							}
 							else if (current.type.toString().endsWith("Property")) {
-								if (probability0dot10()) {
+								if (p(0.1)) {
 									mutated++;
 									let randomScalar = typeProperty[Math.floor((Math.random() * (typeProperty.length)) + 0)];
 									toSubstituteNodes.push({
@@ -416,7 +417,7 @@ function randomlySubstitute(pathI, pathO) {
 								}
 							}
 							else if (current.type.toString().endsWith("Element")) {
-								if (probability0dot10()) {
+								if (p(0.1)) {
 									mutated++;
 									let randomScalar = typeElement[Math.floor((Math.random() * (typeElement.length)) + 0)];
 									toSubstituteNodes.push({
@@ -428,13 +429,13 @@ function randomlySubstitute(pathI, pathO) {
 								}
 							}
 							else if (current.type.toString().endsWith("Literal")) {
-								if (probability0dot10()) {
+								if (p(0.1)) {
 									mutated++;
 									let randomScalar = [];
-									if (probability0dot33()) {
+									if (p(0.33)) {
 										randomScalar = typeIdentifier[Math.floor((Math.random() * (typeIdentifier.length)) + 0)];
 									}
-									else if (probability0dot33()) {
+									else if (p(0.33)) {
 										randomScalar = typeExpression[Math.floor((Math.random() * (typeExpression.length)) + 0)];
 									}
 									else {
@@ -449,7 +450,7 @@ function randomlySubstitute(pathI, pathO) {
 								}
 							}
 							else if (current.type.toString().endsWith("Declaration")) {
-								if (probability0dot10()) {
+								if (p(0.1)) {
 									mutated++;
 									let randomScalar = typeDeclaration[Math.floor((Math.random() * (typeDeclaration.length)) + 0)];
 									let code = '';
@@ -489,13 +490,13 @@ function randomlySubstitute(pathI, pathO) {
 							else {
 								switch (current.type) {
 									case 'Identifier':
-										if (probability0dot10()) {
+										if (p(0.1)) {
 											mutated++;
 											let randomScalar = [];
-											if (probability0dot10()) {
+											if (p(0.1)) {
 												randomScalar = typeLiteral[Math.floor((Math.random() * (typeLiteral.length)) + 0)];
 											}
-											else if (probability0dot33()) {
+											else if (p(0.33)) {
 												randomScalar = typeExpression[Math.floor((Math.random() * (typeExpression.length)) + 0)];
 											}
 											else {
@@ -510,7 +511,7 @@ function randomlySubstitute(pathI, pathO) {
 										}
 										break;
 									case 'VariableDeclarator':
-										if (probability0dot10()) {
+										if (p(0.1)) {
 											mutated++;
 											let randomScalar = typeVariableDeclarator[Math.floor((Math.random() * (typeVariableDeclarator.length)) + 0)];
 											toSubstituteNodes.push({
@@ -522,7 +523,7 @@ function randomlySubstitute(pathI, pathO) {
 										}
 										break;
 									case 'ClassBody':
-										if (probability0dot10()) {
+										if (p(0.1)) {
 											mutated++;
 											let randomScalar = typeClassBody[Math.floor((Math.random() * (typeClassBody.length)) + 0)];
 											toSubstituteNodes.push({
@@ -534,7 +535,7 @@ function randomlySubstitute(pathI, pathO) {
 										}
 										break;
 									case 'MethodDefinition':
-										if (probability0dot10()) {
+										if (p(0.1)) {
 											mutated++;
 											let randomScalar = typeMethodDefinition[Math.floor((Math.random() * (typeMethodDefinition.length)) + 0)];
 											toSubstituteNodes.push({
@@ -546,7 +547,7 @@ function randomlySubstitute(pathI, pathO) {
 										}
 										break;
 									case 'SwitchCase':
-										if (probability0dot10()) {
+										if (p(0.1)) {
 											mutated++;
 											let randomScalar = typeSwitchCase[Math.floor((Math.random() * (typeSwitchCase.length)) + 0)];
 											toSubstituteNodes.push({
@@ -825,33 +826,15 @@ function randomString2() {
 	return str;
 }
 
-function probability0dot10() {
-	if (Math.floor(Math.random() + 0.10))
+
+function probability(value){
+	//assert(0.0 < value <1.0 )
+	if (Math.floor(Math.random() + value))
 		return true;
 	else
 		return false;
 }
 
-function probability0dot20() {
-	if (Math.floor(Math.random() + 0.20))
-		return true;
-	else
-		return false;
-}
-
-function probability0dot33() {
-	if (Math.floor(Math.random() + 0.33))
-		return true;
-	else
-		return false;
-}
-
-function probability0dot50() {
-	if (Math.floor(Math.random() + 0.50))
-		return true;
-	else
-		return false;
-}
 
 function aflcmin(pathI, pathO) {
 	let aflcminExec = execSync(`afl-cmin -i ${pathI} -o ${pathO} -m 81920000 -t 6000 -- ${binPath} @@`);
