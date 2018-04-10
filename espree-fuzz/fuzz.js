@@ -340,13 +340,13 @@ function randomlySubstitute(pathI, pathO) {
 										if (current.arguments.length == 0) {
 											let randomScalar = typeExpression[Math.floor((Math.random() * (typeExpression.length)) + 0)];
 											let codePiece = jsCode.substring(current.start, current.end);
-											let newCallExpression = codePiece.substring(0, codePiece.indexOf('(') + 1) + randomScalar.code + codePiece.substring(codePiece.lastIndexOf(')'), codePiece.length);
+											let newCallExpression = codePiece.substring(0, codePiece.lastIndexOf('(') + 1) + randomScalar.code + codePiece.substring(codePiece.lastIndexOf(')'), codePiece.length);
 											toSubstituteNodes.push({
 												start: current.start,
 												end: current.end,
 												code: newCallExpression
 											});
-											console.log(`[+] Callback of argument counted 0: ${jsCode.substring(current.start, current.end)} -> ${newCallExpression}`);
+											//console.log(`[+] Callback of argument counted 0: ${jsCode.substring(current.start, current.end)} \n----->>\n ${newCallExpression}`);
 										}
 										else {
 											//console.log(current);
