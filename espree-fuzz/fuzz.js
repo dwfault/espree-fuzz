@@ -449,18 +449,35 @@ function randomlySubstitute(pathI, pathO) {
 								}
 							}
 							else if (current.type.toString().endsWith("Declaration")) {
-								if (probability0dot10()) {
+								if (probability0dot10() || true) {
 									mutated = true;
 									let randomScalar = typeDeclaration[Math.floor((Math.random() * (typeDeclaration.length)) + 0)];
 									let code = '';
-									if (jsCode.substring(current.start, current.end).indexOf(';') == -1) {
-										code = randomScalar.code.replace(/;/, '');
+									if ((current.type.toString() == "FunctionDeclaration") || (current.type.toString() == "ClassDeclaration")) {
+										if (randomScalar.code.endsWith(';')) {
+											code = randomScalar.code.substring(0, randomScalar.code.length - 1);
+										}
+										else
+											code = randomScalar.code;
 									}
-									else {
-										if (!randomScalar.code.endsWith(';')) {
-											code = randomScalar.code + ';';
+									else if ((current.type.toString() == "VariableDeclaration")) {
+										if (jsCode.substring(current.start, current.end).endsWith(';')) {
+											if (randomScalar.code.endsWith(';')) {
+												code = randomScalar.code;
+											}
+											else
+												code = randomScalar.code + ';';
+										}
+										else {	//the origin does not contain ';'
+											if (randomScalar.code.endsWith(';')) {
+												code = randomScalar.code.substring(0, randomScalar.code.length - 1);
+											}
+											else
+												code = randomScalar.code;
 										}
 									}
+									else
+										code = randomScalar.code;
 									toSubstituteNodes.push({
 										start: current.start,
 										end: current.end,
