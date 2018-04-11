@@ -329,8 +329,9 @@ function randomlySubstitute(pathI, pathO) {
 			function traverseNode(node) {
 				for (let i in node) {
 					let current = node[i];
-					//console.log(current);
-					if ((current == node) || (typeof current == "string") || (typeof current == "number") || current == null) { }
+					let parent = node;
+					if ((current == parent) || (typeof current == "string") || (typeof current == "number") || current == null) {
+					}
 					else {
 						if (current.hasOwnProperty("type")) {
 
@@ -488,26 +489,102 @@ function randomlySubstitute(pathI, pathO) {
 								}
 							}
 							else {
-								switch (current.type) {
+								switch (current.type.toString()) {
 									case 'Identifier':
-										if (p(0.1)) {
-											mutated++;
-											let randomScalar = [];
+										let randomScalar = [];
+										if (parent.hasOwnProperty("type")) {
 											if (p(0.1)) {
-												randomScalar = typeLiteral[Math.floor((Math.random() * (typeLiteral.length)) + 0)];
+												switch (parent.type.toString()) {
+													case 'FunctionDeclaration':	//This Identifier is the name of the function.
+													case 'ClassDeclaration':	//This Identifier is the name of the class.
+													case 'NewExpression':		//This Identifier is like Float32Array in "new Float32Array(o0)"
+													case 'CallExpression':		//This Identifier is like o5 in "o5()" BUT**could be substitute to few expressions without a ()**
+														mutated++;
+														randomScalar = typeIdentifier[Math.floor((Math.random() * (typeIdentifier.length)) + 0)];
+														toSubstituteNodes.push({
+															start: current.start,
+															end: current.end,
+															code: randomScalar.code
+														});
+														return;
+														break;
+													case 'Property':			//This Identifier is like value in "get value() { return "funky"; }".
+														mutated++;
+														if (p(0.2)) {
+															randomScalar = typeLiteral[Math.floor((Math.random() * (typeLiteral.length)) + 0)];
+														}
+														else {
+															randomScalar = typeIdentifier[Math.floor((Math.random() * (typeIdentifier.length)) + 0)];
+														}
+														toSubstituteNodes.push({
+															start: current.start,
+															end: current.end,
+															code: randomScalar.code
+														});
+														return;
+														break;
+
+													case 'VariableDeclarator':	//This Indentifier is like o0 in "o0 = new Array(0x7f)" BUT**should be lvalue if as expression**
+													case 'MemberExpression':	//This Indentifier is like o2 in "o2[-1]" BUT**rvalue lead to error if as expression**
+													case 'UpdateExpression':	//This Indentifier is like o5 in "o5++" BUT**should be lvalue if as expression**
+													case 'SwitchStatement':		//This Indentifier is like o1 in "switch(o1) ..."	BUT**should be lvalue if as expression**
+													case 'SpreadElement':		//This Indentifier is like o0 in "...o0" BUT**should be lvalue if as expression**
+														mutated++;
+														if (p(0.50)) {
+															randomScalar = typeExpression[Math.floor((Math.random() * (typeExpression.length)) + 0)];
+														}
+														else {
+															randomScalar = typeIdentifier[Math.floor((Math.random() * (typeIdentifier.length)) + 0)];
+														}
+														toSubstituteNodes.push({
+															start: current.start,
+															end: current.end,
+															code: randomScalar.code
+														});
+														return;
+														break;
+													case 'BinaryExpression':	//This Indentifier is like o1 in "value + o1" BUT**should be lvalue if as expression**
+													case 'LogicalExpression':	//This Indentifier is like o6 in "o6||o7" BUT**should be lvalue if as expression**
+													case 'AssignmentExpression'://This Indentifier is like o1 in "o1 = '['" BUT**rvalue lead to error if as expression**
+													case 'UnaryExpression':		//This Indentifier is like o6 in "+o6"
+													case 'ReturnStatement':		//This Indentifier is like o2 in "return 02;"
+													case 'ForInStatement':		//This Indentifier is like o3 in "for(o4 in o3)"
+													case 'ForOfStatement':		//This Indentifier is like o3 in "for(o4 of o3)"
+													case 'IfStatement':			//This Indentifier is like o3 in "if(o3){...}"
+													case 'WhileStatement':			//This Indentifier is like o3 in "while(o3){...}"
+													case 'WithStatement':			//This Indentifier is like o3 in "with(o3){...}"
+													default:
+														mutated++;
+														if (p(0.1)) {
+															randomScalar = typeLiteral[Math.floor((Math.random() * (typeLiteral.length)) + 0)];
+														}
+														else if (p(0.33)) {
+															randomScalar = typeExpression[Math.floor((Math.random() * (typeExpression.length)) + 0)];
+														}
+														else {
+															randomScalar = typeIdentifier[Math.floor((Math.random() * (typeIdentifier.length)) + 0)];
+														}
+														toSubstituteNodes.push({
+															start: current.start,
+															end: current.end,
+															code: randomScalar.code
+														});
+														return;
+														break;
+												}
 											}
-											else if (p(0.33)) {
-												randomScalar = typeExpression[Math.floor((Math.random() * (typeExpression.length)) + 0)];
-											}
-											else {
+										}
+										else if (parent instanceof Array) {
+											if (p(0.1)) {
+												mutated++;
 												randomScalar = typeIdentifier[Math.floor((Math.random() * (typeIdentifier.length)) + 0)];
+												toSubstituteNodes.push({
+													start: current.start,
+													end: current.end,
+													code: randomScalar.code
+												});
+												return;
 											}
-											toSubstituteNodes.push({
-												start: current.start,
-												end: current.end,
-												code: randomScalar.code
-											});
-											return;
 										}
 										break;
 									case 'VariableDeclarator':
@@ -564,8 +641,9 @@ function randomlySubstitute(pathI, pathO) {
 								}
 							}
 						}
-						if (mutated < ARGUMENT_MUTATION_COUNT)
+						if (mutated < ARGUMENT_MUTATION_COUNT) {
 							traverseNode(current);
+						}
 					}
 				}
 			}
@@ -584,8 +662,7 @@ function randomlySubstitute(pathI, pathO) {
 		} catch (e) {
 			if (e.toString().indexOf('SyntaxError') != -1) {
 				//console.log('[+] Exception in randomlySubstitute SyntaxError: ' + file + ':' + e);
-				fs.unlinkSync(pathI + file);
-				//console.log('[-] delete ' + pathI + file);
+				//fs.unlinkSync(pathI + file);
 			}
 			else if (e.toString().indexOf('ENOSPC') != -1) {
 				console.log('[+] Exception in randomlySubstitute : ' + file + ':' + e);
@@ -610,7 +687,6 @@ function randomlySubstitute(pathI, pathO) {
 			}
 			else {
 				console.log(`[+] Exception in randomlySubstitute ROUND ${round} : ${file} : ${e}`);
-				console.trace();
 			}
 		}
 	}
@@ -827,7 +903,7 @@ function randomString2() {
 }
 
 
-function probability(value){
+function probability(value) {
 	//assert(0.0 < value <1.0 )
 	if (Math.floor(Math.random() + value))
 		return true;
