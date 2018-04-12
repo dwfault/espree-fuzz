@@ -138,7 +138,6 @@ function substituteIdentifiers(pathI, pathO) {
 			function traverseNode(node) {
 				for (let i in node) {
 					let current = node[i];
-					//console.log(current);
 					if ((current == node) || (typeof current == "string") || (typeof current == "number") || current == null) { }
 					else {
 						if (current.hasOwnProperty("type")) {
@@ -164,6 +163,8 @@ function substituteIdentifiers(pathI, pathO) {
 				}
 			}
 			traverseNode(ast);
+
+			toSubstituteIdentifiers = toSubstituteIdentifiers.sort(function (a, b) { return (a.start - b.start); });
 
 			let orderIdentifiers = [];
 			for (let scalar of toSubstituteIdentifiers) {
@@ -200,6 +201,7 @@ function substituteIdentifiers(pathI, pathO) {
 }
 
 substituteIdentifiers(testcaseRawDir, testcaseNormalizedDir);
+process.exit(0);
 
 typesArray = [];
 statiticalAnalysis(testcaseNormalizedDir);
