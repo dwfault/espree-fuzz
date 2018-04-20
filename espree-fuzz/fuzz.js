@@ -708,7 +708,8 @@ function randomlySubstitute(pathI, pathO) {
 					fp = scalar.end;
 				}
 				newContent += jsCode.substring(fp, jsCode.length);
-				fs.writeFileSync(pathO + file.substring(0, file.length - 3) + randomString2() + '.js', newContent);
+				if (newContent.toString() != jsCode.toString())
+					fs.writeFileSync(pathO + file.substring(0, file.length - 3) + randomString2() + '.js', newContent);
 			}
 		} catch (e) {
 			if (e.toString().indexOf('SyntaxError') != -1) {
@@ -721,20 +722,20 @@ function randomlySubstitute(pathI, pathO) {
 
 				let cminI = pathO;
 				let cminO = './cminO/'
-				aflcmin(cminI, cminO);
-				let files = fs.readdirSync(cminI);
-				for (let file of files) {
-					fs.unlinkSync(cminI + file);
+				if (aflcmin(cminI, cminO)) {
+					let files = fs.readdirSync(cminI);
+					for (let file of files) {
+						fs.unlinkSync(cminI + file);
+					}
+					files = fs.readdirSync(cminO);
+					for (let file of files) {
+						fs.copyFileSync(cminO + file, cminI + file);
+					}
+					files = fs.readdirSync(cminO);
+					for (let file of files) {
+						fs.unlinkSync(cminO + file);
+					}
 				}
-				files = fs.readdirSync(cminO);
-				for (let file of files) {
-					fs.copyFileSync(cminO + file, cminI + file);
-				}
-				files = fs.readdirSync(cminO);
-				for (let file of files) {
-					fs.unlinkSync(cminO + file);
-				}
-
 			}
 			else {
 				console.log(`[+] Exception in randomlySubstitute ROUND ${round} : ${file} : ${e}`);
@@ -975,4 +976,8 @@ function aflcmin(pathI, pathO) {
 	aflcminExec.on('exit', function (code, signal) {
 		console.log(cminLog);
 	});
+	if (cminLog.indexOf('no instrumentation detected'))
+		return false;
+	else
+		return true;
 }
