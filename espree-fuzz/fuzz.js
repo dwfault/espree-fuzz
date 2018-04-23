@@ -16,7 +16,7 @@ const testcaseNormalizedDir = "./testcase-normalized/";
 const testcaseOutputDir = "./testcase-output/";
 const testcaseRunDir = "./testcase-run/";
 const crashDir = "./crash/";
-const binPath = "~/Desktop/webkit-dfc36ec-asan/bin/jsc";
+const binPath = "~/Desktop/webkit-afa67f9-asan/WebKitBuild/Debug/bin/jsc";
 
 
 const ARGUMENT_MUTATION_COUNT = 6;
