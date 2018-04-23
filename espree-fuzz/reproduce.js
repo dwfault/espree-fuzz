@@ -8,7 +8,7 @@ var crashPath = arguments[1];
 
 var files = fs.readdirSync(crashPath);
 
-var filterNos = ["asanUnsafeJSValue", "JSC::Register::jsValue()", "JSC::ConservativeRoots::genericAddSpan", "LeakSanitizer"];
+var filterNos = ["asanUnsafeJSValue", "prepareOSREntry", "JSC::Register::jsValue()", "JSC::ConservativeRoots::genericAddSpan", "LeakSanitizer"];
 
 var i = 0;
 
