@@ -11,14 +11,14 @@ let duplicatedCount = 0;
 let unDuplicatedCount = 0;
 
 function loop() {
-	let hashExec = exec('md5 ' + path + files[i], function (error, stdout, stderr) {
+	let hashExec = exec('md5sum ' + path + files[i], function (error, stdout, stderr) {
 		console.log(stderr);
-		
-		let hash = stdout.slice(stdout.indexOf('=') + 2, stdout.length - 1);
-		
+
+		let hash = stdout.substring(0, 32);
+
 		if (hashSet.has(hash)) {
 			console.log('[-] Remove duplicated: ' + duplicatedCount++ + ' ' + files[i] + ':' + hash);
-			fs.unlinkFileSync(path + files[i]);
+			fs.unlinkSync(path + files[i]);
 		}
 		else {
 			console.log('[+] First time seen: ' + unDuplicatedCount++ + ' ' + files[i] + ':' + hash);
