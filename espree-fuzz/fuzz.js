@@ -757,13 +757,13 @@ for (let file of files) {
 
 
 randomlySubstitute(testcaseNormalizedDir, testcaseOutputDir);
-process.exit(0);
 randomlySubstitute(testcaseNormalizedDir, testcaseOutputDir);
 randomlySubstitute(testcaseNormalizedDir, testcaseOutputDir);
 randomlySubstitute(testcaseNormalizedDir, testcaseOutputDir);
 randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
 randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
 randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
+//ROUND 8.
 //heapdump.writeSnapshot(Date.now() + '.heapsnapshot', );
 //process.exit(0);
 
