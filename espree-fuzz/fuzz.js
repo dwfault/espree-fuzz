@@ -817,7 +817,7 @@ function loop() {
 				childSpawn.on('close', (code) => { setTimeout(runOne, timeoutSmallLoop); });
 
 				count++;
-				if (count % 0x10 == 0)
+				if (count % 0x58 == 0)
 					exec('kill -9 $(pidof ' + binPath + ')');
 			} catch (e) {
 				exec('kill -9 $(pidof ' + binPath + ')');
