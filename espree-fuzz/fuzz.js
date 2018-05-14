@@ -759,7 +759,7 @@ for (let file of files) {
 randomlySubstitute(testcaseNormalizedDir, testcaseOutputDir);
 randomlySubstitute(testcaseNormalizedDir, testcaseOutputDir);
 randomlySubstitute(testcaseNormalizedDir, testcaseOutputDir);
-randomlySubstitute(testcaseNormalizedDir, testcaseOutputDir);
+randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
 randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
 randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
 randomlySubstitute(testcaseOutputDir, testcaseOutputDir);

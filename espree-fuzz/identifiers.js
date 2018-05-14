@@ -350,7 +350,7 @@ module.exports = [
 	, { oldName: "setGlobalConstRedeclarationShouldNotThrow", newName: "setGlobalConstRedeclarationShouldNotThrow", count: 1 }
 	, { oldName: "shadowChickenFunctionOnStack", newName: "shadowChickenFunctionOnStack", count: 1 }
 	, { oldName: "getGetterSetter", newName: "getGetterSetter", count: 1 }
-	, { oldName: "getHiddenValue", newName: "getHiddenValue", count: 1 }
+	, { oldName: "getHiddenValue", newName: "getHiddenValue", count: 1 }	
 	, { oldName: "setHiddenValue", newName: "setHiddenValue", count: 1 }
 	, { oldName: "loadGetterFromGetterSetter", newName: "loadGetterFromGetterSetter", count: 1 }
 	, { oldName: "hasBasicBlockExecuted", newName: "hasBasicBlockExecuted", count: 1 }

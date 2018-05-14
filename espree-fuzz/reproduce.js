@@ -18,7 +18,7 @@ function reproduceOne(files) {
 
     var file = files[i];
 
-    var reproduce = exec(fuzzeePath + ' ' + crashPath + file);
+    var reproduce = exec(fuzzeePath + ' ' + crashPath + file, { timeout: 6000, killSignal: 9 });
     var reproduceLog = '[-] ' + file + ':\n';
     reproduce.stderr.on('data', function (data) {
         reproduceLog += data;
