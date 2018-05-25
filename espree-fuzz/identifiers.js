@@ -128,6 +128,7 @@ module.exports = [
 	, { oldName: "firstIndexOf", newName: "firstIndexOf", count: 1 }
 	, { oldName: "flags", newName: "flags", count: 1 }
 	, { oldName: "floor", newName: "floor", count: 1 }
+	, { oldName: "for", newName: "for", count: 1 }						//Symbol.for()
 	, { oldName: "forEach", newName: "forEach", count: 1 }
 	, { oldName: "freeze", newName: "freeze", count: 1 }
 	, { oldName: "from", newName: "from", count: 1 }
@@ -149,6 +150,7 @@ module.exports = [
 	, { oldName: "getMilliseconds", newName: "getMilliseconds", count: 1 }
 	, { oldName: "getOwnPropertyDescriptor", newName: "getOwnPropertyDescriptor", count: 1 }
 	, { oldName: "getOwnPropertyNames", newName: "getOwnPropertyNames", count: 1 }
+	, { oldName: "getOwnPropertySymbols", newName: "getOwnPropertySymbols", count: 1 }
 	, { oldName: "getPrototypeOf", newName: "getPrototypeOf", count: 1 }
 	, { oldName: "getTimezoneOffset", newName: "getTimezoneOffset", count: 1 }
 	, { oldName: "getFullYear", newName: "getFullYear", count: 1 }
@@ -168,7 +170,7 @@ module.exports = [
 	, { oldName: "iterator", newName: "iterator", count: 1 }
 	, { oldName: "is", newName: "is", count: 1 }
 	, { oldName: "isArray", newName: "isArray", count: 1 }
-	, { oldName: "isConcatSpreadable", newName: "isConcatSpreadable", count: 1 }
+	, { oldName: "isConcatSpreadable", newName: "isConcatSpreadable", count: 1 }		//Symbol.isConcatSpeadable
 	, { oldName: "isExtensible", newName: "isExtensible", count: 1 }
 	, { oldName: "isFinite", newName: "isFinite", count: 1 }
 	, { oldName: "isFrozen", newName: "isFrozen", count: 1 }
@@ -194,7 +196,7 @@ module.exports = [
 	, { oldName: "log1p", newName: "log1p", count: 1 }
 	, { oldName: "log2", newName: "log2", count: 1 }
 	, { oldName: "map", newName: "map", count: 1 }
-	, { oldName: "match", newName: "match", count: 1 }
+	, { oldName: "match", newName: "match", count: 1 }							//Symbol.match()
 	, { oldName: "movNext", newName: "movNext", count: 1 }
 	, { oldName: "movFirst", newName: "movFirst", count: 1 }
 	, { oldName: "name", newName: "name", count: 1 }
@@ -261,7 +263,7 @@ module.exports = [
 	, { oldName: "slice", newName: "slice", count: 1 }
 	, { oldName: "sort", newName: "sort", count: 1 }
 	, { oldName: "source", newName: "source", count: 1 }
-	, { oldName: "species", newName: "species", count: 1 }
+	, { oldName: "species", newName: "species", count: 1 }				//Symbol.speciess
 	, { oldName: "splice", newName: "splice", count: 1 }
 	, { oldName: "split", newName: "split", count: 1 }
 	, { oldName: "sqrt", newName: "sqrt", count: 1 }
