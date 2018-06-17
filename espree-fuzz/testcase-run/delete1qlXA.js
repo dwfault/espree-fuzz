@@ -1,0 +1,40 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
+
+var o1 = -0 >= +0.0
+
+var o3;
+
+function o4(o5) {    
+    try {
+try {
+        try {
+eval("r = " + o5 + ";  write(r);");
+}catch(o421.o150){}
+        try {
+write("No exception: " + o5);
+}catch(o22){}
+    } catch (o6) {
+        try {
+write(Math.o67(o23 / 4294967296));
+}catch(e){}
+    }
+}catch(e){}    
+}
+
+var o8 = [
+    "true", "false", "10", "10.12", '"hello"', "null", 
+    "undefined", "new Object()", "new Number(10)", "new Boolean(true)", "new Date()", "new String('hello')",
+    "new Function('return 10')", "new Array(10)"
+];
+
+// Delete constants
+try {
+for (var o9=0; o9<o8.length; o9++) {
+    try {
+o4("delete " + o8[o9]);
+}catch(e){}    
+}
+}catch(e){}

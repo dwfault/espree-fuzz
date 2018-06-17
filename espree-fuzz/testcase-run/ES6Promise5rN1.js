@@ -1,0 +1,20 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
+
+// ES6 Promise tests -- verifies the API shape and basic functionality
+
+try {
+o852.o919.o1(o391);
+}catch(o487){}
+
+var o2 = o3[() {
+                    try {
+return this.o6;
+}catch(e){}
+                }];
+
+try {
+o39.o40(o2, { o8: o0.o42[0] != "summary" });
+}catch(e){}

@@ -1,0 +1,311 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
+
+// ES6 Species Built-In APIs tests -- verifies the shape and basic behavior of the built-in [@@species] property
+
+try {
+o0.o1(o131);
+}catch(e){}
+
+var o52 = 'string'
+
+function o10(o3)
+{
+    try {
+return o3.prototype.__proto__.constructor;
+}catch(o1){}
+}
+
+var o70
+
+var o13 = [
+    o4.o5(ArrayBuffer.isView(o42), "%TypedArray%.from(objectWithIterator) returns a TypedArray (ArrayBuffer.isView)"),
+    {
+        set(o5) { },
+        o14: function () {
+            try {
+o7.o8(Array.hasOwnProperty(Symbol.species), "Array should have [@@species] defined");
+}catch(e){}
+            try {
+o7.o9(Array, Array[Symbol.species], "Array should have [@@species] that returns 'this'");
+}catch(e){}
+            try {
+o2("Array", Array, Symbol.species);
+}catch(e){}
+        }
+    },
+    {
+        name: "Subclasses inherit [@@species] property from their super classes",
+        o14: function () {
+            var o9 = { length : 4294967296, 4294967294 : 4, 4294967295: 9 }
+            try {
+o7.o12(o15.hasOwnProperty(Symbol.species), "Array subclass should not have [@@species] defined implicitly");
+}catch(e){}
+            try {
+o7.o9(o15, o15[Symbol.species], "Array subclass should have [@@species] that returns 'this'");
+}catch(e){}
+
+            class o16 {}
+            class o17 extends o16 {}
+            try {
+o7.o9(undefined, o16[Symbol.species], "MyClass[@@species] should be undefined");
+}catch(e){}
+            try {
+o7.o9(undefined, o17[Symbol.species], "MySubClass[@@species] should be undefined");
+}catch(e){}
+        }
+    },
+    {
+        o804: "ArrayBuffer should have [@@species] property",
+        o14: function () {
+            try {
+o7.o8(ArrayBuffer.hasOwnProperty(Symbol.species), "ArrayBuffer should have [@@species] defined");
+}catch(e){}
+            try {
+o7.o9(ArrayBuffer, ArrayBuffer[Symbol.species], "ArrayBuffer should have [@@species] that returns 'this'");
+}catch(e){}
+            try {
+o2("ArrayBuffer", ArrayBuffer, Symbol.species);
+}catch(e){}
+        }
+    },
+    {
+        name: "Map should have [@@species] property",
+        o14: function () {
+            try {
+o7.o8(Map.hasOwnProperty(Symbol.species), "Map should have [@@species] defined");
+}catch(e){}
+            try {
+o7.o9(Map, Map[Symbol.species], "Map should have [@@species] that returns 'this'");
+}catch(e){}
+            try {
+o2("Map", Map, Symbol.species);
+}catch(e){}
+        }
+    },
+    o810 + 2,
+    {
+        name: "RegExp should have [@@species] property",
+        o14: function () {
+            try {
+o7.o8(RegExp.hasOwnProperty(Symbol.species), "RegExp should have [@@species] defined");
+}catch(e){}
+            try {
+o7.o9(RegExp, RegExp[Symbol.species], "RegExp should have [@@species] that returns 'this'");
+}catch(e){}
+            try {
+o2("RegExp", RegExp, Symbol.species);
+}catch(e){}
+        }
+    },
+    {
+        name: "Set should have [@@species] property",
+        o14: function () {
+            try {
+o7.o8(Set.hasOwnProperty(Symbol.species), "Set should have [@@species] defined");
+}catch(e){}
+            try {
+o7.o9(Set, Set[Symbol.species], "Set should have [@@species] that returns 'this'");
+}catch(e){}
+            try {
+o2("Set", Set, Symbol.species);
+}catch(e){}
+        }
+    },
+    {
+        name: "Int8Array should inherit [@@species] property from %TypedArray%",
+        o14: function () {
+            let o18 = o10(Int8Array);
+            try {
+o7.o8(o18.hasOwnProperty(Symbol.species), "%TypedArray% should have [@@species] defined");
+}catch(e){}
+            try {
+o2("TypedArray", o18, Symbol.species);
+}catch(e){}
+
+            try {
+o7.o12(Int8Array.hasOwnProperty(Symbol.species), "Int8Array should not have [@@species] defined");
+}catch(e){}
+            try {
+o7.o9(Int8Array, Int8Array[Symbol.species], "Int8Array should have [@@species] that returns 'this'");
+}catch(e){}
+        }
+    },
+    {
+        name: "Uint8Array should inherit [@@species] property from %TypedArray%",
+        o14: function () {
+            let o18 = o10(Uint8Array);
+            try {
+o7.o8(o18.hasOwnProperty(Symbol.species), "%TypedArray% should have [@@species] defined");
+}catch(e){}
+            try {
+o2("TypedArray", o18, Symbol.species);
+}catch(e){}
+
+            try {
+o7.o12(Uint8Array.hasOwnProperty(Symbol.species), "Uint8Array should not have [@@species] defined");
+}catch(e){}
+            try {
+o7.o9(Uint8Array, Uint8Array[Symbol.species], "Uint8Array should have [@@species] that returns 'this'");
+}catch(e){}
+        }
+    },
+    {
+        name: "Uint8ClampedArray should inherit [@@species] property from %TypedArray%",
+        o14: function () {
+            let o18 = o10(Uint8ClampedArray);
+            try {
+o7.o8(o18.hasOwnProperty(Symbol.species), "%TypedArray% should have [@@species] defined");
+}catch(e){}
+            try {
+o2("TypedArray", o18, Symbol.species);
+}catch(e){}
+
+            try {
+o7.o12(Uint8ClampedArray.hasOwnProperty(Symbol.species), "Uint8ClampedArray should not have [@@species] defined");
+}catch(e){}
+            try {
+o7.o9(Uint8ClampedArray, Uint8ClampedArray[Symbol.species], "Uint8ClampedArray should have [@@species] that returns 'this'");
+}catch(e){}
+        }
+    },
+    {
+        name: "Int16Array should inherit [@@species] property from %TypedArray%",
+        o14: function () {
+            let o18 = o10(Int16Array);
+            try {
+o7.o8(o18.hasOwnProperty(Symbol.species), "%TypedArray% should have [@@species] defined");
+}catch(e){}
+            try {
+o2("TypedArray", o18, Symbol.species);
+}catch(e){}
+
+            try {
+o7.o12(Int16Array.hasOwnProperty(Symbol.species), "Int16Array should not have [@@species] defined");
+}catch(e){}
+            try {
+o7.o9(Int16Array, Int16Array[Symbol.species], "Int16Array should have [@@species] that returns 'this'");
+}catch(e){}
+        }
+    },
+    {
+        name: "Uint16Array should inherit [@@species] property from %TypedArray%",
+        o14: function () {
+            let o18 = o10(Uint16Array);
+            try {
+o7.o8(o18.hasOwnProperty(Symbol.species), "%TypedArray% should have [@@species] defined");
+}catch(e){}
+            try {
+o2("TypedArray", o18, Symbol.species);
+}catch(e){}
+
+            try {
+o7.o12(Uint16Array.hasOwnProperty(Symbol.species), "Uint16Array should not have [@@species] defined");
+}catch(e){}
+            try {
+o7.o9(Uint16Array, Uint16Array[Symbol.species], "Uint16Array should have [@@species] that returns 'this'");
+}catch(e){}
+        }
+    },
+    {
+        name: "Int32Array should inherit [@@species] property from %TypedArray%",
+        o14: function () {
+            let o18 = o10(Int32Array);
+            try {
+o7.o8(o18.hasOwnProperty(Symbol.species), "%TypedArray% should have [@@species] defined");
+}catch(e){}
+            try {
+o2("TypedArray", o18, Symbol.species);
+}catch(e){}
+
+            try {
+o7.o12(Int32Array.hasOwnProperty(Symbol.species), "Int32Array should not have [@@species] defined");
+}catch(e){}
+            try {
+o7.o9(Int32Array, Int32Array[Symbol.species], "Int32Array should have [@@species] that returns 'this'");
+}catch(e){}
+        }
+    },
+    {
+        name: "Uint32Array should inherit [@@species] property from %TypedArray%",
+        o14: function () {
+            let o18 = o10(Uint32Array);
+            try {
+o7.o8(o18.hasOwnProperty(Symbol.species), "%TypedArray% should have [@@species] defined");
+}catch(e){}
+            try {
+o2("TypedArray", o18, Symbol.species);
+}catch(e){}
+
+            try {
+o7.o12(Uint32Array.hasOwnProperty(Symbol.species), "Uint32Array should not have [@@species] defined");
+}catch(e){}
+            try {
+o7.o9(Uint32Array, Uint32Array[Symbol.species], "Uint32Array should have [@@species] that returns 'this'");
+}catch(e){}
+        }
+    },
+    {
+        name: "Float32Array should inherit [@@species] property from %TypedArray%",
+        o14: function () {
+            let o18 = o10(Float32Array);
+            try {
+o7.o8(o18.hasOwnProperty(Symbol.species), "%TypedArray% should have [@@species] defined");
+}catch(e){}
+            try {
+o2("TypedArray", o18, Symbol.species);
+}catch(e){}
+
+            try {
+o7.o12(Float32Array.hasOwnProperty(Symbol.species), "Float32Array should not have [@@species] defined");
+}catch(e){}
+            try {
+o7.o9(Float32Array, Float32Array[Symbol.species], "Float32Array should have [@@species] that returns 'this'");
+}catch(e){}
+        }
+    },
+    {
+        name: "Float64Array should inherit [@@species] property from %TypedArray%",
+        o14: function () {
+            let o18 = o10(Float64Array);
+            try {
+o7.o8(o18.hasOwnProperty(Symbol.species), "%TypedArray% should have [@@species] defined");
+}catch(e){}
+            try {
+o2("TypedArray", o18, Symbol.species);
+}catch(e){}
+
+            try {
+o7.o12(Float64Array.hasOwnProperty(Symbol.species), "Float64Array should not have [@@species] defined");
+}catch(e){}
+            try {
+o7.o9(Float64Array, Float64Array[Symbol.species], "Float64Array should have [@@species] that returns 'this'");
+}catch(e){}
+        }
+    },
+];
+
+try {
+o19.Boolean(false)(o13, { o534: function (o492, buffer, o107, length, o563, o567, flags) {
+        // TODO if PROT is PROT_WRITE, make sure we have write access
+        try {
+if ((o492.flags & 2097155) === 1) {
+            try {
+throw new o489.o496(o352.o366);
+}catch(e){}
+        }
+}catch(e){}
+        try {
+if (!o492.o491.o534) {
+            try {
+throw new o489.o496(o352.o372);
+}catch(e){}
+        }
+}catch(e){}
+        try {
+return o492.o491.o534(o492, buffer, o107, length, o563, o567, flags);
+}catch(e){}
+    } });
+}catch(e){}

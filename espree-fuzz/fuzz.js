@@ -114,7 +114,7 @@ for (let scalar of identifiersArray)
 
 
 /**
- * STEP 2, Substitutions, change the Identifiers using "start" "end" "oldName" "on".
+ * STEP 2.1, Normalized.Substitutions, change the Identifiers using "start" "end" "oldName" "on".
  * 
  * From testcase dir transport to testcase-normalized. Prepare a new types array.
  */
@@ -202,6 +202,98 @@ function substituteIdentifiers(pathI, pathO) {
 
 substituteIdentifiers(testcaseRawDir, testcaseNormalizedDir);
 
+/**
+ * STEP 2.2, Normalized.Substitutions, add Statement with try catch,
+ * 
+ * From testcase dir transport to testcase-normalized. Prepare a new types array.
+ */
+function substituteStatements(pathI, pathO) {
+	let files = fs.readdirSync(pathI);
+	for (let file of files) {
+		let jsCode = fs.readFileSync(pathI + file, 'utf-8');
+		try {
+			let ast = espree.parse(jsCode, {
+				ecmaVersion: 9, sourceType: "script", ecmaFeatures: {
+					jsx: true,
+					globalReturn: true,
+					impliedStrict: false,
+					experimentalObjectRestSpread: true
+				}
+			});
+			//console.log('======================================================');
+			//console.log(ast);
+			let toSubstituteStatements = [];
+			function traverseNode(node) {
+				for (let i in node) {
+					let current = node[i];
+					if ((current == node) || (typeof current == "string") || (typeof current == "number") || current == null) { }
+					else {
+						if (current.hasOwnProperty("type")) {
+							typesArray.push({
+								type: current.type,
+								code: jsCode.substring(current.start, current.end)
+							});
+							if ((current.type.toString().endsWith("Statement") && current.type.toString() != "BlockStatement")) {
+								//console.log(jsCode.substring(current.start, current.end));
+								//console.log(current);
+
+								toSubstituteStatements.push({
+									//code: jsCode.substring(current.start, current.end),
+									start: current.start,
+									end: current.end
+								});
+							}
+						}
+						traverseNode(current);
+					}
+				}
+			}
+			traverseNode(ast);
+			if (toSubstituteStatements.length > 0) {
+				let insertPoints = [];
+				for (let scalar of toSubstituteStatements) {
+					insertPoints.push({
+						position: 1,
+						value: scalar.start
+					});
+					insertPoints.push({
+						position: -1,
+						value: scalar.end
+					});
+				}
+				insertPoints = insertPoints.sort(function (a, b) { return (a.value - b.value); });
+
+				let newContent = [];
+				newContent = jsCode.substring(0, insertPoints[0].value);
+				for (let i = 0; i < insertPoints.length; i++) {
+					//console.log(insertPoints[i]);
+
+					if (insertPoints[i].position == 1) {
+						newContent += 'try {\n';
+					}
+					else if (insertPoints[i].position == -1) {
+						newContent += '\n}catch(e){}';
+					}
+					try {
+						newContent += jsCode.substring(insertPoints[i].value, insertPoints[i + 1].value);
+					}
+					catch (e) {
+						newContent += jsCode.substring(insertPoints[i].value, jsCode.length);
+					}
+				}
+				insertPoints = null;
+
+
+				fs.writeFileSync(pathO + file, newContent);
+			}
+
+		} catch (e) {
+			console.log('[+] Exception in substituteStatements: ' + file + ':' + e);
+		}
+	}
+}
+substituteStatements(testcaseNormalizedDir, testcaseNormalizedDir);
+
 typesArray = [];
 statiticalAnalysis(testcaseNormalizedDir);
 /*
@@ -256,9 +348,15 @@ const typeExpression = typesArray.filter(function (x) { if (x.type.toString().en
 //YieldExpression
 //JSX...
 const typeStatement = typesArray.filter(function (x) { if (x.type.toString().endsWith('Statement')) return x; });
-for(let statement of typeStatement){
-	statement.code = 'try { '+ statement.code + ' } catch(e) {}' ;
+for (let scalar of typeStatement) {
+	scalar.code = 'try { ' + scalar.code + ' } catch(e) {}';
 }
+/*
+for (let scalar of typeStatement) {
+	console.log(scalar);
+}
+process.exit(0);
+*/
 //AssignmentStatement
 //BlockStatement
 //BreakStatement
@@ -438,8 +536,8 @@ function randomlySubstitute(pathI, pathO) {
 									if (p(0.01)) {
 										mutated++;
 										let randomScalar = typeStatement[Math.floor((Math.random() * (typeStatement.length)) + 0)];
-										if(p(0.5)){
-											let randomScalar2  =  typeStatement[Math.floor((Math.random() * (typeStatement.length)) + 0)];
+										if (p(0.5)) {
+											let randomScalar2 = typeStatement[Math.floor((Math.random() * (typeStatement.length)) + 0)];
 											randomScalar.code += randomScalar2.code;
 										}
 										toSubstituteNodes.push({
