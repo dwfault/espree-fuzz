@@ -1,0 +1,709 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
+
+/// <reference path="protolib.js" />
+if (this.o0 && this.o0.o1) {
+    o0.o1("protolib.js");
+}
+
+function o2(o3) {
+    var o4 = [
+        Number.prototype, Boolean.prototype, String.prototype, Object.prototype, Array.prototype, Function.prototype,
+    ];
+    var o5 = [
+        "Number.prototype", "Boolean.prototype", "String.prototype", "Object.prototype", "Array.prototype", "Function.prototype",
+    ];
+
+    var o6 = "";
+    while (o3) {
+        var o7 = o4.indexOf(o3);
+        var name = (o7 >= 0 ? o5[o7] : JSON.stringify(o3));
+        if (o6 == "") {
+            o6 = name;
+        } else {
+            o6 += " -> " + name;
+        }
+
+        o3 = Object.getPrototypeOf(o3);
+    }
+
+    o8.writeln(o6);
+}
+
+function o9(o10, o11) {
+    return { o12: o10, o13: o11 };
+}
+
+var o14;
+if (o8.o15) { // TODO: Change to _11_OrLater
+    o14 = [
+    {
+        name: "Test Object.prototype.__proto__ attributes",
+        o16: function () {
+            var o17 = Object.getOwnPropertyDescriptor(Object.prototype, "__proto__");
+            o8.o18(o17);
+        }
+    },
+
+    {
+        name: "Read built-in __proto__",
+        o16: function () {
+            o19.o20(12["__proto__"] === Number.prototype, "int __proto__");
+            o19.o20(12.3["__proto__"] === Number.prototype, "float __proto__");
+            o19.o20((new Number(12)).__proto__ === Number.prototype, "Number Object __proto__");
+
+            o19.o20(true.__proto__ === Boolean.prototype, "Boolean Value __proto__");
+            o19.o20(false.__proto__ === Boolean.prototype, "Boolean Value __proto__");
+            o19.o20((new Boolean(true)).__proto__ === Boolean.prototype, "Boolean Object __proto__");
+            o19.o20((new Boolean(false)).__proto__ === Boolean.prototype, "Boolean Object __proto__");
+
+            o19.o20("hello".__proto__ === String.prototype, "String Value __proto__");
+            o19.o20(new String("hello").__proto__ === String.prototype, "String Object __proto__");
+
+            o19.o20({}.__proto__ === Object.prototype, "{} __proto__");
+            o19.o20([].__proto__ === Array.prototype, "[] __proto__");
+
+            o19.o20(Array.prototype.__proto__ === Object.prototype, "Array.prototype.__proto__");
+            o19.o20(Object.prototype.__proto__ === null, "Object.prototype.__proto__");
+
+            o19.o20(Array.__proto__ === Function.prototype, "Array.__proto__");
+            o19.o20(Function.__proto__ === Function.prototype, "Function.__proto__");
+            o19.o20(Function.prototype.__proto__ === Object.prototype, "Function.prototype.__proto__");
+
+            var o21 = { o22: 0 };
+            o19.o20(o21.__proto__ === Object.prototype, "o.__proto__");
+            o19.o20(o21.__proto__.__proto__ === null, "o.__proto__.__proto__");
+        }
+    },
+
+    {
+        name: "Change built-in's __proto__ chain",
+        o16: function () {
+            function o23(o3, o24, test) {
+                var o25 = o3.__proto__;
+                o3.__proto__ = o24;
+                o2(o3);
+                try {
+                    test();
+                } finally {
+                    o3.__proto__ = o25; // Restore old __proto__
+                }
+            }
+
+            // Number doesn't have sort method, should throw
+            o19.o26(function () { 12["sort"]() }, o27, "Object doesn't support property or method 'sort'");
+
+            // Number gets Array methods from new prototype in the chain
+            o23(Number.prototype, Array.prototype, function () {
+                12["sort"]();
+
+                var o21 = new Number(34);
+                o21[0] = 8;
+                o21[1] = 3;
+                o21[2] = 9;
+                o21[3] = 5;
+                o21.length = 4;
+                o19.o28("8 3 9 5", o21.join(" "));
+                o21.sort();
+                o19.o28("3 5 8 9", o21.join(" "));
+            });
+
+            // Boolean doesn't have String methods
+            o19.o26(function () { true.toUpperCase() }, o27, "Object doesn't support property or method 'toUpperCase'");
+
+            // Boolean gets String methods from new prototype in the chain
+            o23(Boolean.prototype, new String("abc"), function () {
+                o19.o28("TRUE", true.toUpperCase());
+                o19.o28("FALSE", false.toUpperCase());
+                o19.o28("TRUE", (new Boolean(true)).toUpperCase());
+                o19.o28("FALSE", (new Boolean(false)).toUpperCase());
+            });
+        }
+    },
+
+    {
+        name: "Change __proto__ to null/undefined",
+        o16: function () {
+            var o22 = {};
+
+            // Set an object's prototype to undefined
+            {
+                var o22 = {};
+
+                o19.o20(o22.__proto__ === Object.prototype);
+                o19.o20(!o22.isPrototypeOf(o22));
+
+                o22.__proto__ = undefined;
+
+                o19.o20(o22.__proto__ === Object.prototype);
+                o19.o20(!o22.isPrototypeOf(o22));
+
+                o19.o29(function () { Object.setPrototypeOf(o22, undefined); }, "Object.setPrototypeOf");
+            }
+
+            // Set an object's prototype to null
+            function o30(o31, o32) { o31.__proto__ = o32; }
+            function o33(o31, o32) { Object.setPrototypeOf(o31, o32); }
+            [o30, o33].forEach(function (o34) {
+                var o22 = {};
+
+                o19.o20(o22.__proto__ === Object.prototype);
+                o19.o20(!o22.isPrototypeOf(o22));
+
+                o34(o22, null);
+                o19.o20(Object.getPrototypeOf(o22) === null);
+                o19.o20(o22.__proto__ === undefined, "lost Object.prototype __proto__ getter");
+                o19.o20(o22.isPrototypeOf === undefined, "lost Object.prototype methods");
+            });
+
+            // side test -- try to change null/undefined's __proto__ should throw
+            var o35 = Object.getOwnPropertyDescriptor(Object.prototype, "__proto__").set;
+            [null, undefined].forEach(function (o21) {
+                o19.o36(function () {
+                    o35.apply(o21, [{}]);
+                });
+                o19.o37(function () {
+                    Object.setPrototypeOf(o21, {});
+                });
+            });
+        }
+    },
+
+    {
+        name: "Change __proto__ to neither Object nor null, should throw",
+        o16: function () {
+            function o38(o39) {
+                var o22 = {};
+                o22.__proto__ = o39;
+                o19.o20(Object.getPrototypeOf(o22) === Object.prototype, "Change __proto__ to: " + o39);
+                o19.o29(function () {
+                    Object.setPrototypeOf(o22, o39);
+                }, "Object.setPrototypeOf");
+                o19.o20(Object.getPrototypeOf(o22) === Object.prototype, "Change __proto__ to: " + o39);
+            }
+
+            var o35 = Object.getOwnPropertyDescriptor(Object.prototype, "__proto__").set;
+            [
+                undefined, 0, 123, -12.3, NaN, Infinity, true, false, "str"
+            ].forEach(function (o39) {
+                o38(o39);
+
+                // side test -- try to change these primitive's __proto__ should pass (but has no effect)
+                if (o39 !== undefined) {
+                    o39.__proto__ = {}; // This is ok
+                    o35.apply(o39, [{}]); // This is ok
+                    Object.setPrototypeOf(o39, {});
+                }
+            });
+        }
+    },
+
+    {
+        name: "Change object.__proto__ to an object",
+        o16: function () {
+            var o22 = { o22: 100, o40: 100 };
+            var o40 = { o40: 200, o41: 200 };
+            o40.__proto__ = o22;
+            o8.o18(o40);
+
+            o8.writeln("\n-- delete b.b --");
+            delete o40.o40;
+            o8.o18(o40);
+        }
+    },
+
+    {
+        name: "Change object.__proto__ to an array",
+        o16: function () {
+            var o22 = [8, 3, 9, 5];
+            var o40 = { o40: 200 };
+
+            // b.sort not available
+            o19.o26(function () { o40.sort(); });
+
+            o40.__proto__ = o22;
+            o19.o20(!Array.isArray(o40), "Still not Array");
+            o8.o18(o40);
+
+            o8.writeln("\n-- a.sort --");
+            o22.sort();
+            o8.o18(o40);
+
+            o8.writeln("\n-- b.sort --");
+            o40.sort();
+            o8.o18(o40);
+        }
+    },
+
+    {
+        name: "Change array.__proto__ to an object",
+        o16: function () {
+            var o22 = { o22: 100 };
+            var o40 = [8, 3, 9, 5];
+
+            o40.__proto__ = o22;
+            o19.o20(Array.isArray(o40), "Still is Array");
+            o8.o18(o40);
+
+            // But now b.sort is gone
+            o19.o26(function () { o40.sort(); });
+
+            // We can sort by apply
+            o8.writeln("\n-- sort.apply --");
+            Array.prototype.sort.apply(o40);
+            o8.o18(o40);
+        }
+    },
+
+    {
+        name: "Attempt to change DOM object __proto__",
+        o16: function () {
+            function test(o42, o43) {
+                var o44 = Object.getPrototypeOf(o42);
+                o19.o20(o44 === o42.__proto__);
+
+                var o45 = { __proto__: o44 };
+                o42.__proto__ = o45;
+
+                o19.o28(o43, Object.getPrototypeOf(o42) === o45);
+                o19.o20(o43 || o42.o46 !== null); // expected succeed or otherwise window
+            }
+
+            if (o8.o47()) {
+                test(this, false);
+                test(o48, false);
+                test(o48.o49[0], false);
+
+                test(o46, true);
+                test(o46.o16, true);
+                test(o46.o50("div"), true);
+
+                // test form scope
+                var o34 = o46.o51("form1");
+                var o44 = o34.__proto__;
+                o34.__proto__ = { o52: "form1_injected_value", __proto__: o44 };
+
+                var o53 = o46.o51("button1");
+                o53.o54();
+                o19.o28("form1_injected_value", o53.o55);
+            }
+        }
+    },
+
+    {
+        name: "__proto__ and instanceof/isPrototypeOf",
+        o16: function () {
+            function o56() { }
+            function o57() { }
+
+            var o22 = new o56();
+            var o40 = new o57();
+
+            o19.o20(!(o40 instanceof o56), "Initially b is not instance of A");
+            o19.o20(!(o56.prototype.isPrototypeOf(o40)));
+            o19.o20(o40 instanceof o57, "Initially b is instance of B");
+            o19.o20(o57.prototype.isPrototypeOf(o40));            
+
+            o40.__proto__ = o56.prototype;
+            o19.o20(o40 instanceof o56, "Now b is instance of A");
+            o19.o20(o56.prototype.isPrototypeOf(o40));
+            o19.o20(!(o40 instanceof o57), "Now b is not instance of B");
+            o19.o20(!(o57.prototype.isPrototypeOf(o40)));
+
+            o40.__proto__ = o22;
+            o19.o20(o40 instanceof o56, "b is still instance of A");
+            o19.o20(o56.prototype.isPrototypeOf(o40));
+            o19.o20(!(o40 instanceof o57), "b is still not instance of B");
+            o19.o20(!(o57.prototype.isPrototypeOf(o40)));
+
+            o40.__proto__ = o57.prototype;
+            o19.o20(!(o40 instanceof o56), "b is back not instance of A");
+            o19.o20(!(o56.prototype.isPrototypeOf(o40)));
+            o19.o20(o40 instanceof o57, "b is back instance of B");
+            o19.o20(o57.prototype.isPrototypeOf(o40));
+        }
+    },
+
+    {
+        name: "Verify we reject simple __proto__ cycle",
+        o16: function () {
+            var o22 = {};
+            var o40 = {};
+            var o41 = {};
+
+            o22.__proto__ = o40;
+            o40.__proto__ = o41;
+
+            o19.o58(function () { o41.__proto__ = o22 });
+            o19.o58(function () { o22.__proto__ = o22 });
+            o19.o58(function () { Array.prototype.__proto__ = [] });
+        }
+    },
+
+    {
+        name: "Verify proto cache is discarded",
+        o16: function () {
+            var o22 = o9(1, 2);
+            var o40 = o9(3, 4);
+
+            //
+            // Create prototype chain:
+            //      x -> y -> a
+            // where x inherits properties from prototype a.
+            //
+            var o13 = Object.create(o22);
+            var o12 = Object.create(o13);
+
+            function print(o21) {
+                o8.writeln(o21.o12 + ", " + o21.o13);
+            }
+
+            o8.writeln("Before change");
+            print(o12);
+
+            //
+            // Now change prototype chain:
+            //    x -> y -> b
+            // While changing y.__proto__, we should discard inline proto cache in original chain.
+            // x should now get changed properties from prototype b.
+            //
+            o8.writeln("After change");
+            o13.__proto__ = o40;
+            print(o12);
+        }
+    },
+
+    {
+        // Copy of above proto cache test and change a getter
+        name: "Verify proto getter cache is discarded",
+        o16: function () {
+            var o22 = o9(1, 2);
+            var o40 = o9(3, 4);
+            Object.defineProperty(o22, "y", { get: function () { return 7; }, enumerable: true, configurable: true });
+
+            //
+            // Create prototype chain:
+            //      x -> y -> a
+            // where x inherits properties from prototype a.
+            //
+            var o13 = Object.create(o22);
+            var o12 = Object.create(o13);
+
+            function print(o21) {
+                o8.writeln(o21.o12 + ", " + o21.o13);
+            }
+
+            o8.writeln("Before change");
+            print(o12);
+
+            //
+            // Now change prototype chain:
+            //    x -> y -> b
+            // While changing y.__proto__, we should discard inline proto cache in original chain.
+            // x should now get changed properties from prototype b.
+            //
+            o8.writeln("After change");
+            o13.__proto__ = o40;
+            print(o12);
+        },
+    },
+
+    {
+        name: "Verify the new proto object is marked as proto, so that changing the proto object invalidates related proto cache",
+        o16: function () {
+            var o40 = o9(3, 4);
+
+            function print(o21) {
+                o8.writeln(o21.o12 + ", " + o21.o13);
+            }
+
+            var o12 = {};
+
+            o8.writeln("Before change");
+            print(o12);
+
+            o8.writeln("After change");
+            o12.__proto__ = o40; // This should mark "b" as a prototype object
+            print(o12);
+
+            //
+            // Now we make certain change to "b". If b is marked on prototype correctly, the following should invalidate related proto cache.
+            //
+            o8.writeln("After change proto property");
+            Object.defineProperty(o40, "x", { get: function () { return 9; }, enumerable: true, configurable: true });
+            print(o12);
+        }
+    },
+
+    {
+        name: "Verify changing __proto__ works safely with ObjTypeSpec",
+        o16: function () {
+            function o34(o21, o22) {
+                var o59 = o21.o12;
+                if (o22 > 0)
+                {
+                    o21.__proto__ = {}; // ObjTypeSpec won't generate 2nd type check for the next "o.x" load. But implicit call bailout should bailout right here.
+                }
+                var o60 = o21.o12;
+
+                o19.o28(1, o59);
+                o19.o28(o22 > 0 ? undefined : 1, o60);
+            }
+
+            var o61 = { o12: 1 };
+            var o21 = Object.create(o61);
+            o34(o21, 0); // no __proto__ change in interpreter.
+            o34(o21, 0); // -maxInterpretCount:1, still no __proto__ change in jit.
+            o34(o21, 1); // -maxInterpretCount:1, now with __proto__ change in jit.
+        }
+    },
+
+    {
+        name: "Verify PathTypeHandler successor Types continue to work, case 1",
+        o16: function () {
+            function o34() {
+                return { o62: 1 }; // Use x_100 to start a unique path
+            }
+
+            var o63 = o34();
+            o63.__proto__ = { o22: 2 };
+            o63.o13 = 1; // This has path "x" -> "x, y"
+
+            var o64 = o34();
+            o64.o13 = 1; // This also has path "x" -> "x, y"
+
+            // But o1 and o2 can't go to the same Type. If they do, they have the same [[prototype]], which is wrong.
+            o19.o28(2, o63.o22, "from prototype");
+            o19.o28(undefined, o64.o22, "should be undefined");
+        }
+    },
+
+    {
+        name: "Verify PathTypeHandler successor Types continue to work, case 2",
+        o16: function () {
+            function o34() {
+                return { o65: 1 }; // Use x_101 to start a unique path
+            }
+
+            var o63 = o34();
+            o63.o13 = 1; // This has path "x" -> "x, y"
+
+            var o64 = o34();
+            o64.__proto__ = { o22: 2 };
+            o64.o13 = 1; // This also has path "x" -> "x, y"
+
+            // But o1 and o2 can't go to the same Type. If they do, they have the same [[prototype]], which is wrong.
+            o19.o28(undefined, o63.o22, "should be undefined");
+            o19.o28(2, o64.o22, "from prototype");
+        }
+    },
+
+    {
+        name: "Verify that we can shadow __proto__ property",
+        o16: function () {
+            var o61 = {};
+            var o21 = {};
+            o21.__proto__ = o61;
+
+            Object.defineProperty(o61, "__proto__", { value: 10, writable: true, enumerable: true, configurable: true });
+            o19.o28(10, o21.__proto__);
+
+            o21.__proto__ = -100;
+            o19.o28(-100, o21.__proto__);
+
+            delete o21.__proto__;
+            o19.o28(10, o21.__proto__);
+
+            delete o61.__proto__;
+            o19.o28(o61, o21.__proto__);
+            o19.o28(Object.prototype, o61.__proto__);
+
+            o21.__proto__ = { o22: 123 };
+            o19.o28(123, o21.o22);
+        }
+    },
+
+    {
+        name: "Test fast path o[i] with changed prototype",
+        o16: function () {
+            var o21 = []; o21.length = 10;
+
+            var o61 = [123];
+            o21.__proto__ = o61; // Now o's prototype != Array.prototype
+            o19.o28(123, o21[0]);
+
+            var o44 = { "1": 4 };
+            o61.__proto__ = o44; // Now p's prototype != Object.prototype
+            o19.o28(4, o21[1]);
+
+            o44.__proto__ = null;
+            o19.o28(undefined, o21[2]);
+        }
+    },
+
+    {
+        name: "Test fast path o[i] when o.__proto__ == null",
+        o16: function () {
+            var o21 = [];
+            o21.__proto__ = null;
+            o19.o28(undefined, o21[1]);
+        }
+    },
+
+    {
+        name: "Test fast path o[i] when o.__proto__.__proto__ == null",
+        o16: function () {
+            var o21 = [];
+            o21.__proto__ = [12, 34];
+            o21.__proto__.__proto__ = null;
+            o19.o28(undefined, o21[5]);
+        }
+    },
+
+    {
+        name: "Test Array methods with changed prototype",
+        o16: function () {
+            function o66() {
+                var o67 = [];
+                for (var o61 in arguments) {
+                    var o7 = arguments[o61];
+                    o67[o7] = o7;
+                }
+                return o67;
+            }
+
+            var o21 = []; o21.length = 10;
+
+            o21.__proto__ = o66(0, 1, 2);
+            o21.__proto__.__proto__ = o66(3, 4);
+            o21.__proto__.__proto__.__proto__ = { "5": 5, "6": 6 };
+            o21.__proto__.__proto__.__proto__.__proto__ = Array.prototype;
+
+            var o22 = o21.slice();
+            o19.o28("0,1,2,3,4,5,6,,,", o22.toString());
+
+            o22.__proto__ = o66(8, 9);
+            o19.o28("0,1,2,3,4,5,6,,8,9", o22.toString());
+        }
+    },
+
+    {
+        name: "Test cross-site change prototype",
+        o16: function () {
+            if (this.o0.o1) {
+                var o68 = o69();
+                var o70 = o68.eval('var o = { get name() {return this.v}, set name(value) {this.v = value}, v: "a name" }; o');
+
+                var o21 = { __proto__: o70 };
+                o19.o28("a name", o21.name);
+            }
+        }
+    },
+
+    {
+        name: "Test change prototype of global object",
+        o16: function () {
+            if (this.o0.o1) {
+                o69().o71(function () {
+                    function test(o12) {
+                        var o61 = { o22: 1 };
+
+                        // Should go through general change prototype code path and mark "p" as prototype. Then changes to "p" should invalidate proto cache.
+                        o12.__proto__ = o61;
+                        o19.o28(1, o12.o22);
+
+                        Object.defineProperty(o61, "a", { get: function () { return 2; }, configurable: true });
+                        o19.o28(2, o12.o22);
+                    }
+                    
+                    o19.o20(__proto__ === Object.prototype); // default binds to global this.__proto__
+                    test(this);
+
+                    __proto__ = { o40: 3, __proto__: __proto__ };
+                    o19.o28(2, o22);
+                    o19.o28(3, o40);
+                });
+            }
+        }
+    },
+
+    {
+        name: "Blue 62526: __proto__: ArrayElementEnumerator does not expect non-TypeIds_Object on prototype",
+        o16: function () {
+            var o22 = new String();
+            o22[1] = "a1";
+            o22[2] = "a2";
+            o22.__proto__ = [];
+
+            var o40 = [0];
+
+            o40.__proto__ = o22;
+            o40.length = 5;
+            o40 = o40.concat([]);
+
+            o19.o28('[0,"a1","a2",null,null]', JSON.stringify(o40));
+        }
+    },
+
+    {
+        name: "Blue 114364: __proto__: Object.preventExtensions should make [[prototype]] immutable",
+        o16: function () {
+            var o22 = {};
+            Object.preventExtensions(o22);
+            
+            o19.o26(
+                function () { o22.__proto__ = { o12: 1 } },
+                o27);
+            o19.o20(o22.__proto__ === Object.prototype, "__proto__ should remain unchanged");
+        }
+    },
+
+    {
+        name: "Blue 245453: __proto__: Invalid has-only-writable-data-property cache",
+        o16: function () {
+            var o22 = { __proto__: {} };
+            o22.o12 = 0; // populate cache -- whole prototype chain has only writable data properties
+            o22.__proto__.__proto__ = /a_regex/;
+            o22.source = 1;
+
+            o19.o28("a_regex", o22.source, "prototype chain should NOT has-only-writable-data-properties");
+        }
+    },
+
+    {
+        name: "Blue 245453: __proto__: Invalid has-only-writable-data-property cache -- verify cross-context",
+        o16: function () {
+            if (this.o0.o1) {
+                var o68 = o69();
+                var o70 = o68.eval('({b: 1})');
+
+                var o22 = { __proto__: o70 };
+                o19.o28(1, o22.o40, "a.b from prototype");
+
+                o22.o12 = 0; // try to populate cache -- prototype chain has only writable data properties -- our code actually would not cache cross-context
+                Object.defineProperty(o70, "y", { value: 2, enumerable: true, writable: false });
+                o22.o13 = 1234;
+                o19.o28(2, o22.o13, "prototype chain should NOT be has-only-writable-data-properties");
+            }
+        }
+    },
+
+    ];
+} else {
+    o14 = [
+    {
+        name: "Test Object.prototype.__proto__",
+        o16: function () {
+            o19.o20(Object.prototype.__proto__ === undefined, "Object.prototype.__proto__ only supported on IE11 or later");
+            o19.o20(Object.hasOwnProperty("getPrototypeOf") && !Object.hasOwnProperty("setPrototypeOf"), "Object.setPrototypeOf only supported on IE11 or later");
+
+            var o21 = { __proto__: { o72: 123 } }; // compat mode: not working in object literal
+            o19.o28(undefined, o21.o72);
+        }
+    }
+    ];
+}
+
+o73.o71(o14);

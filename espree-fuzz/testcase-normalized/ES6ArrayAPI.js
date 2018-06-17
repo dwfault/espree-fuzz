@@ -1,0 +1,648 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
+
+// ES6 Array extension tests -- verifies the API shape and basic functionality
+
+o0.o1("..\\UnitTestFramework\\UnitTestFramework.js");
+
+var o2 = [
+    {
+        name: "Array constructor has correct functions",
+        o3: function() {
+            o4.o5(Array.hasOwnProperty('from'), "Array.hasOwnProperty('from');");
+            o4.o6('function', typeof Array.from, "typeof Array.from === 'function'");
+            o4.o6(1, Array.from.length, "Array.from.length === 0");
+
+            o4.o5(Array.hasOwnProperty('of'), "Array.hasOwnProperty('of');");
+            o4.o6('function', typeof Array.of, "typeof Array.of === 'function'");
+            o4.o6(0, Array.of.length, "Array.of.length === 0");
+        }
+    },
+    {
+        name: "[0].indexOf(-0.0) should return 0",
+        o3: function() {
+            o4.o6(0, [0].indexOf(-0.0), "[0].indexOf(-0.0) should return 0");
+        }
+    },
+    {
+        name: "Array.from basic behavior",
+        o3: function() {
+            o4.o6([], Array.from([]), "Array.from simplest usage is copying empty array");
+
+            o4.o6([], Array.from([], undefined), "Array.from disables mapping function when the param is explicitly passed as undefined");
+
+            o4.o6([0,1,2,3], Array.from([0,1,2,3]), "Array.from basic behavior with an iterable object");
+            o4.o6([0,1,2,3], Array.from({ 0: 0, 1: 1, 2: 2, 3: 3, length: 4 }), "Array.from basic behavior with an object with length but no iterator");
+        }
+    },
+    {
+        name: "Array.from special behaviors",
+        o3: function() {
+            var o7 = Array.from;
+
+            var o8 = o7.call(Array, "string");
+            o4.o6('object', typeof o8, "Array.from.call(Array, 'string') returns an array");
+            o4.o6(['s','t','r','i','n','g'], o8, "Array.from.call(Array, 'string') == ['s','t','r','i','n','g']");
+            o4.o6(6, o8.length, "Array.from.call(Array, 'string').length === 6");
+            o4.o9(ArrayBuffer.isView(o8), "Array.from.call(Array, 'string') is not a TypedArray");
+
+            var o8 = o7.call(String, [0,1,2,3]);
+            o4.o6('object', typeof o8, "Array.from.call(String, [0,1,2,3]) returns a String object");
+            o4.o6('', o8.toString(), "Array.from.call(String, [0,1,2,3]).toString() == '4'");
+            o4.o6(0, o8.length, "Array.from.call(String, [0,1,2,3]).length === 1");
+            o4.o9(ArrayBuffer.isView(o8), "Array.from.call(String, [0,1,2,3]) is not a TypedArray");
+            o4.o6(0, o8[0], "Integer-indexed properties are still added to the string");
+            o4.o6(1, o8[1], "Integer-indexed properties are still added to the string");
+            o4.o6(2, o8[2], "Integer-indexed properties are still added to the string");
+            o4.o6(3, o8[3], "Integer-indexed properties are still added to the string");
+
+            var o10 = { 0: 0, 1: 1, 2: 2, 3: 3, length: 4 };
+            var o8 = o7.call(String, o10);
+            o4.o6('object', typeof o8, "Array.from.call(String, objectLikeArray) returns a String object");
+            o4.o6('4', o8.toString(), "Array.from.call(String, objectLikeArray).toString() == '4'");
+            o4.o6(1, o8.length, "Array.from.call(String, objectLikeArray).length === 1");
+            o4.o9(ArrayBuffer.isView(o8), "Array.from.call(String, objectLikeArray) is not a TypedArray");
+            o4.o6(1, o8[1], "Integer-indexed properties are still added to the string");
+            o4.o6(2, o8[2], "Integer-indexed properties are still added to the string");
+            o4.o6(3, o8[3], "Integer-indexed properties are still added to the string");
+            o4.o6('4', o8[0], "Zero-th property of the string is set to the string value, can't overwrite this via put");
+
+            o4.o11(function() { o7.call(Uint8Array, { 0: 0, 1: 1, 2: 2, length: 5 }); }, o12, "Array.from tries to set length of the object returned from the constructor which will throw for TypedArrays", "Cannot define property: object is not extensible");
+
+            var o10 = { 0: 0, 1: 1, 3: 3, length: 5 };
+            var o8 = o7.call(Array, o10);
+            o4.o6('object', typeof o8, "Array.from.call(Array, objectWithLengthProperty) returns an object");
+            o4.o6('0,1,,3,', o8.toString(), "Array.from.call(String, [0,1,2,3]).toString() == '4'");
+            o4.o6(5, o8.length, "Array.from.call(Array, objectWithLengthProperty) returns a new array with length = a.length");
+            o4.o9(ArrayBuffer.isView(o8), "Array.from.call(Array, objectWithLengthProperty) is not a TypedArray (ArrayBuffer.isView)");
+            o4.o6([0,1,undefined,3,undefined], o8, "Array.from.call(Array, objectWithLengthProperty) has missing values set to undefined");
+
+            var o10 = { 0: 0, 1: 1 };
+            var o8 = o7.call(Array, o10);
+            o4.o6('object', typeof o8, "Array.from.call(Array, objectWithLengthNoProperty) returns an object");
+            o4.o6(0, o8.length, "Array.from.call(Array, objectWithLengthNoProperty) returns a new array with length = 0");
+            o4.o9(ArrayBuffer.isView(o8), "Array.from.call(Array, objectWithLengthNoProperty) is not a TypedArray (ArrayBuffer.isView)");
+            o4.o6([], o8, "Array.from.call(Array, objectWithLengthNoProperty) is an empty array");
+
+            o4.o6([0,1,2], o7.call(undefined, [0,1,2]), "Calling Array.from with undefined this argument produces an array");
+            o4.o6([0,1,2], o7.call(null, [0,1,2]), "Calling Array.from with null this argument produces an array");
+            o4.o6([0,1,2], o7.call({}, [0,1,2]), "Calling Array.from with a non-function this argument produces an array");
+            o4.o6([0,1,2], o7.call(Math.sin, [0,1,2]), "Calling Array.from with a non-constructor function this argument produces an array");
+        }
+    },
+    {
+        name: "Array.from error conditions",
+        o3: function() {
+            o4.o11(function () { Array.from(); }, o12, "Calling Array.from with non-object items argument throws TypeError", "Array.from: argument is not an Object");
+            o4.o11(function () { Array.from(undefined); }, o12, "Calling Array.from with non-object items argument throws TypeError", "Array.from: argument is not an Object");
+            o4.o11(function () { Array.from(null); }, o12, "Calling Array.from with non-object items argument throws TypeError", "Array.from: argument is not an Object");
+            o4.o11(function () { Array.from({}, null); }, o12, "Calling Array.from with non-object mapFn argument throws TypeError", "Array.from: argument is not a Function object");
+            o4.o11(function () { Array.from({}, 'string'); }, o12, "Calling Array.from with non-object mapFn argument throws TypeError", "Array.from: argument is not a Function object");
+            o4.o11(function () { Array.from({}, {}); }, o12, "Calling Array.from with non-function mapFn argument throws TypeError", "Array.from: argument is not a Function object");
+        }
+    },
+    {
+        name: "Array.from behavior with a map function",
+        o3: function() {
+            var o13 = 0;
+
+            function o14(o15, o16) {
+                o4.o6(o13, o16, "Array.from called with a mapping function, we should get the elements in order. Setting item[" + o16 + "] = " + o15);
+                o4.o6(o15, o16, "Array.from called with a mapping function, Value and index should be same for this test");
+                o4.o6(2, arguments.length, "Array.from called with a mapping function, only 2 elements should be passed as arguments");
+                // increment expected index
+                o13++;
+            }
+
+            var o17 = {
+                0: 0,
+                1: 1,
+                2: 2,
+                3: 3,
+                length: 4
+            };
+
+            // Verify mapFunction gets called with correct arguments
+            Array.from(o17, o14);
+        }
+    },
+    {
+        name: "Array.from behavior with a map function passing this argument",
+        o3: function() {
+            var o18 = 'thisArg';
+
+            function o14(o15, o16) {
+                // this will be wrapped as an Object
+                o4.o6(Object(o18), this, "thisArg passed into Array.from should flow into mapFunction");
+            }
+
+            var o17 = {
+                0: 0,
+                1: 1,
+                2: 2,
+                3: 3,
+                length: 4
+            };
+
+            // Verify mapFunction gets called with thisArg passed as this
+            Array.from(o17, o14, o18);
+        }
+    },
+    {
+        name: "Array.from behavior with a map function that mutates source object",
+        o3: function() {
+            var o17 = {
+                0: 0,
+                1: 1,
+                2: 2,
+                3: 3,
+                4: 4,
+                length: 5
+            };
+
+            function o14(o15, o16) {
+                switch (o16) {
+                    case 0:
+                        // change the objectWithoutIterator length value - we should still fetch the rest of the indexed-elements anyway
+                        o17.length = 0;
+                        return o15;
+                    case 1:
+                        // change the value of the next indexed value - the new value should end up in the return object
+                        o17[2] = 200;
+                        return o15;
+                    case 2:
+                        // change the value of a previous indexed value - the old value should end up in the return object
+                        o17[0] = -100;
+                        return o15;
+                    case 3:
+                        // delete the next indexed value - return object should have undefined there
+                        delete o17[4];
+                        return o15;
+                }
+
+                // otherwise
+                return o15;
+            }
+
+            o4.o6([0,1,200,3,undefined], Array.from(o17, o14), "Array.from called with a map function that mutates the source object");
+        }
+    },
+    {
+        name: "Array.from behavior with iterator and a map function",
+        o3: function() {
+            var o19 = 0;
+            var o20 = false;
+            var o18 = 'string';
+
+            var o21 = {
+                [Symbol.iterator]: function() {
+                    return {
+                        o13: 0,
+                        next: function () {
+                            return {
+                                done: this.o13 == 5,
+                                value: this.o13++
+                            };
+                        }
+                    };
+                }
+            };
+
+            function o14(o15, o16) {
+                o4.o6(o19, o15, "Array.from called with a mapping function, we should get the elements in order. Setting item[" + o19 + "] = " + o15);
+                o4.o6(o15, o16, "Array.from called with a mapping function, index should match the value passed in");
+                o4.o6(2, arguments.length, "Array.from called with a mapping function, only 2 elements should be passed as arguments");
+
+                // increment expected value
+                o19++;
+
+                if (o20) {
+                    // this will be wrapped as an Object
+                    o4.o6(Object(o18), this, "thisArg passed into Array.from should flow into mapFunction");
+                }
+            }
+
+            // Verify mapFunction gets called with correct arguments
+            Array.from(o21, o14);
+
+            o19 = 0;
+            o20 = true;
+
+            // Verify mapFunction gets called with thisArg passed as this
+            Array.from(o21, o14, o18);
+        }
+    },
+    {
+        name: "Array.from behavior with iterator and a map function which mutates the iterator state",
+        o3: function() {
+            var o22 = 0;
+
+            var o21 = {
+                [Symbol.iterator]: function() {
+                    return {
+                        next: function () {
+                            return {
+                                done: o22 == 5,
+                                value: o22++
+                            };
+                        }
+                    };
+                }
+            };
+
+            var o23 = false;
+            function o14(o15, o16) {
+                if (o15 == 2 && !o23)
+                {
+                    o23 = true;
+                    o22 = 0;
+                }
+
+                return o15;
+            }
+
+            o4.o6([0,1,2,0,1,2,3,4], Array.from(o21, o14), "Array.from called with map function which alters iterator state");
+        }
+    },
+    {
+        name: "Array.from behavior with badly formed iterator objects",
+        o3: function() {
+            var o24 = { [Symbol.iterator]: 'a string' };
+            var o25 = { [Symbol.iterator]: function() { return undefined; } };
+            var o26 = { [Symbol.iterator]: function() { return { next: undefined }; } };
+            var o27 = { [Symbol.iterator]: function() { return { next: function() { return undefined; } }; } };
+
+            o4.o11(function() { Array.from(o24); }, o12, "obj[@@iterator] must be a function", "Function expected");
+            o4.o11(function() { Array.from(o25); }, o12, "obj[@@iterator] must return an object", "Object expected");
+            o4.o11(function() { Array.from(o26); }, o12, "obj[@@iterator].next must be a function", "Function expected");
+            o4.o11(function() { Array.from(o27); }, o12, "obj[@@iterator].next must return an object", "Object expected");
+
+            var o28 = { 0: "a", 1: "b", length: 2, [Symbol.iterator]: undefined };
+            var o29 = { 0: "a", 1: "b", length: 2, [Symbol.iterator]: null };
+
+            o4.o6([ "a", "b" ], Array.from(o28), "'@@iterator: undefined' is ignored");
+            o4.o6([ "a", "b" ], Array.from(o29), "'@@iterator: null' is ignored");
+        }
+    },
+    {
+        name: "Array.of basic behavior",
+        o3: function() {
+            o4.o6([], Array.of(), "Array.of basic behavior with no arguments");
+            o4.o6([3], Array.of(3), "Array.of basic behavior with a single argument");
+            o4.o6([0,1,2,3], Array.of(0, 1, 2, 3), "Array.of basic behavior with a list of arguments");
+        }
+    },
+    {
+        name: "Array.of extended behavior",
+        o3: function() {
+            var o30 = Array.of;
+
+            o4.o11(function() { o30.call(Uint8ClampedArray, 0, -1, 2, 300, 4); }, o12, "Array.of tries to set length of the object returned from the constructor which will throw for TypedArrays", "Cannot define property: object is not extensible");
+
+            var o8 = o30.call(Array, 'string', 'other string', 5, { 0: 'string val',length:10 });
+            o4.o6('object', typeof o8, "Array.of.call(Array, ...someStringsAndObjects) returns an array");
+            o4.o6(['string','other string',5,{ 0: 'string val',length:10 }], o8, "Array.of.call(Array, ...someStringsAndObjects) == ['string','other string',5,{ 0: 'string val',length:10 }]");
+            o4.o6(4, o8.length, "Array.of.call(Array, ...someStringsAndObjects).length === 4");
+            o4.o9(ArrayBuffer.isView(o8), "Array.of.call(Array, ...someStringsAndObjects) is not a TypedArray");
+
+            var o8 = o30.call(String, 0, 1, 2, 3);
+            o4.o6('object', typeof o8, "Array.of.call(String, 0, 1, 2, 3) returns a string object");
+            o4.o6(1, o8.length, "Array.of.call(String, 0, 1, 2, 3) returns a string object with length 1");
+            o4.o6('4', o8.toString(), "Array.of.call(String, 0, 1, 2, 3) returns a string object with value == '4'");
+            o4.o6('4', o8[0], "Array.of.call(String, 0, 1, 2, 3) returns a string object s. s[0] == '4'");
+            o4.o6(1, o8[1], "Array.of.call(String, 0, 1, 2, 3) returns a string object s. s[1] == 1");
+            o4.o6(2, o8[2], "Array.of.call(String, 0, 1, 2, 3) returns a string object s. s[2] == 2");
+            o4.o6(3, o8[3], "Array.of.call(String, 0, 1, 2, 3) returns a string object s. s[3] == 3");
+
+            o4.o6([], o30.call(Array), "Array.of.call(Array) returns empty array");
+            o4.o6([], o30.call(), "Array.of.call() returns empty array");
+            o4.o6(new String(0), o30.call(String), "Array.of.call(String) returns empty string");
+            o4.o6("0", o30.call(String).toString(), "Array.of.call(String) returns empty string");
+        }
+    },
+    {
+        name: "OS:840217 - Array.from, Array#fill, Array#lastIndexOf should use ToLength instead of ToUint32 on their parameter's length property",
+        o3: function() {
+            // ToLength(-1) should be 0 which means we won't execute any iterations in the below calls.
+            Array.from({length: -1});
+            Array.prototype.fill.call({length: -1}, 'a');
+            Array.prototype.lastIndexOf.call({length: -1}, 'a');
+        }
+    },
+    {
+        name: "Array.from called with an items object that has length > 2^32-1 and is not iterable",
+        o3: function() {
+            var o31 = {length: 4294967301};
+
+            o4.o11(function() { Array.from(o31); }, o32, "Array.from uses abstract operation ArrayCreate which throws RangeError when requested length > 2^32-1", "Array length must be a finite positive integer");
+        }
+    },
+    {
+        name: "Array.from doesn't get @@iterator twice",
+        o3: function () {
+            let o33 = 0;
+            Array.from({
+                get [Symbol.iterator]() {
+                    o33++;
+                    return [][Symbol.iterator];
+                }
+            });
+            o4.o6(o33, 1, "Array.from calls @@iterator getter once");
+
+            o33 = 0;
+            Array.from(new Proxy({}, {
+                get(target, o34) {
+                    if (o34 === Symbol.iterator) {
+                        o33++;
+                        return [][Symbol.iterator];
+                    }
+                    return Reflect.get(target, o34);
+                }
+            }));
+            o4.o6(o33, 1, "Array.from calls proxy's getter with @@iterator as parameter only once");
+        }
+    },
+    {
+        name: "Array#fill called with an object that has length > 2^32-1",
+        o3: function() {
+            var o35 = {length: 4294967301, 4294967297: 1234};
+            Array.prototype.fill.call(o35, 5678, 4294967298, 4294967300);
+
+            o4.o6(1234, o35[4294967297], "Array.prototype.fill called on an object with length > 2^32 and a fill range existing completely past 2^32 does not fill elements outside the request range");
+            o4.o6(5678, o35[4294967298], "Array.prototype.fill called on an object with length > 2^32 and a fill range existing completely past 2^32 is able to fill elements with indices > 2^32");
+            o4.o6(5678, o35[4294967299], "Array.prototype.fill called on an object with length > 2^32 and a fill range existing completely past 2^32 is able to fill elements with indices > 2^32");
+            o4.o6(undefined, o35[4294967300], "Array.prototype.fill called on an object with length > 2^32 and a fill range existing completely past 2^32 does not fill elements outside the request range");
+
+            var o35 = {length: 4294967301, 4294967292: 1234};
+            Array.prototype.fill.call(o35, 5678, 4294967293, 4294967300);
+
+            o4.o6(1234, o35[4294967292], "Array.prototype.fill called on an object with length > 2^32 and a fill range starting before 2^32 but ending after 2^32 does not fill elements outside the request range");
+            o4.o6(5678, o35[4294967293], "Array.prototype.fill called on an object with length > 2^32 and a fill range starting before 2^32 but ending after 2^32 is able to fill elements with indices > 2^32");
+            o4.o6(5678, o35[4294967294], "Array.prototype.fill called on an object with length > 2^32 and a fill range starting before 2^32 but ending after 2^32 is able to fill elements with indices > 2^32");
+            o4.o6(5678, o35[4294967295], "Array.prototype.fill called on an object with length > 2^32 and a fill range starting before 2^32 but ending after 2^32 is able to fill elements with indices > 2^32");
+            o4.o6(5678, o35[4294967299], "Array.prototype.fill called on an object with length > 2^32 and a fill range starting before 2^32 but ending after 2^32 is able to fill elements with indices > 2^32");
+            o4.o6(undefined, o35[4294967300], "Array.prototype.fill called on an object with length > 2^32 and a fill range starting before 2^32 but ending after 2^32 does not fill elements outside the request range");
+        }
+    },
+    {
+        name: "Array#lastIndexOf called with an object that has length > 2^32-1",
+        o3: function() {
+            var o35 = {length: 4294967301, 4294967291: 1234, 4294967294: 5678, 4294967295: 5678, 4294967296: 5678, 4294967297: 9};
+
+            o4.o6(4294967291, Array.prototype.lastIndexOf.call(o35, 1234, 4294967300), "Array.prototype.lastIndexOf called on an object with length > 2^32 and a fromIndex also > 2^32 finds the element when expected index is < 2^32");
+            o4.o6(4294967296, Array.prototype.lastIndexOf.call(o35, 5678, 4294967300), "Array.prototype.lastIndexOf called on an object with length > 2^32 and a fromIndex also > 2^32 finds the element when expected index is > 2^32");
+
+            var o35 = [1,2,3,4];
+
+            o4.o6(0, Array.prototype.lastIndexOf.call(o35, 1, 4294967296), "Array.prototype.lastIndexOf is able to find the element when it exists at index 0 when fromIndex > 2^32");
+            o4.o6(0, Array.prototype.lastIndexOf.call(o35, 1), "Array.prototype.lastIndexOf is able to find the element when it exists at index 0 when fromIndex not defined");
+        }
+    },
+    {
+        name: "Array#copyWithin called with an object that has length > 2^32-1 and parameters also > 2^32-1",
+        o3: function() {
+            var o35 = {length: 4294967301, 4294967292: 4294967292, 4294967293: 4294967293, 4294967294: 4294967294};
+            Array.prototype.copyWithin.call(o35, 5, 4294967292, 4294967294);
+
+            o4.o6(4294967292, o35[5], "Array.prototype.copyWithin called on an object with length > 2^32 and a source and destination range completely < 2^32");
+            o4.o6(4294967293, o35[6], "Array.prototype.copyWithin called on an object with length > 2^32 and a source and destination range completely < 2^32");
+
+            var o35 = {length: 4294967304, 4294967300: 4294967300, 4294967301: 4294967301, 4294967302: 4294967302, 4294967303: 4294967303};
+            Array.prototype.copyWithin.call(o35, 4294967297, 4294967300, 4294967303);
+
+            o4.o6(4294967300, o35[4294967297], "Array.prototype.copyWithin called on an object with length > 2^32 and a source and destination range completely > 2^32");
+            o4.o6(4294967301, o35[4294967298], "Array.prototype.copyWithin called on an object with length > 2^32 and a source and destination range completely > 2^32");
+            o4.o6(4294967302, o35[4294967299], "Array.prototype.copyWithin called on an object with length > 2^32 and a source and destination range completely > 2^32");
+
+            var o35 = {length: 4294967301, 4294967297: 4294967297, 4294967298: 4294967298, 4294967299: 4294967299};
+            Array.prototype.copyWithin.call(o35, 5, 4294967297, 4294967300);
+
+            o4.o6(4294967297, o35[5], "Array.prototype.copyWithin called on an object with length > 2^32 and a source range completely > 2^32 and destination range completely < 2^32");
+            o4.o6(4294967298, o35[6], "Array.prototype.copyWithin called on an object with length > 2^32 and a source range completely > 2^32 and destination range completely < 2^32");
+            o4.o6(4294967299, o35[7], "Array.prototype.copyWithin called on an object with length > 2^32 and a source range completely > 2^32 and destination range completely < 2^32");
+
+            var o35 = {length: 4294967301, 0: 0, 1: 1, 2: 2, 3: 3, 4: 4};
+            Array.prototype.copyWithin.call(o35, 4294967297, 0, 5);
+
+            o4.o6(0, o35[4294967297], "Array.prototype.copyWithin called on an object with length > 2^32 and a source range completely < 2^32 and destination range completely > 2^32");
+            o4.o6(1, o35[4294967298], "Array.prototype.copyWithin called on an object with length > 2^32 and a source range completely < 2^32 and destination range completely > 2^32");
+            o4.o6(2, o35[4294967299], "Array.prototype.copyWithin called on an object with length > 2^32 and a source range completely < 2^32 and destination range completely > 2^32");
+            o4.o6(3, o35[4294967300], "Array.prototype.copyWithin called on an object with length > 2^32 and a source range completely < 2^32 and destination range completely > 2^32");
+
+            var o35 = {length: 4294967301, 4294967292: 4294967292, 4294967293: 4294967293, 4294967294: 4294967294, 4294967295: 4294967295, 4294967296: 4294967296, 4294967297: 4294967297, 4294967298: 4294967298, 4294967299: 4294967299, 4294967300: 4294967300};
+            Array.prototype.copyWithin.call(o35, 5, 4294967292, 4294967301);
+
+            o4.o6(4294967292, o35[5], "Array.prototype.copyWithin called on an object with length > 2^32 and a source range crossing 2^32 and destination range completely < 2^32");
+            o4.o6(4294967293, o35[6], "Array.prototype.copyWithin called on an object with length > 2^32 and a source range crossing 2^32 and destination range completely < 2^32");
+            o4.o6(4294967294, o35[7], "Array.prototype.copyWithin called on an object with length > 2^32 and a source range crossing 2^32 and destination range completely < 2^32");
+            o4.o6(4294967295, o35[8], "Array.prototype.copyWithin called on an object with length > 2^32 and a source range crossing 2^32 and destination range completely < 2^32");
+            o4.o6(4294967296, o35[9], "Array.prototype.copyWithin called on an object with length > 2^32 and a source range crossing 2^32 and destination range completely < 2^32");
+            o4.o6(4294967297, o35[10], "Array.prototype.copyWithin called on an object with length > 2^32 and a source range crossing 2^32 and destination range completely < 2^32");
+            o4.o6(4294967298, o35[11], "Array.prototype.copyWithin called on an object with length > 2^32 and a source range crossing 2^32 and destination range completely < 2^32");
+            o4.o6(4294967299, o35[12], "Array.prototype.copyWithin called on an object with length > 2^32 and a source range crossing 2^32 and destination range completely < 2^32");
+            o4.o6(4294967300, o35[13], "Array.prototype.copyWithin called on an object with length > 2^32 and a source range crossing 2^32 and destination range completely < 2^32");
+
+            var o35 = {length: 4294967400, 4294967292: 4294967292, 4294967293: 4294967293, 4294967294: 4294967294, 4294967295: 4294967295, 4294967296: 4294967296, 4294967297: 4294967297, 4294967298: 4294967298, 4294967299: 4294967299, 4294967300: 4294967300};
+            Array.prototype.copyWithin.call(o35, 4294967350, 4294967292, 4294967301);
+
+            o4.o6(4294967292, o35[4294967350], "Array.prototype.copyWithin called on an object with length > 2^32 and a source range crossing 2^32 and destination range completely > 2^32");
+            o4.o6(4294967293, o35[4294967351], "Array.prototype.copyWithin called on an object with length > 2^32 and a source range crossing 2^32 and destination range completely > 2^32");
+            o4.o6(4294967294, o35[4294967352], "Array.prototype.copyWithin called on an object with length > 2^32 and a source range crossing 2^32 and destination range completely > 2^32");
+            o4.o6(4294967295, o35[4294967353], "Array.prototype.copyWithin called on an object with length > 2^32 and a source range crossing 2^32 and destination range completely > 2^32");
+            o4.o6(4294967296, o35[4294967354], "Array.prototype.copyWithin called on an object with length > 2^32 and a source range crossing 2^32 and destination range completely > 2^32");
+            o4.o6(4294967297, o35[4294967355], "Array.prototype.copyWithin called on an object with length > 2^32 and a source range crossing 2^32 and destination range completely > 2^32");
+            o4.o6(4294967298, o35[4294967356], "Array.prototype.copyWithin called on an object with length > 2^32 and a source range crossing 2^32 and destination range completely > 2^32");
+            o4.o6(4294967299, o35[4294967357], "Array.prototype.copyWithin called on an object with length > 2^32 and a source range crossing 2^32 and destination range completely > 2^32");
+            o4.o6(4294967300, o35[4294967358], "Array.prototype.copyWithin called on an object with length > 2^32 and a source range crossing 2^32 and destination range completely > 2^32");
+
+            var o35 = {length: 4294967301, 0: 0, 1: 1, 2: 2, 3: 3, 4: 4};
+            Array.prototype.copyWithin.call(o35, 4294967293, 0, 5);
+
+            o4.o6(0, o35[4294967293], "Array.prototype.copyWithin called on an object with length > 2^32 and a source range completely < 2^32 and destination range crossing 2^32");
+            o4.o6(1, o35[4294967294], "Array.prototype.copyWithin called on an object with length > 2^32 and a source range completely < 2^32 and destination range crossing 2^32");
+            o4.o6(2, o35[4294967295], "Array.prototype.copyWithin called on an object with length > 2^32 and a source range completely < 2^32 and destination range crossing 2^32");
+            o4.o6(3, o35[4294967296], "Array.prototype.copyWithin called on an object with length > 2^32 and a source range completely < 2^32 and destination range crossing 2^32");
+            o4.o6(4, o35[4294967297], "Array.prototype.copyWithin called on an object with length > 2^32 and a source range completely < 2^32 and destination range crossing 2^32");
+
+            var o35 = {length: 4294967420, 4294967400: 4294967400, 4294967401: 4294967401, 4294967402: 4294967402, 4294967403: 4294967403, 4294967404: 4294967404};
+            Array.prototype.copyWithin.call(o35, 4294967293, 4294967400, 4294967405);
+
+            o4.o6(4294967400, o35[4294967293], "Array.prototype.copyWithin called on an object with length > 2^32 and a source range completely > 2^32 and destination range crossing 2^32");
+            o4.o6(4294967401, o35[4294967294], "Array.prototype.copyWithin called on an object with length > 2^32 and a source range completely > 2^32 and destination range crossing 2^32");
+            o4.o6(4294967402, o35[4294967295], "Array.prototype.copyWithin called on an object with length > 2^32 and a source range completely > 2^32 and destination range crossing 2^32");
+            o4.o6(4294967403, o35[4294967296], "Array.prototype.copyWithin called on an object with length > 2^32 and a source range completely > 2^32 and destination range crossing 2^32");
+            o4.o6(4294967404, o35[4294967297], "Array.prototype.copyWithin called on an object with length > 2^32 and a source range completely > 2^32 and destination range crossing 2^32");
+        }
+    },
+    {
+        name: "Array#lastIndexOf called with a fromIndex < 0 && abs(fromIndex) > length (OS #1185913)",
+        o3: function() {
+            var o10 = [0, 1];
+            var o36 = o10.lastIndexOf(0, -3);
+
+            o4.o6(-1, o36, "Array.prototype.lastIndexOf returns -1 when the search element is not found");
+        }
+    },
+    {
+        name: "Array.of() called with the a bound function without a constructor should not throw an exception",
+        o3: function () {
+            var o15 = Math.cos.bind(Math);
+            o4.o5(Array.isArray(Array.of.call(o15)));
+        }
+    },
+    {
+        name: "Array.of() should not invoke setter",
+        o3: function () {
+            function o37() {}
+            o37.of = Array.of;
+            Object.defineProperty(o37.prototype, "0", {set: function(o38) { /* no-op */ }});
+            o4.o6(1, o37.of(1)[0]);
+        }
+    },
+    {
+        name: "Array.from() should not invoke setter in iterable case",
+        o3: function () {
+            function o37() {}
+            o37.from = Array.from;
+            Object.defineProperty(o37.prototype, "0", {set: function(o38) { throw "Fail"; }});
+            var o10 = [1,2,3];
+            o4.o6(1, o37.from(o10)[0]);
+        }
+    },
+    {
+        name: "Array.from() should not invoke setter in array like case",
+        o3: function () {
+            function o37() {}
+            o37.from = Array.from;
+            Object.defineProperty(o37.prototype, "0", {set: function(o38) { throw "Fail"; }});
+            var o10 = {};
+            o10[0] = 1;
+            o10[1] = 2;
+            o10[2] = 3;
+            o10.length = 3;
+            o4.o6(1, o37.from(o10)[0]);
+        }
+    },
+    {
+        name: "Array.filter() should not invoke setter even with substituted constructor",
+        o3: function () {
+            var o10 = [1,2,3];
+            o10.constructor = function()
+            {
+                function o37() {};
+                Object.defineProperty(o37.prototype, "0", { set: function(o38){ throw "Fail"; } });
+                return new o37();
+            };
+            o4.o6(1, o10.filter(function(o38){return o38 % 2 == 1;})[0]);
+        }
+    },
+    {
+        name: "Array.map() should not invoke setter even with substituted constructor",
+        o3: function () {
+            var o10 = [1,2,3];
+            o10.constructor = function()
+            {
+                function o37() {};
+                Object.defineProperty(o37.prototype, "0", { set: function(o38){ throw "Fail"; } });
+                return new o37();
+            };
+            o4.o6(1, o10.map(function(o38){return o38 % 2;})[0]);
+        }
+    },
+    {
+        name: "Array.slice() should not invoke setter even with substituted constructor",
+        o3: function () {
+            var o10 = [1,2,3];
+            o10.constructor = function()
+            {
+                function o37() {};
+                Object.defineProperty(o37.prototype, "0", { set: function(o38){ throw "Fail"; } });
+                return new o37();
+            };
+            o4.o6(2, o10.slice(1, 3)[0]);
+        }
+    },
+    {
+        name: "Array.splice() should not invoke setter even with substituted constructor",
+        o3: function () {
+            var o10 = [1,2,3];
+            o10.constructor = function()
+            {
+                function o37() {};
+                Object.defineProperty(o37.prototype, "0", { set: function(o38){ throw "Fail"; } });
+                return new o37();
+            };
+            o4.o6(1, o10.splice(0, 1, 'x')[0]);
+        }
+    },
+    {
+        name: "Array.fill() should throw when applied on frozen array",
+        o3: function () {
+            var o39 = [0];
+            Object.freeze(o39);
+            o4.o11(function() { Array.prototype.fill.call(o39) }, o12, "We should get a TypeError when fill is applied to a frozen array");
+        }
+    },
+    {
+        name: "Array.copyWithin() should throw when applied on frozen array",
+        o3: function () {
+            var o39 = [1,2,3,4,5];
+            Object.freeze(o39);
+            o4.o11(function() { Array.prototype.fill.copyWithin(o39, 1, 2) }, o12, "We should get a TypeError when fill is applied to a frozen array");
+        }
+    },
+    {
+        name: "Array.concat() should always box the first item",
+        o3: function () {
+            o4.o5(typeof Array.prototype.concat.call(101)[0] === "object");
+        }
+    },
+    {
+        name: "Boolean primitive should never be considered concat spreadable",
+        o3: function () {
+            try
+            {
+                Boolean.prototype[Symbol.isConcatSpreadable] = true;
+                Boolean.prototype[0] = 1;
+                Boolean.prototype[1] = 2;
+                Boolean.prototype[2] = 3;
+                Boolean.prototype.length = 3;
+                o4.o5([].concat(true).length === 1); /** True is added to the array as an literal, not spreaded */
+            }
+            finally
+            {
+                delete Boolean.prototype[Symbol.isConcatSpreadable];
+                delete Boolean.prototype[0];
+                delete Boolean.prototype[1];
+                delete Boolean.prototype[2];
+                delete Boolean.prototype.length;
+            }
+        }
+    },
+    {
+        name: "String primitive should never be considered concat spreadable",
+        o3: function () {
+            try
+            {
+                String.prototype[Symbol.isConcatSpreadable] = true;
+                String.prototype[0] = 1;
+                String.prototype[1] = 2;
+                String.prototype[2] = 3;
+                String.prototype.length = 3;
+                o4.o5([].concat("Hello").length === 1); /** True is added to the array as an literal, not spreaded */
+            }
+            finally
+            {
+                delete String.prototype[Symbol.isConcatSpreadable];
+                delete String.prototype[0];
+                delete String.prototype[1];
+                delete String.prototype[2];
+                delete String.prototype.length;
+            }
+        }
+    }
+];
+
+o40.o41(o2, { o42: o0.o43[0] != "summary" });

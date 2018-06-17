@@ -256,6 +256,9 @@ const typeExpression = typesArray.filter(function (x) { if (x.type.toString().en
 //YieldExpression
 //JSX...
 const typeStatement = typesArray.filter(function (x) { if (x.type.toString().endsWith('Statement')) return x; });
+for(let statement of typeStatement){
+	statement.code = 'try { '+ statement.code + ' } catch(e) {}' ;
+}
 //AssignmentStatement
 //BlockStatement
 //BreakStatement
@@ -435,6 +438,10 @@ function randomlySubstitute(pathI, pathO) {
 									if (p(0.01)) {
 										mutated++;
 										let randomScalar = typeStatement[Math.floor((Math.random() * (typeStatement.length)) + 0)];
+										if(p(0.5)){
+											let randomScalar2  =  typeStatement[Math.floor((Math.random() * (typeStatement.length)) + 0)];
+											randomScalar.code += randomScalar2.code;
+										}
 										toSubstituteNodes.push({
 											start: current.start,
 											end: current.end,
