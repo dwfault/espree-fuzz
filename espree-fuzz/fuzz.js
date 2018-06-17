@@ -243,6 +243,21 @@ function substituteStatements(pathI, pathO) {
 									end: current.end
 								});
 							}
+							else if (current.type.toString() == 'VariableDeclaration') {
+								let parent = node;
+								if (parent.hasOwnProperty("type")) {
+									if (parent.type.toString() == "ForStatement") {
+										;
+									}
+								}
+								else {
+									toSubstituteStatements.push({
+										//code: jsCode.substring(current.start, current.end),
+										start: current.start,
+										end: current.end
+									});
+								}
+							}
 						}
 						traverseNode(current);
 					}
