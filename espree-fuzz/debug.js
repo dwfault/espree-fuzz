@@ -20,6 +20,7 @@ try {
     function traverseNode(node) {
         for (let i in node) {
             let current = node[i];
+            let parent = node;
             if ((current == node) || (typeof current == "string") || (typeof current == "number") || current == null) {
             }
             else {
@@ -27,6 +28,9 @@ try {
                     console.log(`[+] ${current.type}:${jsCode.substring(current.start, current.end)}`);
                     console.log(current);
                     console.log('\n-----------------------\n');
+                    console.log('parent: ');
+                    console.log(parent);
+                    console.log('\n=======================\n');
                 }
                 traverseNode(current);
             }

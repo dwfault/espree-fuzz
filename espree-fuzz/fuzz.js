@@ -9,15 +9,15 @@ const exec = child_process.exec;
 const execSync = child_process.execSync;
 
 //const heapdump = require("heapdump");
-const seedrandom =  require("seedrandom");
-const  rng = seedrandom();
+const seedrandom = require("seedrandom");
+const rng = seedrandom();
 
 const testcaseRawDir = "./testcase-raw/";
 const testcaseNormalizedDir = "./testcase-normalized/";
 const testcaseOutputDir = "./testcase-output/";
 const testcaseRunDir = "./testcase-run/";
 const crashDir = "./crash/";
-const binPath = "~/Desktop/webkit-afa67f9-asan/WebKitBuild/Debug/bin/jsc";
+const binPath = "/src/WebKitBuild/Debug/bin/jsc";
 
 
 const ARGUMENT_MUTATION_COUNT = 6;
@@ -285,10 +285,10 @@ function substituteStatements(pathI, pathO) {
 					//console.log(insertPoints[i]);
 
 					if (insertPoints[i].position == 1) {
-						newContent += 'try {\n';
+						newContent += '\ntry {\n';
 					}
 					else if (insertPoints[i].position == -1) {
-						newContent += '\n}catch(e){}';
+						newContent += '\n}catch(e){}\n';
 					}
 					try {
 						newContent += jsCode.substring(insertPoints[i].value, insertPoints[i + 1].value);
@@ -342,7 +342,7 @@ String.prototype.endsWith = function (suffix) {
 };
 
 
-const typeExpression = typesArray.filter(function (x) { if (x.type.toString().endsWith('Expression')) return x; });
+const typeExpression = typesArray.filter(function (x) { if ((x.type.toString().endsWith('Expression')) && (!x.type.toString().endsWith('FunctionExpression'))) return x; });
 //AssignmentExpression
 //ArrayExpression
 //ArrowFunctionExpression
@@ -365,7 +365,8 @@ const typeExpression = typesArray.filter(function (x) { if (x.type.toString().en
 //JSX...
 const typeStatement = typesArray.filter(function (x) { if (x.type.toString().endsWith('Statement')) return x; });
 for (let scalar of typeStatement) {
-	scalar.code = 'try { ' + scalar.code + ' } catch(e) {}';
+	if ((scalar.type.toString() != 'BlockStatement') && (scalar.type.toString() != 'TryStatement'))
+		scalar.code = '\ntry {\n' + scalar.code + '\n} catch(e) {}\n';
 }
 /*
 for (let scalar of typeStatement) {
@@ -427,8 +428,6 @@ const typeLeftValueIdentifier = typeIdentifier.filter(function (x) { if ((x.code
 let round = 0;
 const p = probability;
 
-//console.log(`${typeExpression.length} ${typeStatement.length} ${typePattern.length} ${typeProperty.length} ${typeElement.length} ${typeLiteral.length} ${typeDeclaration.length} ${typeVariableDeclarator.length} ${typeClassBody.length} ${typeMethodDefinition.length} ${typeSwitchCase.length}`);
-
 function randomlySubstitute(pathI, pathO) {
 	console.log('[+] ROUND ' + ++round + '.');
 	let files = fs.readdirSync(pathI);
@@ -447,10 +446,14 @@ function randomlySubstitute(pathI, pathO) {
 			//console.log(ast);
 			let toSubstituteNodes = [];
 			let mutated = 0;
-			function traverseNode(node) {
+			function traverseNode(node, inLeft) {
 				for (let i in node) {
 					let current = node[i];
 					let parent = node;
+
+					let leftValueFlag = inLeft;
+					let leftValueIdentifierFlag = inLeft;
+
 					if ((current == parent) || (typeof current == "string") || (typeof current == "number") || current == null) {
 					}
 					else {
@@ -464,23 +467,31 @@ function randomlySubstitute(pathI, pathO) {
 								console.log('--------------------------');
 							}
 							*/
-							let leftValueFlag = false;
 							if (parent.hasOwnProperty("type")) {
 								switch (parent.type.toString()) {
 									case 'AssignmentExpression':
 										if (parent.left == current) {
-											leftValueFlag = true;//current should be a left value
+											leftValueFlag = true; //current should be a left value
 										}
 										break;
 									case 'UpdateExpression':
 										if (parent.argument == current) {
-											leftValueFlag = true;//current should be a left value
+											leftValueFlag = true; //current should be a left value
 										}
 										break;
 									case 'UnaryExpression':
 										if (parent.operator.toString() == 'delete') {
-											leftValueFlag = true;//current should be a left value
+											leftValueFlag = true; //current should be a left value
 										}
+										break;
+									case 'VariableDeclarator':
+										if (parent.id == current) {
+											leftValueFlag = true;
+											leftValueIdentifierFlag = true;
+										}
+										break;
+									case 'MemberExpression':
+										leftValueFlag = true;
 										break;
 								}
 							}
@@ -488,17 +499,23 @@ function randomlySubstitute(pathI, pathO) {
 								if (p(0.5)) {
 									mutated++;
 									let randomScalar = [];
-									if (p(0.5)) {
-										randomScalar = typeLeftValueExpression[Math.floor((rng() * (typeLeftValueExpression.length)) + 0)];
+									if (leftValueIdentifierFlag) {
+										randomScalar = typeLeftValueIdentifier[Math.floor((rng() * (typeLeftValueIdentifier.length)) + 0)];
 									}
 									else {
-										randomScalar = typeLeftValueIdentifier[Math.floor((rng() * (typeLeftValueIdentifier.length)) + 0)];
+										if (p(0.5)) {
+											randomScalar = typeLeftValueExpression[Math.floor((rng() * (typeLeftValueExpression.length)) + 0)];
+										}
+										else {
+											randomScalar = typeLeftValueIdentifier[Math.floor((rng() * (typeLeftValueIdentifier.length)) + 0)];
+										}
 									}
 									toSubstituteNodes.push({
 										start: current.start,
 										end: current.end,
 										code: randomScalar.code
 									});
+									return;
 								}
 							}
 							else {
@@ -548,8 +565,8 @@ function randomlySubstitute(pathI, pathO) {
 										}
 									}
 								}
-								else if (current.type.toString().endsWith("Statement")) {
-									if (p(0.01)) {
+								else if (current.type.toString().endsWith("Statement") && current.type.toString() != 'BlockStatement') {
+									if (p(0.1)) {
 										mutated++;
 										let randomScalar = typeStatement[Math.floor((rng() * (typeStatement.length)) + 0)];
 										if (p(0.5)) {
@@ -662,12 +679,14 @@ function randomlySubstitute(pathI, pathO) {
 								else {
 									switch (current.type.toString()) {
 										case 'Identifier':
+											if (jsCode.substring(current.start, current.end) == 'e')
+												return;
 											let randomScalar = [];
 											if (parent.hasOwnProperty("type")) {
-												if (p(0.1)) {
+												if (p(0.5)) {
 													switch (parent.type.toString()) {
 														case 'FunctionDeclaration':	//This Identifier is the name of the function.
-														case 'ClassDeclaration':	//This Identifier is the name of the class.
+														case 'ClassExpression':	//This Identifier is the name of the class.
 														case 'NewExpression':		//This Identifier is like Float32Array in "new Float32Array(o0)"
 														case 'CallExpression':		//This Identifier is like o5 in "o5()" BUT**could be substitute to few expressions without a ()**
 															mutated++;
@@ -678,7 +697,6 @@ function randomlySubstitute(pathI, pathO) {
 																code: randomScalar.code
 															});
 															return;
-															break;
 														case 'Property':			//This Identifier is like value in "get value() { return "funky"; }".
 															mutated++;
 															if (p(0.2)) {
@@ -693,7 +711,6 @@ function randomlySubstitute(pathI, pathO) {
 																code: randomScalar.code
 															});
 															return;
-															break;
 
 														case 'VariableDeclarator':	//This Indentifier is like o0 in "o0 = new Array(0x7f)" BUT**should be lvalue if as expression**
 														case 'MemberExpression':	//This Indentifier is like o2 in "o2[-1]" BUT**rvalue lead to error if as expression**
@@ -713,7 +730,6 @@ function randomlySubstitute(pathI, pathO) {
 																code: randomScalar.code
 															});
 															return;
-															break;
 														case 'BinaryExpression':	//This Indentifier is like o1 in "value + o1" BUT**should be lvalue if as expression**
 														case 'LogicalExpression':	//This Indentifier is like o6 in "o6||o7" BUT**should be lvalue if as expression**
 														case 'AssignmentExpression'://This Indentifier is like o1 in "o1 = '['" BUT**rvalue lead to error if as expression**
@@ -726,7 +742,7 @@ function randomlySubstitute(pathI, pathO) {
 														case 'WithStatement':			//This Indentifier is like o3 in "with(o3){...}"
 														default:
 															mutated++;
-															if (p(0.1)) {
+															if (p(0.33)) {
 																randomScalar = typeLiteral[Math.floor((rng() * (typeLiteral.length)) + 0)];
 															}
 															else if (p(0.33)) {
@@ -741,7 +757,6 @@ function randomlySubstitute(pathI, pathO) {
 																code: randomScalar.code
 															});
 															return;
-															break;
 													}
 												}
 											}
@@ -814,17 +829,19 @@ function randomlySubstitute(pathI, pathO) {
 							}
 						}
 						if (mutated < ARGUMENT_MUTATION_COUNT) {
-							traverseNode(current);
+							traverseNode(current, leftValueFlag);
 						}
 					}
 				}
 			}
-			traverseNode(ast);
+			traverseNode(ast, false);
+			toSubstituteNodes = toSubstituteNodes.sort(function (a, b) { return (a.start - b.start); });
 			if (mutated > 0) {
 				let newContent = "";
 				let fp = 0;
 				for (let scalar of toSubstituteNodes) {
-					newContent += jsCode.substring(fp, scalar.start);
+					let sub = jsCode.substring(fp, scalar.start);
+					newContent += sub;
 					newContent += scalar.code;
 					fp = scalar.end;
 				}
@@ -878,7 +895,6 @@ for (let file of files) {
 
 
 randomlySubstitute(testcaseNormalizedDir, testcaseOutputDir);
-process.exit(0);
 randomlySubstitute(testcaseNormalizedDir, testcaseOutputDir);
 randomlySubstitute(testcaseNormalizedDir, testcaseOutputDir);
 randomlySubstitute(testcaseOutputDir, testcaseOutputDir);
