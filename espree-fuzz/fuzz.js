@@ -966,8 +966,8 @@ function loop() {
 			setTimeout(loop, timeoutBigLoop);
 		}
 	}
-	runOne(files);
 	randomlySubstitute(testcaseOutputDir, testcaseRunDir);
+	runOne(files);
 }
 
 loop();
